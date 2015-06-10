@@ -14,7 +14,7 @@ import com.badlogic.gdx.tools.texturepacker.TexturePacker.Settings;
  *
  * Main Desktop file for libgdx. Loads the application in a desktop window
  * with configuration.  It creates a new <code>LwjglApplication</code> by
- * passing a new <code>DantesEscapeGame</code>.
+ * passing a new <code>DantesEscapeGame</code>.//
  */
 public class DesktopLauncher {
 	public static void main(String[] args) {
