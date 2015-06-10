@@ -1,0 +1,104 @@
+
+games.png
+size: 256,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Fireball
+  rotate: false
+  xy: 74, 603
+  size: 65, 49
+  orig: 65, 49
+  offset: 0, 0
+  index: 1
+Fireball
+  rotate: false
+  xy: 149, 679
+  size: 65, 49
+  orig: 65, 49
+  offset: 0, 0
+  index: 2
+Fireball
+  rotate: false
+  xy: 74, 552
+  size: 65, 49
+  orig: 65, 49
+  offset: 0, 0
+  index: 3
+Fireball
+  rotate: false
+  xy: 74, 501
+  size: 65, 49
+  orig: 65, 49
+  offset: 0, 0
+  index: 4
+Fireball
+  rotate: false
+  xy: 74, 450
+  size: 65, 49
+  orig: 65, 49
+  offset: 0, 0
+  index: 5
+Fireball
+  rotate: false
+  xy: 74, 399
+  size: 65, 49
+  orig: 65, 49
+  offset: 0, 0
+  index: 6
+Fireball
+  rotate: false
+  xy: 74, 348
+  size: 65, 49
+  orig: 65, 49
+  offset: 0, 0
+  index: 7
+bob
+  rotate: false
+  xy: 149, 730
+  size: 72, 72
+  orig: 72, 72
+  offset: 0, 0
+  index: -1
+firewall
+  rotate: false
+  xy: 20, 302
+  size: 16, 500
+  orig: 16, 500
+  offset: 0, 0
+  index: 1
+firewall
+  rotate: false
+  xy: 38, 302
+  size: 16, 500
+  orig: 16, 500
+  offset: 0, 0
+  index: 2
+firewall
+  rotate: false
+  xy: 56, 302
+  size: 16, 500
+  orig: 16, 500
+  offset: 0, 0
+  index: 3
+goalpole
+  rotate: false
+  xy: 2, 2
+  size: 16, 800
+  orig: 16, 800
+  offset: 0, 0
+  index: -1
+homeButton
+  rotate: false
+  xy: 74, 729
+  size: 73, 73
+  orig: 73, 73
+  offset: 0, 0
+  index: -1
+resetButton
+  rotate: false
+  xy: 74, 654
+  size: 73, 73
+  orig: 73, 73
+  offset: 0, 0
+  index: -1
