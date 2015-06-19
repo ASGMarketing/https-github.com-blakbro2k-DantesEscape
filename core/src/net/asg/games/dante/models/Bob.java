@@ -18,10 +18,14 @@ public class Bob {
 
 	private Rectangle bounds;
 
-	public Bob(int screenHeight,int screenWidth, int posX, int posY, int height, int width) {
+	private Rectangle[] hitboxes;
+
+	public Bob(int posX, int posY, int height, int width) {
 		bounds = new Rectangle();
-		this.screenWidth = screenWidth;
-		this.screenHeight = screenHeight;
+        hitboxes = new Rectangle[0];
+
+		this.screenWidth = Constants.MAX_WIDTH;
+		this.screenHeight = Constants.MAX_HEIGHT;
 		this.width = width;
 		this.height = height;
 

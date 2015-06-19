@@ -45,6 +45,8 @@ public class MovingGameObject {
 
 	protected Rectangle rect;
 
+	protected Rectangle[] hitboxes;
+
 	protected int frame = 0;
 
 	protected float time = 0;
@@ -81,7 +83,7 @@ public class MovingGameObject {
 		rect.width = width;
 		rect.height = height;
 
-		this.rect.x = this.imageProvider.getScreenWidth();
+		this.rect.x = Constants.MAX_WIDTH;
 		this.rect.y = 0;
 
 		this.state = state;

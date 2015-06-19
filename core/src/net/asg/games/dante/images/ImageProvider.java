@@ -7,11 +7,13 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import net.asg.games.dante.Constants;
+
 public class ImageProvider {
 
-    private int SCREEN_WIDTH = 800;
+    private int SCREEN_WIDTH = Constants.GAME_WIDTH;
     
-    private int SCREEN_HEIGHT = 480;
+    private int SCREEN_HEIGHT = Constants.GAME_HEIGHT;
 	
 	private TextureAtlas atlas;
 	

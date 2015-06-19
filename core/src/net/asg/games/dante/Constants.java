@@ -39,6 +39,7 @@ public class Constants {
 	public static final float DEFAULT_ANIMATION_PERIOD = 0.10f;
 	public static final float DEFAULT_GAME_SPEED = 1.0f;
 	public static final float BACKGROUND_SPEED = 0.7f;
+	public static final float MIDROUND_SPEED = 1.1f;
 	public static final float FOREGROUND_SPEED = 1.7f;
 	public static final float FIREBALL_SPEED = 0.7f;
 	

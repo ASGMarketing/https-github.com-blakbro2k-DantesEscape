@@ -1,5 +1,6 @@
 
 text-images.png
+size: 1024,256
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
