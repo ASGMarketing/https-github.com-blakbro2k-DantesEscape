@@ -29,8 +29,6 @@ public class DantesEscapeGame extends Game{
 		this.isDebugOn = isDebugOn;
 	}
 
-
-
 	@Override
 	public void create() {
 		imageProvider = new ImageProvider();
@@ -44,7 +42,7 @@ public class DantesEscapeGame extends Game{
 		stateManager = new StateManager();
 
 		//menuScreen = new MenuScreen(this);
-		//levelScreen = new LevelScreen(this);
+		//levelScreen = new LevelSelectScreen(this);
 		gotoGameScreen();
 	}
 

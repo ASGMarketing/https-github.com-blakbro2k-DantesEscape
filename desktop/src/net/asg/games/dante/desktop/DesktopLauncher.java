@@ -18,10 +18,6 @@ import com.badlogic.gdx.tools.texturepacker.TexturePacker.Settings;
  */
 public class DesktopLauncher {
 	public static void main(String[] args) {
-
-		boolean copyImages = Constants.COPY_IMAGES;
-		boolean debugOn = Constants.DEBUG;
-
 		//Use TexturePacker to pack image files
 
 		if (args.length == 1 && args[0].equals("texturepacker")) {
@@ -32,8 +28,10 @@ public class DesktopLauncher {
 			Settings settings = new Settings();
 			settings.maxWidth = Constants.MAX_WIDTH;
 			settings.maxHeight = Constants.MAX_HEIGHT;
-			TexturePacker.process(settings, Constants.IMAGES_FOLDER_NAME, Constants.ASSETS_FOLDER_NAME, Constants.GAME_FOLDER_NAME);
-			TexturePacker.process(settings, Constants.TEXT_IMAGES_FOLDER_NAME, Constants.ASSETS_FOLDER_NAME, Constants.TEXT_IMAGES_FOLDER_NAME);
+			TexturePacker.process(settings, Constants.SOURCE_ASSETS_FOLDER_PATH + Constants.IMAGES_FOLDER_NAME,
+					Constants.TARGET_ASSETS_FOLDER_PATH, Constants.GAME_ATLAS_NAME);
+			TexturePacker.process(settings, Constants.SOURCE_ASSETS_FOLDER_PATH + Constants.TEXT_IMAGES_FOLDER_NAME,
+					Constants.TARGET_ASSETS_FOLDER_PATH , Constants.TEXT_IMAGES_ATLAS_NAME);
 		}
 
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
@@ -42,6 +40,6 @@ public class DesktopLauncher {
 		cfg.width = Constants.GAME_WIDTH;
 		cfg.height = Constants.GAME_HEIGHT;
 
-		new LwjglApplication(new DantesEscapeGame(debugOn), cfg);
+		new LwjglApplication(new DantesEscapeGame(Constants.DEBUG), cfg);
 	}
 }

@@ -41,8 +41,8 @@ public class ImageProvider {
 	}
 	
 	public void load() {
-		atlas = new TextureAtlas(Gdx.files.internal("game.atlas"));
-		textAtlas  = new TextureAtlas(Gdx.files.internal("text_images.atlas"));
+		atlas = new TextureAtlas(Gdx.files.internal("games.atlas"));
+		textAtlas  = new TextureAtlas(Gdx.files.internal("text-images.atlas"));
 		
 		
 		background = new Texture(Gdx.files.internal("background.png"));

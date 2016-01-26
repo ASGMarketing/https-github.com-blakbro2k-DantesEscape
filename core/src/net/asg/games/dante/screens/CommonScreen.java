@@ -29,7 +29,7 @@ public class CommonScreen implements Screen, InputProcessor {
     protected SoundManager soundManager;
 	
 	protected ShapeRenderer debugRenderer;
-		   
+
 	@Override
 	public boolean keyDown(int keycode) {
 		// TODO Auto-generated method stub
