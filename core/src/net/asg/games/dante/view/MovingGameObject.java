@@ -45,7 +45,7 @@ public class MovingGameObject {
 
 	protected Rectangle rect;
 
-	protected Rectangle[] hitboxes;
+	protected Rectangle hitboxes;
 
 	protected int frame = 0;
 
@@ -72,6 +72,7 @@ public class MovingGameObject {
 	public MovingGameObject(ImageProvider imageProvider,
 			TextureRegion[] textureRegions, SoundManager soundManager,
 			int width, int height, boolean isHitboxActive, MovingGameObjectState state) {
+
 		this.imageProvider = imageProvider;
 		this.soundManager = soundManager;
 		this.textureRegions = textureRegions;

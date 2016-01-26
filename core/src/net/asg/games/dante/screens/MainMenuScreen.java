@@ -2,13 +2,14 @@ package net.asg.games.dante.screens;
 
 import net.asg.games.dante.DantesEscapeGame;
 import net.asg.games.dante.images.ImageProvider;
+import net.asg.games.dante.state.State;
 
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 
-public class MainMenuScreen implements Screen, InputProcessor {
+public class MainMenuScreen extends CommonScreen {
 	
 	private DantesEscapeGame game;
 	
@@ -18,11 +19,16 @@ public class MainMenuScreen implements Screen, InputProcessor {
 	
     private Button [] buttons;
     private Button helpButton;
-	
+
+	private boolean soundOn;
+
 	public MainMenuScreen(DantesEscapeGame game) {
 		// TODO Auto-generated constructor stub
     	super();
     	this.game = game;
+
+		//soundOn = State.isSoundOn();
+		//game.getSoundManager().setSoundOn(soundOn);
 	}
 
 	@Override
@@ -96,29 +102,4 @@ public class MainMenuScreen implements Screen, InputProcessor {
         //buttons[2] = new Button(buttonBg, imageProvider.getScores());
 
 	}
-
-	@Override
-	public void hide() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
-
-	}
-
 }
