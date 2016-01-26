@@ -1,9 +1,7 @@
 package net.asg.games.dante;
 
 public class Constants {
-
-	public static final boolean COPY_IMAGES = true;
-	public static final boolean DEBUG = false;
+	public static final boolean DEBUG = true;
 	public static final boolean NO_CLIP_MODE_OFF = true;
 	
 	public static final int MAX_WIDTH = 1024;
@@ -14,7 +12,7 @@ public class Constants {
 
 	//view constants
 	public static final int BOB_MOVE_SPEED = 510;
-	public static final int BOB_SPRITE_TOP_TRIM = 20;
+	public static final int[] BOB_HITBOX = {10,12,70,48};
 	public static final int OBJECT_MOVE_SPEED = 550;
 	public static final int GOAL_OBJECT_MOVE_SPEED = 800;
 	public static final int WALL_OBJECT_MOVE_SPEED = 750;
@@ -44,9 +42,11 @@ public class Constants {
 	public static final float FIREBALL_SPEED = 0.7f;
 	
 	public static final String GAME_TITLE = "Jerry's Escape";
-	public static final String ASSETS_FOLDER_NAME = "assets";
+	public static final String SOURCE_ASSETS_FOLDER_PATH = "../../desktop/";
+	public static final String TARGET_ASSETS_FOLDER_PATH = "../assets";
 	public static final String IMAGES_FOLDER_NAME = "images";
-	public static final String GAME_FOLDER_NAME = "games";
+	public static final String GAME_ATLAS_NAME = "games";
 	public static final String TEXT_IMAGES_FOLDER_NAME = "text-images";
+	public static final String TEXT_IMAGES_ATLAS_NAME = "text-images";
 	public static final String STATE_DATA_FILE = "data/gamestate-v2.json";
 }
