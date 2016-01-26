@@ -6,42 +6,42 @@ import com.badlogic.gdx.audio.Sound;
 
 public class SoundManager {
 
-	private boolean isSoundOn;
+    private boolean isSoundOn;
 
-	private Sound cannonSound;
+    private Sound cannonSound;
 
-	private Sound flameBurst;
-	
-	private Sound firewoosh;
+    private Sound flameBurst;
 
-	private Sound buzzSound;
-	
-	private Sound goalHitSound;
-	
-	private Sound deathSound;
-	
-	private Music bgStart;
+    private Sound firewoosh;
 
-	private Music bgLoop;
-	
-	private boolean isBGMStarted = false;
+    private Sound buzzSound;
 
-	private boolean isPauseMusicOn = false;
-	
-	private boolean isBGMStartFinished = false;
+    private Sound goalHitSound;
 
-	private Music pauseMusic;
-	
-	public void setSoundOn(boolean isSoundOn) {
-		this.isSoundOn = isSoundOn;
-	}
-	
-	public SoundManager() {
-		
-	}
-	
-	public void load() {
-		cannonSound = Gdx.audio.newSound(Gdx.files.internal("cannon.ogg"));
+    private Sound deathSound;
+
+    private Music bgStart;
+
+    private Music bgLoop;
+
+    private boolean isBGMLoopStarted = false;
+
+    private boolean isPauseMusicOn = false;
+
+    private boolean isBGMStartFinished = false;
+
+    private Music pauseMusic;
+
+    public void setSoundOn(boolean isSoundOn) {
+        this.isSoundOn = isSoundOn;
+    }
+
+    public SoundManager() {
+
+    }
+
+    public void load() {
+        cannonSound = Gdx.audio.newSound(Gdx.files.internal("cannon.ogg"));
         flameBurst = Gdx.audio.newSound(Gdx.files.internal("flameBurst2.ogg"));
         firewoosh = Gdx.audio.newSound(Gdx.files.internal("firewoosh.ogg"));
         buzzSound = Gdx.audio.newSound(Gdx.files.internal("buzz.ogg"));
@@ -53,10 +53,10 @@ public class SoundManager {
         bgStart.setLooping(false);
         bgLoop.setLooping(true);
         pauseMusic.setLooping(true);
-	}
-	
-	public void dispose() {
-		cannonSound.dispose();
+    }
+
+    public void dispose() {
+        cannonSound.dispose();
         flameBurst.dispose();
         firewoosh.dispose();
         buzzSound.dispose();
@@ -65,78 +65,111 @@ public class SoundManager {
         bgLoop.dispose();
         deathSound.dispose();
         pauseMusic.dispose();
-	}
-	
-	public void playCannonSound() {
-		if (isSoundOn) {
-			cannonSound.play();
-		}
-	}
+    }
 
-	public void playflameBurstSound() {
-		if (isSoundOn) {
-			flameBurst.play();
-		}
-	}
-	
-	public void playfirewooshSound() {
-		if (isSoundOn) {
-			firewoosh.play();
-		}
-	}
-	
-	public void playBuzzSound() {
-		if (isSoundOn) {
-	        long buzzSoundId = buzzSound.play();
-	        buzzSound.setVolume(buzzSoundId, 0.1f);
-		}
-	}	
-	
-	public void playGoalHitSound() {
-		if (isSoundOn) {
-			goalHitSound.play();
-		}
-	}
-	
-	public void playDeathSound() {
-		if (isSoundOn) {
-			deathSound.play();
-		}
-	}
-	
-	public void playBgSound() {
-		if (isSoundOn) {
-			if (!isBGMStarted){
-			bgStart.play();
-			bgStart.setOnCompletionListener(new Music.OnCompletionListener() {
-		          @Override
-		          public void onCompletion(Music music) {
-		        	  bgLoop.play();
-		        	  isBGMStartFinished = true;
-		          }
-			});
-			isBGMStarted = true;
-			}
-		}
-	}
-	
-	public void togglePauseMusic() {
-		if (isSoundOn) {
-			if (!isPauseMusicOn && isBGMStarted){
-				if (isBGMStartFinished)
-					bgLoop.pause();
-				else
-					bgStart.pause();
-				pauseMusic.play();
-				isPauseMusicOn = true;
-			} else if (isBGMStarted) {
-				pauseMusic.stop();
-				if (isBGMStartFinished)
-					bgLoop.play();
-				else
-					bgStart.play();
-				isPauseMusicOn = false;
-			}
-		}
-	}
+    public void playCannonSound() {
+        if (isSoundOn) {
+            cannonSound.play();
+        }
+    }
+
+    public void playflameBurstSound() {
+        if (isSoundOn) {
+            flameBurst.play();
+        }
+    }
+
+    public void playfirewooshSound() {
+        if (isSoundOn) {
+            firewoosh.play();
+        }
+    }
+
+    public void playBuzzSound() {
+        if (isSoundOn) {
+            long buzzSoundId = buzzSound.play();
+            buzzSound.setVolume(buzzSoundId, 0.1f);
+        }
+    }
+
+    public void playGoalHitSound() {
+        if (isSoundOn) {
+            goalHitSound.play();
+        }
+    }
+
+    public void playDeathSound() {
+        if (isSoundOn) {
+            deathSound.play();
+        }
+    }
+
+    public void playBgSound() {
+        if (isSoundOn) {
+            if (!isBGMLoopStarted) {
+                bgStart.play();
+                bgStart.setOnCompletionListener(new Music.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(Music music) {
+                        bgLoop.play();
+                        isBGMStartFinished = true;
+                    }
+                });
+                isBGMLoopStarted = true;
+            }
+        }
+    }
+
+    public void setBgMusicOff() {
+        if (isSoundOn) {
+            isSoundOn = false;
+            if(isBGMLoopStarted){
+                bgLoop.pause();
+            } else {
+                bgStart.pause();
+            }
+        }
+    }
+
+    public void setBgMusicOn() {
+        if (!isSoundOn) {
+            isSoundOn = true;
+            if(isBGMLoopStarted){
+                bgLoop.play();
+            } else {
+                bgStart.play();
+            }
+        }
+    }
+
+    public void setPauseMusicOn() {
+        Gdx.app.log(this.toString(),"Pause Button Pressed");
+
+        if (!isSoundOn) {
+            if (!isPauseMusicOn && isBGMLoopStarted) {
+                if (isBGMStartFinished)
+                    bgLoop.pause();
+                else
+                    bgStart.pause();
+
+                pauseMusic.play();
+                isPauseMusicOn = true;
+            }
+        }
+    }
+
+    public void setPauseMusicOff() {
+        Gdx.app.log(this.toString(),"Pause Button Pressed");
+
+        if (isSoundOn) {
+            if (isPauseMusicOn && isBGMLoopStarted) {
+                pauseMusic.stop();
+                if (isBGMStartFinished)
+                    bgLoop.play();
+                else
+                    bgStart.play();
+                isPauseMusicOn = false;
+            }
+        }
+    }
 }
