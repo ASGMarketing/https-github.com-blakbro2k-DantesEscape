@@ -59,7 +59,7 @@ public class GameScreenState implements Serializable {
 	public void levelReset(){
 		lastStageType = stageType;
 		stageType = 0;
-		spawnTime = 2200;
+		spawnTime = Constants.STARTING_SPAWNTIME;
 		isLevelStarted = false;
 		//gameState = LevelState.RUNNING;
 	}
@@ -68,11 +68,11 @@ public class GameScreenState implements Serializable {
 		score = 0;
 		roundCount = 0;
 		stageType = 0;
-		spawnTime = 2200;
+		spawnTime = Constants.STARTING_SPAWNTIME;
 		isLevelStarted = false;
 		lastStageType = 0;
 		lastGameObjTime = 0;
-		bobX = 20;
+		bobX = -1;
 		bobY = -1;
 		isDead = false;
 		roundEndTime = TimeUtils.millis() + Constants.ROUND_TIME_DURATION;
