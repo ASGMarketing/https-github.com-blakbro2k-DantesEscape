@@ -1,7 +1,7 @@
 /**
  * 
  */
-package net.asg.games.dante.models;
+package net.asg.games.dante.view;
 
 /**
  * @author Blakbro2k

@@ -1,8 +1,6 @@
 package net.asg.games.dante.view;
 
 
-import net.asg.games.dante.models.MovingGameObjectType;
-
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.Json.Serializable;
 import com.badlogic.gdx.utils.JsonValue;

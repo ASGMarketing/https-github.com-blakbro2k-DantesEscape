@@ -6,6 +6,7 @@ import net.asg.games.dante.screens.GameScreenState;
 import net.asg.games.dante.sound.SoundManager;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.graphics.FPSLogger;
 //import com.badlogic.gdx.graphics.FPSLogger;
 
 
@@ -20,6 +21,8 @@ public class DantesEscapeGame extends Game{
 	public boolean isDebugOn = false;
 	//private FPSLogger fpsLogger;
 	private StateManager stateManager;
+
+	private FPSLogger fpsLog;
 
 	public DantesEscapeGame(){
 		this.isDebugOn = false;
@@ -37,6 +40,9 @@ public class DantesEscapeGame extends Game{
 		soundManager = new SoundManager();
 		soundManager.load();
 
+		fpsLog = new FPSLogger();
+		fpsLog.log();
+
 		gameScreen = new GameScreen(this, null);
 
 		stateManager = new StateManager();
@@ -44,6 +50,11 @@ public class DantesEscapeGame extends Game{
 		//menuScreen = new MenuScreen(this);
 		//levelScreen = new LevelSelectScreen(this);
 		gotoGameScreen();
+	}
+
+	public void render(){
+		super.render();
+		fpsLog.log();
 	}
 
 	public void gotoGameScreen() {

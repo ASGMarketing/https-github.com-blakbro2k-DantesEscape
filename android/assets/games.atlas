@@ -1,82 +1,82 @@
 
 games.png
-size: 128,1024
+size: 256,1024
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 Fireball
   rotate: false
-  xy: 20, 753
+  xy: 188, 753
   size: 65, 49
   orig: 65, 49
   offset: 0, 0
   index: 1
 Fireball
   rotate: false
-  xy: 20, 702
+  xy: 74, 521
   size: 65, 49
   orig: 65, 49
   offset: 0, 0
   index: 2
 Fireball
   rotate: false
-  xy: 20, 651
+  xy: 74, 470
   size: 65, 49
   orig: 65, 49
   offset: 0, 0
   index: 3
 Fireball
   rotate: false
-  xy: 20, 600
+  xy: 74, 419
   size: 65, 49
   orig: 65, 49
   offset: 0, 0
   index: 4
 Fireball
   rotate: false
-  xy: 20, 549
+  xy: 74, 368
   size: 65, 49
   orig: 65, 49
   offset: 0, 0
   index: 5
 Fireball
   rotate: false
-  xy: 20, 498
+  xy: 74, 317
   size: 65, 49
   orig: 65, 49
   offset: 0, 0
   index: 6
 Fireball
   rotate: false
-  xy: 20, 401
+  xy: 20, 251
   size: 65, 49
   orig: 65, 49
   offset: 0, 0
   index: 7
 bob
   rotate: false
-  xy: 2, 954
-  size: 98, 65
-  orig: 98, 65
+  xy: 74, 722
+  size: 112, 80
+  orig: 112, 80
   offset: 0, 0
   index: -1
 firewall
   rotate: false
-  xy: 87, 452
+  xy: 20, 302
   size: 16, 500
   orig: 16, 500
   offset: 0, 0
   index: 1
 firewall
   rotate: false
-  xy: 105, 519
+  xy: 38, 302
   size: 16, 500
   orig: 16, 500
   offset: 0, 0
   index: 2
 firewall
   rotate: false
-  xy: 105, 17
+  xy: 56, 302
   size: 16, 500
   orig: 16, 500
   offset: 0, 0
@@ -90,14 +90,14 @@ goalpole
   index: -1
 homeButton
   rotate: false
-  xy: 2, 879
+  xy: 74, 647
   size: 73, 73
   orig: 73, 73
   offset: 0, 0
   index: -1
 resetButton
   rotate: false
-  xy: 2, 804
+  xy: 74, 572
   size: 73, 73
   orig: 73, 73
   offset: 0, 0

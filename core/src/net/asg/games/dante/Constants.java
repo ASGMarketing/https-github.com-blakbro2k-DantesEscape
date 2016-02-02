@@ -33,6 +33,8 @@ public class Constants {
 	public static final int WALL_POSITION_FIVE = 250;
 	public static final int WALL_POSITION_SIX = 300;
 	public static final int WALL_BASE_OFFSET = 450;
+	public static final int HIGH_SCORES_COUNT = 5;
+
 
 	public static final float DEFAULT_ANIMATION_PERIOD = 0.10f;
 	public static final float DEFAULT_GAME_SPEED = 1.0f;
@@ -49,4 +51,5 @@ public class Constants {
 	public static final String TEXT_IMAGES_FOLDER_NAME = "text-images";
 	public static final String TEXT_IMAGES_ATLAS_NAME = "text-images";
 	public static final String STATE_DATA_FILE = "data/gamestate-v2.json";
+	public static final String SCORES_DATA_FILE = "data/scores-v1.json";
 }

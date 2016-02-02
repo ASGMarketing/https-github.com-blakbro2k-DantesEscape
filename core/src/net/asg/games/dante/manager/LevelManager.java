@@ -49,7 +49,7 @@ public class LevelManager {
 		return processLevelDesign(mObj, st);
 	}
 
-	private MovingGameObject processLevelDesign(MovingGameObject mObj, GameScreenState st) {
+	public MovingGameObject processLevelDesign(MovingGameObject mObj, GameScreenState st) {
 		if (mObj instanceof FireWallMovingGameObject) {
 			if (st.roundCount > 2 && (MathUtils.random(0, 2) == 1))
 			((FireWallMovingGameObject) mObj).isMobile = true;
@@ -57,7 +57,7 @@ public class LevelManager {
 		
 		if (mObj instanceof FireBallMovingGameObject) {
 			if (st.roundCount > 6)
-			((FireBallMovingGameObject) mObj).setAnimationSpeed(500);
+			mObj.setAnimationSpeed(500);
 		}
 	
 		return mObj;

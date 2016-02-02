@@ -41,15 +41,15 @@ public class SoundManager {
     }
 
     public void load() {
-        cannonSound = Gdx.audio.newSound(Gdx.files.internal("cannon.ogg"));
-        flameBurst = Gdx.audio.newSound(Gdx.files.internal("flameBurst2.ogg"));
-        firewoosh = Gdx.audio.newSound(Gdx.files.internal("firewoosh.ogg"));
-        buzzSound = Gdx.audio.newSound(Gdx.files.internal("buzz.ogg"));
-        goalHitSound = Gdx.audio.newSound(Gdx.files.internal("goalHit.ogg"));
-        deathSound = Gdx.audio.newSound(Gdx.files.internal("death.ogg"));
-        bgStart = Gdx.audio.newMusic(Gdx.files.internal("btoad-start.ogg"));
-        bgLoop = Gdx.audio.newMusic(Gdx.files.internal("btoad-loop.ogg"));
-        pauseMusic = Gdx.audio.newMusic(Gdx.files.internal("pause.ogg"));
+        cannonSound = Gdx.audio.newSound(Gdx.files.internal("sounds/cannon.ogg"));
+        flameBurst = Gdx.audio.newSound(Gdx.files.internal("sounds/flameBurst2.ogg"));
+        firewoosh = Gdx.audio.newSound(Gdx.files.internal("sounds/firewoosh.ogg"));
+        buzzSound = Gdx.audio.newSound(Gdx.files.internal("sounds/buzz.ogg"));
+        goalHitSound = Gdx.audio.newSound(Gdx.files.internal("sounds/goalHit.ogg"));
+        deathSound = Gdx.audio.newSound(Gdx.files.internal("sounds/death.ogg"));
+        bgStart = Gdx.audio.newMusic(Gdx.files.internal("sounds/btoad-start.ogg"));
+        bgLoop = Gdx.audio.newMusic(Gdx.files.internal("sounds/btoad-loop.ogg"));
+        pauseMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/pause.ogg"));
         bgStart.setLooping(false);
         bgLoop.setLooping(true);
         pauseMusic.setLooping(true);

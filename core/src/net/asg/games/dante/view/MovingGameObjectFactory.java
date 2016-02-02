@@ -2,10 +2,7 @@ package net.asg.games.dante.view;
 
 import net.asg.games.dante.Constants;
 import net.asg.games.dante.images.ImageProvider;
-import net.asg.games.dante.models.MovingGameObjectType;
 import net.asg.games.dante.sound.SoundManager;
-import net.asg.games.dante.view.MovingGameObjectState;
-
 
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
