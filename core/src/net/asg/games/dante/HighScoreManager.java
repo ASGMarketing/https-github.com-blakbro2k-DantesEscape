@@ -3,6 +3,7 @@ package net.asg.games.dante;
 /**
  * Created by Blakbro2k on 2/2/2016.
  */
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -49,7 +50,7 @@ public class HighScoreManager {
     public void addHighScore(String name, int score) {
         highScores.add(new HighScore(name, score, true));
 
-        Collections.sort(highScores, new Comparator<HighScore> () {
+        Collections.sort(highScores, new Comparator<HighScore>() {
             @Override
             public int compare(HighScore score1, HighScore score2) {
                 return score2.score - score1.score;
@@ -57,7 +58,7 @@ public class HighScoreManager {
 
         });
 
-        while(highScores.size() > Constants.HIGH_SCORES_COUNT) {
+        while (highScores.size() > Constants.HIGH_SCORES_COUNT) {
             highScores.remove(Constants.HIGH_SCORES_COUNT);
         }
 
@@ -71,22 +72,22 @@ public class HighScoreManager {
     @SuppressWarnings("unchecked")
     private void retrieveHighScores() {
         FileHandle highScoresFile = Gdx.files.local(Constants.SCORES_DATA_FILE);
-        if( highScoresFile.exists() ) {
+        if (highScoresFile.exists()) {
             Json json = new Json();
             try {
                 String encScoresStr = highScoresFile.readString();
-                String scoresStr = Base64Coder.decodeString( encScoresStr );
+                String scoresStr = Base64Coder.decodeString(encScoresStr);
                 highScores = json.fromJson(ArrayList.class, HighScore.class, scoresStr);
                 return;
-            } catch( Exception e ) {
-                Gdx.app.error( HighScoreManager.class.getName(),
-                        "Unable to parse high scores data file", e );
+            } catch (Exception e) {
+                Gdx.app.error(HighScoreManager.class.getName(),
+                        "Unable to parse high scores data file", e);
             }
         }
         highScores = new ArrayList<HighScore>();
         String playerName = textResources.getDefaultPlayerName();
-        for(int i=0;i<Constants.HIGH_SCORES_COUNT;i++){
-            highScores.add(new HighScore(playerName, 50 - 10*i, false));
+        for (int i = 0; i < Constants.HIGH_SCORES_COUNT; i++) {
+            highScores.add(new HighScore(playerName, 50 - 10 * i, false));
         }
     }
 
@@ -110,9 +111,9 @@ public class HighScoreManager {
         Json json = new Json();
         try {
             return json.fromJson(ArrayList.class, HighScore.class, scoresStr);
-        } catch( Exception e ) {
-            Gdx.app.error( HighScoreManager.class.getName(),
-                    "Unable to deserialize high scores", e );
+        } catch (Exception e) {
+            Gdx.app.error(HighScoreManager.class.getName(),
+                    "Unable to deserialize high scores", e);
         }
         return null;
     }

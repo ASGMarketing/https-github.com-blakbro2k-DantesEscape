@@ -7,10 +7,10 @@ import net.asg.games.dante.DantesEscapeGame;
 import net.asg.games.dante.manager.LevelManager;
 import net.asg.games.dante.models.Bob;
 import net.asg.games.dante.models.Button;
-import net.asg.games.dante.view.GameOverMessage;
-import net.asg.games.dante.view.MovingGameObject;
-import net.asg.games.dante.view.MovingGameObjectFactory;
-import net.asg.games.dante.view.MovingGameObjectState;
+import net.asg.games.dante.models.GameOverMessage;
+import net.asg.games.dante.models.MovingGameObject;
+import net.asg.games.dante.models.MovingGameObjectFactory;
+import net.asg.games.dante.models.MovingGameObjectState;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -82,9 +82,9 @@ public class GameScreen extends CommonScreen {
 
     public void show() {
         imageProvider = game.getImageProvider();
-        soundManager = game.getSoundManager();
-        soundManager.setSoundOn(true);
-        soundManager.playBgSound();
+        soundProvider = game.getSoundProvider();
+        soundProvider.setSoundOn(true);
+        soundProvider.playBgSound();
 
         backgroundSprite = imageProvider.getBackgroundSprite();
         foregroundSprite = imageProvider.getForegroundSprite();
@@ -98,12 +98,12 @@ public class GameScreen extends CommonScreen {
         batch = new SpriteBatch();
 
         movingGameObjectFactory = new MovingGameObjectFactory(imageProvider,
-                soundManager);
+                soundProvider);
 
         bobRegion = imageProvider.getBob();
         //Gdx.app.log(this.toString(), "" + bobRegion);
         bob = new Bob(-1, -1, bobRegion.getRegionHeight(), bobRegion.getRegionWidth(),
-                Constants.BOB_HITBOX[0],Constants.BOB_HITBOX[1],Constants.BOB_HITBOX[3],Constants.BOB_HITBOX[2]);
+                Constants.BOB_HITBOX[0], Constants.BOB_HITBOX[1], Constants.BOB_HITBOX[3], Constants.BOB_HITBOX[2]);
 
         movingObjects = new Array<MovingGameObject>();
         scoreName = "score: 0";
@@ -168,9 +168,9 @@ public class GameScreen extends CommonScreen {
         }
 
         if (st.isDead) {
-            if (gameOverMessage == null) {
+            if (gameOverMessage == null)
                 gameOverMessage = new GameOverMessage(imageProvider, st.score);
-            }
+
             gameOverMessage.draw(batch);
             resetButton.draw(batch);
             homeButton.draw(batch);
@@ -201,7 +201,7 @@ public class GameScreen extends CommonScreen {
             //Gdx.gl.glBlendFunc(GL30.GL_SRC_ALPHA, GL30.GL_ONE_MINUS_SRC_ALPHA);
             //hitBoxRenderer.setProjectionMatrix(camera.combined);
             debugRenderer.begin(ShapeType.Line);
-            debugRenderer.setColor(1,0,0,Color.alpha(0.5f));
+            debugRenderer.setColor(1, 0, 0, Color.alpha(0.5f));
 
             debugRenderer.rect(bob.getHitbox().x, bob.getHitbox().y,
                     bob.getHitbox().width, bob.getHitbox().height);
@@ -215,8 +215,8 @@ public class GameScreen extends CommonScreen {
             return;
         }
 
-            bgScrollTimer += delta * st.getBackgroundSpeed();
-            fgScrollTimer += delta * st.getForegroundSpeed();
+        bgScrollTimer += delta * st.getBackgroundSpeed();
+        fgScrollTimer += delta * st.getForegroundSpeed();
 
         st.score += st.standardMovingBonus * delta;
 
@@ -224,7 +224,7 @@ public class GameScreen extends CommonScreen {
             movingObjects.add(levelManager.getNextObject(movingGameObjectFactory, st));
         }
         /*
-		 * Using Iterator, we update all objects on screen to move, and discard
+         * Using Iterator, we update all objects on screen to move, and discard
 	     * all objects off screen All hit detection happens here also
 		 */
         Iterator<MovingGameObject> iter = movingObjects.iterator();
@@ -264,7 +264,7 @@ public class GameScreen extends CommonScreen {
     @Override
     public void pause() {
         if (!st.isPaused && st.isLevelStarted) {
-            soundManager.setBgMusicOff();
+            soundProvider.setBgMusicOff();
             st.isPaused = true;
 
             long pausedTime = TimeUtils.millis();
@@ -285,7 +285,7 @@ public class GameScreen extends CommonScreen {
     @Override
     public void resume() {
         if (st.isPaused) {
-            soundManager.setBgMusicOn();
+            soundProvider.setBgMusicOn();
             st.isPaused = false;
             long now = TimeUtils.millis();
             st.lastGameObjTime += now;

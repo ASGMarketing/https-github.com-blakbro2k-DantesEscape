@@ -4,14 +4,14 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.Json.Serializable;
 
-public class GameLevelState implements Serializable{
+public class GameLevelState implements Serializable {
 
-	public void write(Json json) {
-	
-	}
+    public void write(Json json) {
 
-	@Override
-	public void read(Json json, JsonValue jsonData) {
+    }
 
-	}
+    @Override
+    public void read(Json json, JsonValue jsonData) {
+
+    }
 }

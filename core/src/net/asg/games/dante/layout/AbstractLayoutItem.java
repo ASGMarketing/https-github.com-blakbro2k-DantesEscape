@@ -3,33 +3,33 @@ package net.asg.games.dante.layout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public abstract class AbstractLayoutItem {
-	protected float x, y;
-	
-	protected int width, height;	
-	
-	public float getX() {
-		return x;
-	}
+    protected float x, y;
 
-	public void setX(float x) {
-		this.x = x;
-	}
+    protected int width, height;
 
-	public float getY() {
-		return y;
-	}
+    public float getX() {
+        return x;
+    }
 
-	public void setY(float y) {
-		this.y = y;
-	}
-	
-	public int getWidth() {
-		return width;
-	}
+    public void setX(float x) {
+        this.x = x;
+    }
 
-	public int getHeight() {
-		return height;
-	}	
-	
-	public abstract void draw(SpriteBatch batch);
+    public float getY() {
+        return y;
+    }
+
+    public void setY(float y) {
+        this.y = y;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public abstract void draw(SpriteBatch batch);
 }

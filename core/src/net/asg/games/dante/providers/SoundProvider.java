@@ -1,10 +1,10 @@
-package net.asg.games.dante.sound;
+package net.asg.games.dante.providers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 
-public class SoundManager {
+public class SoundProvider {
 
     private boolean isSoundOn;
 
@@ -36,7 +36,7 @@ public class SoundManager {
         this.isSoundOn = isSoundOn;
     }
 
-    public SoundManager() {
+    public SoundProvider() {
 
     }
 
@@ -123,7 +123,7 @@ public class SoundManager {
     public void setBgMusicOff() {
         if (isSoundOn) {
             isSoundOn = false;
-            if(isBGMLoopStarted){
+            if (isBGMLoopStarted) {
                 bgLoop.pause();
             } else {
                 bgStart.pause();
@@ -134,7 +134,7 @@ public class SoundManager {
     public void setBgMusicOn() {
         if (!isSoundOn) {
             isSoundOn = true;
-            if(isBGMLoopStarted){
+            if (isBGMLoopStarted) {
                 bgLoop.play();
             } else {
                 bgStart.play();
@@ -143,7 +143,7 @@ public class SoundManager {
     }
 
     public void setPauseMusicOn() {
-        Gdx.app.log(this.toString(),"Pause Button Pressed");
+        Gdx.app.log(this.toString(), "Pause Button Pressed");
 
         if (!isSoundOn) {
             if (!isPauseMusicOn && isBGMLoopStarted) {
@@ -159,7 +159,7 @@ public class SoundManager {
     }
 
     public void setPauseMusicOff() {
-        Gdx.app.log(this.toString(),"Pause Button Pressed");
+        Gdx.app.log(this.toString(), "Pause Button Pressed");
 
         if (isSoundOn) {
             if (isPauseMusicOn && isBGMLoopStarted) {

@@ -1,4 +1,4 @@
-package net.asg.games.dante.images;
+package net.asg.games.dante.providers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -12,118 +12,126 @@ import net.asg.games.dante.Constants;
 public class ImageProvider {
 
     private int SCREEN_WIDTH = Constants.GAME_WIDTH;
-    
+
     private int SCREEN_HEIGHT = Constants.GAME_HEIGHT;
-	
-	private TextureAtlas atlas;
-	
-	private TextureAtlas textAtlas;
-	
-	private Texture background;
-	
-	private Texture foreground;
-	
+
+    private TextureAtlas atlas;
+
+    private TextureAtlas textAtlas;
+
+    private Texture background;
+
+    private Texture foreground;
+
+	private Texture splashScreen;
+
 	//private Texture sign;
-	
-	private Texture animatedBackground;
-	
-	private Texture animatedForeground;
-	
-	private Texture pauseScreen;
-	
-	private Sprite backGroundSprite;
-	
-	private Sprite foreGroundSprite;
 
-	private Texture gameover;
+    private Texture animatedBackground;
 
-	public ImageProvider() {
+    private Texture animatedForeground;
+
+    private Texture pauseScreen;
+
+    private Sprite backGroundSprite;
+
+    private Sprite foreGroundSprite;
+
+    private Texture gameover;
+
+    public ImageProvider() {
+    }
+
+    public void load() {
+        atlas = new TextureAtlas(Gdx.files.internal("games.atlas"));
+        textAtlas = new TextureAtlas(Gdx.files.internal("text-images.atlas"));
+
+
+        background = new Texture(Gdx.files.internal("background.png"));
+        foreground = new Texture(Gdx.files.internal("foreground.png"));
+		splashScreen = new Texture(Gdx.files.internal("splash-screen.png"));
+        pauseScreen = new Texture(Gdx.files.internal("paused.png"));
+        gameover = new Texture(Gdx.files.internal("gameover.png"));
+        animatedBackground = new Texture(Gdx.files.internal("background.png"));
+        animatedBackground.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
+        animatedForeground = new Texture(Gdx.files.internal("foreground.png"));
+        animatedForeground.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
+        backGroundSprite = new Sprite(animatedBackground, 0, 0, this.getScreenWidth(), this.getScreenHeight());
+        foreGroundSprite = new Sprite(animatedForeground, 0, 0, this.getScreenWidth(), this.getScreenHeight());
+    }
+
+    public void dispose() {
+        atlas.dispose();
+        textAtlas.dispose();
+        animatedBackground.dispose();
+        animatedForeground.dispose();
+        background.dispose();
+        foreground.dispose();
+        gameover.dispose();
+        pauseScreen.dispose();
+		splashScreen.dispose();
+    }
+
+    public int getScreenWidth() {
+        return SCREEN_WIDTH;
+    }
+
+    public int getScreenHeight() {
+        return SCREEN_HEIGHT;
+    }
+
+    public Texture getBackground() {
+        return background;
+    }
+
+    public Sprite getBackgroundSprite() {
+        return backGroundSprite;
+    }
+
+    public Texture getGameOverBoard() {
+        return gameover;
+    }
+
+    public Texture getForeground() {
+        return foreground;
+    }
+
+	public Texture getSplashScreen() {
+		return splashScreen;
 	}
-	
-	public void load() {
-		atlas = new TextureAtlas(Gdx.files.internal("games.atlas"));
-		textAtlas  = new TextureAtlas(Gdx.files.internal("text-images.atlas"));
-		
-		
-		background = new Texture(Gdx.files.internal("background.png"));
-		foreground = new Texture(Gdx.files.internal("foreground.png"));
-		pauseScreen = new Texture(Gdx.files.internal("paused.png"));
-		gameover = new Texture(Gdx.files.internal("gameover.png"));
-		animatedBackground = new Texture(Gdx.files.internal("background.png"));
-		animatedBackground.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
-		animatedForeground = new Texture(Gdx.files.internal("foreground.png"));
-		animatedForeground.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
-		backGroundSprite = new Sprite(animatedBackground,0,0,this.getScreenWidth(),this.getScreenHeight());
-		foreGroundSprite = new Sprite(animatedForeground,0,0,this.getScreenWidth(),this.getScreenHeight());
+
+	public Sprite getForegroundSprite() {
+        return foreGroundSprite;
+    }
+
+    public Texture getPauseScreen() {
+        return pauseScreen;
+    }
+
+    public TextureRegion getFireBall(int frame) {
+        return atlas.findRegion("Fireball", frame);
+    }
+
+    public TextureRegion getFireWall(int frame) {
+        return atlas.findRegion("firewall", frame);
+    }
+
+    public TextureRegion getBob() {
+        return atlas.findRegion("bob");
+    }
+
+    public TextureRegion getGoal() {
+        return atlas.findRegion("goalpole");
+    }
+
+    public TextureRegion getResetButton() {
+        return atlas.findRegion("resetButton");
+    }
+
+    public TextureRegion getHomeButton() {
+        return atlas.findRegion("homeButton");
 	}
-	
-	public void dispose() {
-		atlas.dispose();
-		textAtlas.dispose();
-		animatedBackground.dispose();
-		animatedForeground.dispose();
-		background.dispose();
-		foreground.dispose();
-		gameover.dispose();
-		pauseScreen.dispose();
-	}
-	
-	public int getScreenWidth() {
-		return SCREEN_WIDTH;
-	}
-	
-	public int getScreenHeight() {
-		return SCREEN_HEIGHT;
-	}
-	
-	public Texture getBackground() {
-		return background;
-	}
-	
-	public Sprite getBackgroundSprite(){
-		return backGroundSprite;
-	}
-	
-	public Texture getGameOverBoard(){
-		return gameover;
-	}
-	
-	public Texture getForeground() {
-		return foreground;
-	}
-	
-	public Sprite getForegroundSprite(){
-		return foreGroundSprite;
-	}
-	
-	public Texture getPauseScreen(){
-		return pauseScreen;
-	}
-	
-	public TextureRegion getFireBall(int frame) {
-		return atlas.findRegion("Fireball", frame);
-	}
-	
-	public TextureRegion getFireWall(int frame) {
-		return atlas.findRegion("firewall", frame);
-	}
-	
-	public TextureRegion getBob() {
-		return atlas.findRegion("bob");
-	}
-	
-	public TextureRegion getGoal() {
-		return atlas.findRegion("goalpole");
-	}
-	
-	public TextureRegion getResetButton() {
-		return atlas.findRegion("resetButton");
-	}
-	
-	public TextureRegion getHomeButton() {
-		return atlas.findRegion("homeButton");
-	}
-	/*
+    /*
 	public Texture getBoard() {
 		return sign;
 	}
@@ -215,17 +223,17 @@ public class ImageProvider {
 */
 
 
-	/**
-	 * Text images
-	 */
-	
-	public TextureRegion getYouLoseLabel() {
-		return textAtlas.findRegion("YouLose");
-	}
-	
-	public TextureRegion getStartLabel() {
-		return textAtlas.findRegion("Start");
-	}
+    /**
+     * Text images
+     */
+
+    public TextureRegion getYouLoseLabel() {
+        return textAtlas.findRegion("YouLose");
+    }
+
+    public TextureRegion getStartLabel() {
+        return textAtlas.findRegion("Start");
+    }
 	
 	/*
 	public TextureRegion getLogo() {

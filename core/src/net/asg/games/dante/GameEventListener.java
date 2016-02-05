@@ -1,6 +1,7 @@
 package net.asg.games.dante;
 
 import java.util.List;
+
 import net.asg.games.dante.HighScoreManager.HighScore;
 
 /**

@@ -4,7 +4,7 @@ package net.asg.games.dante.text;
  * Created by Blakbro2k on 2/2/2016.
  */
 public class TextResources {
-    private static String [] helpLines = {
+    private static String[] helpLines = {
 
             "Eating fruits is good for your health. As fruits fall",
             "from the sky you can try to catch as many as you",
@@ -44,7 +44,7 @@ public class TextResources {
         return "Jerry";
     }
 
-    public String [] getHelpLines() {
+    public String[] getHelpLines() {
         return helpLines;
     }
 }
