@@ -63,7 +63,7 @@ public class GameScreenState implements Serializable {
         //gameState = LevelState.RUNNING;
     }
 
-    public void hardReset() {
+    public void gameReset() {
         score = 0;
         roundCount = 0;
         stageType = 0;

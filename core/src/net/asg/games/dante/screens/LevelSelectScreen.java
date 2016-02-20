@@ -4,7 +4,6 @@ package net.asg.games.dante.screens;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import net.asg.games.dante.DantesEscapeGame;
 import net.asg.games.dante.models.Button;
@@ -12,7 +11,7 @@ import net.asg.games.dante.models.Button;
 /**
  * @author Blakbro2k
  */
-public class LevelSelectScreen extends CommonScreen {
+public class LevelSelectScreen extends AbstractScreen {
 
     private Texture backgroundImage;
 

@@ -13,10 +13,10 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 /**
  * @author Blakbro2k
  *         <p/>
- *         <code>CommonScreen</code> implements <code>Screen</code> and <code>InputProcessor</code>
+ *         <code>AbstractScreen</code> implements <code>Screen</code> and <code>InputProcessor</code>
  *         from libgdx API.  This class has all methods implemented. All other screens will extend this class
  */
-public class CommonScreen implements Screen, InputProcessor {
+public class AbstractScreen implements Screen, InputProcessor {
 
     protected SpriteBatch batch;
 

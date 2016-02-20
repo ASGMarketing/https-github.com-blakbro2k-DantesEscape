@@ -1,26 +1,25 @@
 package net.asg.games.dante.screens;
 
-import net.asg.games.dante.DantesEscapeGame;
-import net.asg.games.dante.providers.ImageProvider;
-import net.asg.games.dante.state.State;
-
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL30;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-public class MainMenuScreen extends CommonScreen {
+import net.asg.games.dante.DantesEscapeGame;
 
-    private DantesEscapeGame game;
+public class MainMenuScreen extends AbstractScreen {
+    //private Button[] buttons;
+    //private Button helpButton;
 
-    private OrthographicCamera camera;
+    //private boolean soundOn;
+    private Skin skin;
+    private Stage stage;
 
-    private ImageProvider imageProvider;
-
-    private Button[] buttons;
-    private Button helpButton;
-
-    private boolean soundOn;
 
     public MainMenuScreen(DantesEscapeGame game) {
         // TODO Auto-generated constructor stub
@@ -32,74 +31,54 @@ public class MainMenuScreen extends CommonScreen {
     }
 
     @Override
-    public boolean keyDown(int keycode) {
-        // TODO Auto-generated method stub
-        return false;
-    }
+    public void show() {
+        //super.show();
 
-    @Override
-    public boolean keyUp(int keycode) {
-        // TODO Auto-generated method stub
-        return false;
-    }
+        batch = new SpriteBatch();
 
-    @Override
-    public boolean keyTyped(char character) {
-        // TODO Auto-generated method stub
-        return false;
-    }
+        skin = new Skin(Gdx.files.internal("data/uiskin.json"));
+        //Gdx.app.log("Skin",skin.toString());
+        stage = new Stage();
 
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        // TODO Auto-generated method stub
-        return false;
-    }
+        final TextButton newGameButton = new TextButton("New Game", skin, "default");
+        final TextButton quitGameButton = new TextButton("Quit App", skin, "default");
 
-    @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        // TODO Auto-generated method stub
-        return false;
-    }
+        newGameButton.setWidth(200f);
+        newGameButton.setHeight(200f);
+        newGameButton.setPosition(Gdx.graphics.getWidth() / 2 - 100f, Gdx.graphics.getHeight() / 2 - 10f);
 
-    @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
-        // TODO Auto-generated method stub
-        return false;
-    }
+        quitGameButton.setWidth(200f);
+        quitGameButton.setHeight(200f);
+        quitGameButton.setPosition(newGameButton.getX(), newGameButton.getY() + 400f);
 
-    @Override
-    public boolean mouseMoved(int screenX, int screenY) {
-        // TODO Auto-generated method stub
-        return false;
-    }
+        newGameButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.gotoGameScreen();
+            }
+        });
 
-    @Override
-    public boolean scrolled(int amount) {
-        // TODO Auto-generated method stub
-        return false;
+        quitGameButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                Gdx.app.exit();
+            }
+        });
+
+        stage.addActor(newGameButton);
+        stage.addActor(quitGameButton);
+
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
     public void render(float delta) {
-        // TODO Auto-generated method stub
+        super.render(delta);
+        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 
-    }
-
-    @Override
-    public void resize(int width, int height) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void show() {
-        // TODO Auto-generated method stub
-
-        buttons = new Button[2];
-        //buttons[0] = new Button(helpButton, null);
-        //buttons[0] = new Button(buttonBg, imageProvider.getStart());
-        //buttons[1] = new Button(buttonBg, imageProvider.getKids());
-        //buttons[2] = new Button(buttonBg, imageProvider.getScores());
-
+        batch.begin();
+        stage.draw();
+        batch.end();
     }
 }

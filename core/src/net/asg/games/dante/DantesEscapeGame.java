@@ -10,11 +10,13 @@ import net.asg.games.dante.screens.SplashScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.FPSLogger;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.Timer;
 
 public class DantesEscapeGame extends Game {
     private ImageProvider imageProvider;
     private GameScreen gameScreen;
+    private MainMenuScreen mainMenuScreen;
     //private GameState gameState;
 
     //private TextResources textResources;
@@ -45,28 +47,28 @@ public class DantesEscapeGame extends Game {
         fpsLog.log();
 
         gameScreen = new GameScreen(this, null);
-
         stateManager = new StateManager();
-        //menuScreen = new MenuScreen(this);
+        mainMenuScreen = new MainMenuScreen(this);
+
         //levelScreen = new LevelSelectScreen(this);
         setScreen(new SplashScreen(this));
 
-        final long splash_start_time = System.currentTimeMillis();
+        final long splash_start_time = TimeUtils.millis();
 
                 Gdx.app.postRunnable(new Runnable() {
                     @Override
                     public void run() {
-                        long splash_elapsed_time = System.currentTimeMillis() - splash_start_time;
-                        if (splash_elapsed_time < Constants.SPLASH_MINIMUM_MILLIS) {
+                        long splash_elapsed_time = TimeUtils.millis() - splash_start_time;
+                        if (splash_elapsed_time < Constants.SPLASH_MINIMUM_MILLISECONDS) {
                             Timer.schedule(
                                     new Timer.Task() {
                                         @Override
                                         public void run() {
-                                            DantesEscapeGame.this.gotoGameScreen();
+                                            DantesEscapeGame.this.gotoMainMenuScreen();
                                         }
-                                    }, (float) (Constants.SPLASH_MINIMUM_MILLIS - splash_elapsed_time) / 1000f);
+                                    }, (float) (Constants.SPLASH_MINIMUM_MILLISECONDS - splash_elapsed_time) / 1000);
                         } else {
-                            DantesEscapeGame.this.gotoGameScreen();
+                            DantesEscapeGame.this.gotoMainMenuScreen();
                         }
                     }
                 });
@@ -75,6 +77,12 @@ public class DantesEscapeGame extends Game {
     public void render() {
         super.render();
         fpsLog.log();
+    }
+
+    public void endGame(GameScreenState gameScreenState){
+        gameScreenState.gameReset();
+        soundProvider.stopAllSounds();
+        soundProvider.resetSoundBoard();
     }
 
     public void gotoGameScreen() {
@@ -93,8 +101,8 @@ public class DantesEscapeGame extends Game {
         //setScreen(new HelpScreen(this));
     }
 
-    public void gotoMenuScreen() {
-        //setScreen(new MenuScreen(this));
+    public void gotoMainMenuScreen() {
+        setScreen(new MainMenuScreen(this));
     }
 
     //public GameState getGameState() {
@@ -117,5 +125,11 @@ public class DantesEscapeGame extends Game {
         //menuScreen.dispose();
         //levelScreen.dispose();
         gameScreen.dispose();
+    }
+
+    public void startGame(GameScreenState gameScreenState) {
+            gameScreenState.gameReset();
+            gameScreenState.isPaused = false;
+            soundProvider.resetSoundBoard();
     }
 }

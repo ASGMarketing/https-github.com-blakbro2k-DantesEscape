@@ -53,6 +53,6 @@ public class Constants {
     public static final String STATE_DATA_FILE = "data/gamestate-v2.json";
     public static final String SCORES_DATA_FILE = "data/scores-v1.json";
 
-    public static long SPLASH_MINIMUM_MILLIS = 3000L;
+    public static final long SPLASH_MINIMUM_MILLISECONDS = 3000L;
 
 }

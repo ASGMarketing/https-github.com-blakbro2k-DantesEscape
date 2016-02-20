@@ -10,7 +10,7 @@ import net.asg.games.dante.DantesEscapeGame;
 /**
  * Created by Blakbro2k on 2/4/2016.
  */
-public class SplashScreen extends CommonScreen {
+public class SplashScreen extends AbstractScreen {
     private SpriteBatch batch;
     private Texture splashScreenTexture;
 

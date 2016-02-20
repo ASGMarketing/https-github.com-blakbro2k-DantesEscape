@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class GameoverScreen extends CommonScreen {
+public class GameoverScreen extends AbstractScreen {
 
 
     private Texture gameoverImage;

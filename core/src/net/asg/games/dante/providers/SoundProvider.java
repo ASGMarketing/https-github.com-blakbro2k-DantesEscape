@@ -32,12 +32,12 @@ public class SoundProvider {
 
     private Music pauseMusic;
 
-    public void setSoundOn(boolean isSoundOn) {
-        this.isSoundOn = isSoundOn;
-    }
-
     public SoundProvider() {
 
+    }
+
+    public void setSoundOn(boolean isSoundOn) {
+        this.isSoundOn = isSoundOn;
     }
 
     public void load() {
@@ -171,5 +171,24 @@ public class SoundProvider {
                 isPauseMusicOn = false;
             }
         }
+    }
+
+    public void resetSoundBoard(){
+        isBGMLoopStarted = false;
+        isPauseMusicOn = false;
+        isBGMStartFinished = false;
+    }
+    public void stopAllSounds(){
+        if(bgStart.isPlaying())
+            bgStart.stop();
+        if(bgLoop.isPlaying())
+            bgLoop.stop();
+        if(pauseMusic.isPlaying())
+            pauseMusic.stop();
+            cannonSound.stop();
+        flameBurst.stop();
+        firewoosh.stop();
+        buzzSound.stop();
+        deathSound.stop();
     }
 }
