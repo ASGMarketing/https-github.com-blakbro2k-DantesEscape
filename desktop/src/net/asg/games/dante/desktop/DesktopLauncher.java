@@ -32,6 +32,8 @@ public class DesktopLauncher {
 					Constants.TARGET_ASSETS_FOLDER_PATH, Constants.GAME_ATLAS_NAME);
 			TexturePacker.process(settings, Constants.SOURCE_ASSETS_FOLDER_PATH + Constants.TEXT_IMAGES_FOLDER_NAME,
 					Constants.TARGET_ASSETS_FOLDER_PATH , Constants.TEXT_IMAGES_ATLAS_NAME);
+			TexturePacker.process(settings, Constants.SOURCE_ASSETS_FOLDER_PATH + Constants.BUTTONS_IMAGES_FOLDER_NAME,
+					Constants.TARGET_ASSETS_FOLDER_PATH , Constants.BUTTONS_IMAGES_ATLAS_NAME);
 		}
 
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
