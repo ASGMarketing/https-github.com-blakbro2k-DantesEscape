@@ -1,0 +1,153 @@
+
+buttons.png
+size: 1024,256
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+acheivement
+  rotate: false
+  xy: 2, 2
+  size: 27, 29
+  orig: 27, 29
+  offset: 0, 0
+  index: -1
+acheivement_down
+  rotate: false
+  xy: 522, 100
+  size: 27, 29
+  orig: 27, 29
+  offset: 0, 0
+  index: -1
+acheivement_over
+  rotate: false
+  xy: 748, 198
+  size: 27, 29
+  orig: 27, 29
+  offset: 0, 0
+  index: -1
+back
+  rotate: false
+  xy: 31, 2
+  size: 27, 29
+  orig: 27, 29
+  offset: 0, 0
+  index: -1
+back_down
+  rotate: false
+  xy: 522, 69
+  size: 27, 29
+  orig: 27, 29
+  offset: 0, 0
+  index: -1
+back_over
+  rotate: false
+  xy: 551, 100
+  size: 27, 29
+  orig: 27, 29
+  offset: 0, 0
+  index: -1
+cancel
+  rotate: false
+  xy: 748, 167
+  size: 27, 29
+  orig: 27, 29
+  offset: 0, 0
+  index: -1
+cancel_down
+  rotate: false
+  xy: 777, 198
+  size: 27, 29
+  orig: 27, 29
+  offset: 0, 0
+  index: -1
+cancel_over
+  rotate: false
+  xy: 60, 2
+  size: 27, 29
+  orig: 27, 29
+  offset: 0, 0
+  index: -1
+config
+  rotate: false
+  xy: 228, 33
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+config_down
+  rotate: false
+  xy: 454, 131
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+config_over
+  rotate: false
+  xy: 326, 33
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+exit
+  rotate: false
+  xy: 552, 131
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+exit_down
+  rotate: false
+  xy: 424, 33
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+exit_over
+  rotate: false
+  xy: 650, 131
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+facebook
+  rotate: false
+  xy: 522, 38
+  size: 27, 29
+  orig: 27, 29
+  offset: 0, 0
+  index: -1
+google
+  rotate: false
+  xy: 551, 69
+  size: 27, 29
+  orig: 27, 29
+  offset: 0, 0
+  index: -1
+like
+  rotate: false
+  xy: 580, 100
+  size: 27, 29
+  orig: 27, 29
+  offset: 0, 0
+  index: -1
+play
+  rotate: false
+  xy: 2, 131
+  size: 224, 96
+  orig: 224, 96
+  offset: 0, 0
+  index: -1
+play_down
+  rotate: false
+  xy: 2, 33
+  size: 224, 96
+  orig: 224, 96
+  offset: 0, 0
+  index: -1
+play_over
+  rotate: false
+  xy: 228, 131
+  size: 224, 96
+  orig: 224, 96
+  offset: 0, 0
+  index: -1
