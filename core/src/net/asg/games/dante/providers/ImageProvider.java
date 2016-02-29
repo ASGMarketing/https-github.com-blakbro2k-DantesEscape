@@ -6,6 +6,9 @@ import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 import net.asg.games.dante.Constants;
 
@@ -19,13 +22,17 @@ public class ImageProvider {
 
     private TextureAtlas textAtlas;
 
+    private TextureAtlas buttonsAtlas;
+
     private Texture background;
 
     private Texture foreground;
 
 	private Texture splashScreen;
 
-	//private Texture sign;
+	private Skin defaultUISkin;
+
+    private Skin defaultButtonSkin;
 
     private Texture animatedBackground;
 
@@ -39,14 +46,16 @@ public class ImageProvider {
 
     private Texture gameover;
 
+
     public ImageProvider() {
     }
 
     public void load() {
         atlas = new TextureAtlas(Gdx.files.internal("games.atlas"));
         textAtlas = new TextureAtlas(Gdx.files.internal("text-images.atlas"));
+        buttonsAtlas = new TextureAtlas(Gdx.files.internal("buttons.atlas"));
 
-
+        //Textures
         background = new Texture(Gdx.files.internal("background.png"));
         foreground = new Texture(Gdx.files.internal("foreground.png"));
 		splashScreen = new Texture(Gdx.files.internal("splash-screen.png"));
@@ -56,13 +65,21 @@ public class ImageProvider {
         animatedBackground.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
         animatedForeground = new Texture(Gdx.files.internal("foreground.png"));
         animatedForeground.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
+
+		//Sprites
         backGroundSprite = new Sprite(animatedBackground, 0, 0, this.getScreenWidth(), this.getScreenHeight());
         foreGroundSprite = new Sprite(animatedForeground, 0, 0, this.getScreenWidth(), this.getScreenHeight());
+
+		//Skins
+        defaultUISkin = new Skin(Gdx.files.internal("data/uiskin.json"));
+        buildButtonSkin();
+
     }
 
     public void dispose() {
         atlas.dispose();
         textAtlas.dispose();
+        buttonsAtlas.dispose();
         animatedBackground.dispose();
         animatedForeground.dispose();
         background.dispose();
@@ -70,6 +87,8 @@ public class ImageProvider {
         gameover.dispose();
         pauseScreen.dispose();
 		splashScreen.dispose();
+        defaultUISkin.dispose();
+        defaultButtonSkin.dispose();
     }
 
     public int getScreenWidth() {
@@ -131,11 +150,55 @@ public class ImageProvider {
     public TextureRegion getHomeButton() {
         return atlas.findRegion("homeButton");
 	}
+
+    public Skin getDefaultUIskin() { return defaultUISkin; }
+    public Skin getDefaultButtonSkin() { return defaultButtonSkin; }
+
+    ;
+    private void buildButtonSkin (){
+        defaultButtonSkin = new Skin();
+        defaultButtonSkin.addRegions(buttonsAtlas);
+    }
+
+    public ImageButtonStyle getExitButtonStyle() {
+        ImageButtonStyle tempButtonStyle = new ImageButtonStyle();  //Instaciate
+        tempButtonStyle.up = defaultButtonSkin.getDrawable("exit");  //Set image for not pressed button
+        tempButtonStyle.down = defaultButtonSkin.getDrawable("exit_down");  //Set image for pressed
+        tempButtonStyle.over = defaultButtonSkin.getDrawable("play_over");  //set image for mouse over
+        tempButtonStyle.pressedOffsetX = 1;
+        tempButtonStyle.pressedOffsetY = -1;
+        return tempButtonStyle;
+    }
+
+    public ImageButtonStyle getConfigButtonStyle() {
+        ImageButtonStyle tempButtonStyle = new ImageButtonStyle();  //Instaciate
+        tempButtonStyle.up = defaultButtonSkin.getDrawable("config");  //Set image for not pressed button
+        tempButtonStyle.down = defaultButtonSkin.getDrawable("config_down");  //Set image for pressed
+        tempButtonStyle.over = defaultButtonSkin.getDrawable("config_over");  //set image for mouse over
+        tempButtonStyle.pressedOffsetX = 1;
+        tempButtonStyle.pressedOffsetY = -1;
+        return tempButtonStyle;
+    }
+
+    public ImageButtonStyle getPlayButtonStyle() {
+        ImageButtonStyle tempButtonStyle = new ImageButtonStyle();  //Instaciate
+        tempButtonStyle.up = defaultButtonSkin.getDrawable("play");  //Set image for not pressed button
+        tempButtonStyle.down = defaultButtonSkin.getDrawable("play_down");  //Set image for pressed
+        tempButtonStyle.over = defaultButtonSkin.getDrawable("play_over");  //set image for mouse over
+        tempButtonStyle.pressedOffsetX = 1;
+        tempButtonStyle.pressedOffsetY = -1;
+        return tempButtonStyle;
+    }
     /*
-	public Texture getBoard() {
-		return sign;
-	}
-			
+
+    fireButtonStyle = new ImageButtonStyle();  //Instaciate
+fireButtonStyle.up = skinPadrao.getDrawable("uFireUpI");  //Set image for not pressed button
+fireButtonStyle.down = skinPadrao.getDrawable("uFireDownI");  //Set image for pressed
+fireButtonStyle.over = skinPadrao.getDrawable("uFireOverI");  //set image for mouse over
+fireButtonStyle.pressedOffsetX = 1;
+fireButtonStyle.pressedOffsetY = -1;
+
+     */
 	public TextureRegion getHelp() {
 		return atlas.findRegion("Help");
 	}

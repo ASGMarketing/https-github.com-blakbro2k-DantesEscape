@@ -52,7 +52,9 @@ public class Constants {
     public static final String TEXT_IMAGES_ATLAS_NAME = "text-images";
     public static final String STATE_DATA_FILE = "data/gamestate-v2.json";
     public static final String SCORES_DATA_FILE = "data/scores-v1.json";
+    public static final String BUTTONS_IMAGES_FOLDER_NAME = "buttons";
+    public static final String BUTTONS_IMAGES_ATLAS_NAME = "buttons";
 
-    public static final long SPLASH_MINIMUM_MILLISECONDS = 3000L;
+    public static final long SPLASH_MINIMUM_MILLISECONDS = 1000L;
 
 }

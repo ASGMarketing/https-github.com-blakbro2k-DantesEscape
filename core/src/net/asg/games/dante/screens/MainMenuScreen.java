@@ -2,13 +2,18 @@ package net.asg.games.dante.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL30;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import net.asg.games.dante.DantesEscapeGame;
 
@@ -19,6 +24,7 @@ public class MainMenuScreen extends AbstractScreen {
     //private boolean soundOn;
     private Skin skin;
     private Stage stage;
+    private Table table;
 
 
     public MainMenuScreen(DantesEscapeGame game) {
@@ -33,40 +39,64 @@ public class MainMenuScreen extends AbstractScreen {
     @Override
     public void show() {
         //super.show();
+        imageProvider = game.getImageProvider();
 
         batch = new SpriteBatch();
 
-        skin = new Skin(Gdx.files.internal("data/uiskin.json"));
+        skin = imageProvider.getDefaultButtonSkin();
+        //skin = imageProvider.getDefaultUIskin();
+
         //Gdx.app.log("Skin",skin.toString());
-        stage = new Stage();
+        stage = new Stage(new ScreenViewport(new OrthographicCamera(imageProvider.getScreenWidth(),
+                imageProvider.getScreenHeight())));
 
-        final TextButton newGameButton = new TextButton("New Game", skin, "default");
-        final TextButton quitGameButton = new TextButton("Quit App", skin, "default");
+        table = new Table();
+        //table.debug();      // Turn on all debug lines (table, cell, and widget).
+        //table.defaults().expand().fill().padBottom(4f);
+        //table.align(Align.center | Align.top);
+        table.setPosition(imageProvider.getScreenWidth() / 2,imageProvider.getScreenHeight() / 2);
+        //table.setX(400f);
+        //table.setY(imageProvider.getScreenHeight() / 2);
+        //table.setPosition(0, imageProvider.getScreenHeight());
 
-        newGameButton.setWidth(200f);
-        newGameButton.setHeight(200f);
-        newGameButton.setPosition(Gdx.graphics.getWidth() / 2 - 100f, Gdx.graphics.getHeight() / 2 - 10f);
+        stage.addActor(table);
 
-        quitGameButton.setWidth(200f);
-        quitGameButton.setHeight(200f);
-        quitGameButton.setPosition(newGameButton.getX(), newGameButton.getY() + 400f);
+        final ImageButton playGameButton = new ImageButton(imageProvider.getPlayButtonStyle());
+        final ImageButton quitGameButton = new ImageButton(imageProvider.getExitButtonStyle());
+        final ImageButton settingsGameButton = new ImageButton(imageProvider.getConfigButtonStyle());
 
-        newGameButton.addListener(new ClickListener() {
+        table.add(playGameButton).colspan(2);
+        table.row();
+        table.add(settingsGameButton);
+        table.add(quitGameButton);
+
+       // playGameButton.setWidth(200f);
+        //playGameButton.setHeight(100f);
+        //playGameButton.setPosition(Gdx.graphics.getWidth() / 2 - 100f, Gdx.graphics.getHeight() / 2 - 10f);
+
+        //quitGameButton.setWidth(200f);
+        //quitGameButton.setHeight(100f);
+        //quitGameButton.setPosition(playGameButton.getX(), playGameButton.getY() + 200f);
+
+        //settingsGameButton.setWidth(200f);
+        //settingsGameButton.setHeight(100f);
+        //settingsGameButton.setPosition(playGameButton.getX(), playGameButton.getY() + 200f);
+
+        playGameButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.gotoGameScreen();
             }
         });
 
-        quitGameButton.addListener(new ClickListener(){
+        quitGameButton.addListener(new ClickListener() {
             @Override
-            public void clicked(InputEvent event, float x, float y){
+            public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.exit();
             }
         });
 
-        stage.addActor(newGameButton);
-        stage.addActor(quitGameButton);
+       // stage.addActor(quitGameButton);
 
         Gdx.input.setInputProcessor(stage);
     }

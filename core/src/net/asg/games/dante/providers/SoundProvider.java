@@ -185,7 +185,7 @@ public class SoundProvider {
             bgLoop.stop();
         if(pauseMusic.isPlaying())
             pauseMusic.stop();
-            cannonSound.stop();
+        cannonSound.stop();
         flameBurst.stop();
         firewoosh.stop();
         buzzSound.stop();

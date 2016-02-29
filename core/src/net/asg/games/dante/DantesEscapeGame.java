@@ -121,8 +121,8 @@ public class DantesEscapeGame extends Game {
     public void dispose() {
         imageProvider.dispose();
         soundProvider.dispose();
+        mainMenuScreen.dispose();
 
-        //menuScreen.dispose();
         //levelScreen.dispose();
         gameScreen.dispose();
     }
