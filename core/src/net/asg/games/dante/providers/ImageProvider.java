@@ -3,6 +3,7 @@ package net.asg.games.dante.providers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -46,6 +47,10 @@ public class ImageProvider {
 
     private Texture gameover;
 
+    private BitmapFont defaultFont;
+
+    private BitmapFont ravieFont;
+
 
     public ImageProvider() {
     }
@@ -74,6 +79,10 @@ public class ImageProvider {
         defaultUISkin = new Skin(Gdx.files.internal("data/uiskin.json"));
         buildButtonSkin();
 
+        //Fonts
+        defaultFont = new BitmapFont(Gdx.files.internal("data/default.fnt"), Gdx.files.internal("data/default.png"), false);
+        ravieFont = new BitmapFont(Gdx.files.internal("fonts/ravie.fnt"), Gdx.files.internal("fonts/ravie.png"), false);
+
     }
 
     public void dispose() {
@@ -89,6 +98,8 @@ public class ImageProvider {
 		splashScreen.dispose();
         defaultUISkin.dispose();
         defaultButtonSkin.dispose();
+        defaultFont.dispose();
+        ravieFont.dispose();
     }
 
     public int getScreenWidth() {
@@ -146,6 +157,10 @@ public class ImageProvider {
     public TextureRegion getResetButton() {
         return atlas.findRegion("resetButton");
     }
+
+    public BitmapFont getDefaultFont() { return defaultFont;}
+
+    public BitmapFont getRavieFont() { return ravieFont;}
 
     public TextureRegion getHomeButton() {
         return atlas.findRegion("homeButton");

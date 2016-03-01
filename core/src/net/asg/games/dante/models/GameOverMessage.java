@@ -54,10 +54,10 @@ public class GameOverMessage {
                 Layout.CENTER_HORIZONTAL | Layout.ALIGN_BOTTOM,
                 new Margin(0, 0, 0, boardTopPadding));
 
-        startLayoutItem = new LayoutItem(startLabel);
+/*        startLayoutItem = new LayoutItem(startLabel);
         simpleLayoutManager.add(startLayoutItem,
                 Layout.CENTER_HORIZONTAL | Layout.ALIGN_BOTTOM,
-                new Margin(0, 0, 0, boardBottomPadding));
+                new Margin(0, 0, 0, boardBottomPadding));*/
     }
 
     public void draw(SpriteBatch batch) {
