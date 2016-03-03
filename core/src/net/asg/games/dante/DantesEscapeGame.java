@@ -17,22 +17,19 @@ import com.badlogic.gdx.utils.Timer;
 
 public class DantesEscapeGame extends Game {
     private ImageProvider imageProvider;
+    private SoundProvider soundProvider;
+
     private GameScreen gameScreen;
     private MainMenuScreen mainMenuScreen;
     private SettingsScreen settingsMenuScreen;
 
     //private GameState gameState;
-
     //private TextResources textResources;
-    private SoundProvider soundProvider;
     public boolean isDebugOn = false;
-    //private FPSLogger fpsLogger;
     private StateManager stateManager;
-
     private FPSLogger fpsLog;
 
     public DantesEscapeGame() {
-        this.isDebugOn = false;
     }
 
     public DantesEscapeGame(boolean isDebugOn) {
@@ -95,6 +92,14 @@ public class DantesEscapeGame extends Game {
     public void gotoGameScreen() {
         setScreen(new GameScreen(this, null));
     }
+    
+    public void gotoMainMenuScreen() {
+        setScreen(new MainMenuScreen(this));
+    }
+    
+    public void gotoSettingsScreen() {
+        setScreen(new SettingsScreen(this));
+    }
 
     public ImageProvider getImageProvider() {
         return imageProvider;
@@ -108,9 +113,6 @@ public class DantesEscapeGame extends Game {
         //setScreen(new HelpScreen(this));
     }
 
-    public void gotoMainMenuScreen() {
-        setScreen(new MainMenuScreen(this));
-    }
 
     //public GameState getGameState() {
     //    return gameState;
