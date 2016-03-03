@@ -68,6 +68,14 @@ public class MainMenuScreen extends AbstractScreen {
                 Gdx.app.exit();
             }
         });
+        
+        settingsGameButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.gotoSettingsScreen();
+            }
+        });
+
 
         // stage.addActor(quitGameButton);
         Gdx.input.setInputProcessor(stage);
