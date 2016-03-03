@@ -45,7 +45,7 @@ public class MovingGameObject {
 
     protected Rectangle rect;
 
-    protected Rectangle hitboxes;
+    protected Rectangle[] hitboxes;
 
     protected int frame = 0;
 
@@ -122,10 +122,6 @@ public class MovingGameObject {
 
     public boolean isOverlapping(Rectangle otherRect) {
         return rect.overlaps(otherRect);
-    }
-
-    public boolean isHitboxActive() {
-        return isHitboxActive;
     }
 
     public void setHitboxActive(boolean bool) {

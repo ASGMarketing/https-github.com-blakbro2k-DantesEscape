@@ -104,7 +104,7 @@ public class GameScreen extends AbstractScreen {
         //Gdx.app.log(this.toString(), "" + bobRegion);
         bob = new Bob(-1, -1, bobRegion.getRegionHeight(), bobRegion.getRegionWidth(),
                 Constants.BOB_HITBOX[0], Constants.BOB_HITBOX[1], Constants.BOB_HITBOX[3], Constants.BOB_HITBOX[2]);
-
+                // TODO: 3/2/2016 make hitbox helper class to parse and return an array of hitboxes
         movingObjects = new Array<MovingGameObject>();
         scoreName = "score: 0";
         bitmapFontName = new BitmapFont();
@@ -125,7 +125,7 @@ public class GameScreen extends AbstractScreen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         //Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT | GL30.GL_DEPTH_BUFFER_BIT);
         //set up the background and forground scroll properties
 
@@ -154,7 +154,8 @@ public class GameScreen extends AbstractScreen {
 
         scoreName = "score: " + gameScreenState.score;
         bitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-        bitmapFontName.draw(batch, scoreName, 10, imageProvider.getScreenHeight() - 15);
+
+        imageProvider.getDefaultFont().draw(batch, scoreName, 10, imageProvider.getScreenHeight() - 15);
 
         // Draw Bob on screen
         batch.draw(bobRegion, bob.getPosition().x, bob.getPosition().y);
@@ -203,8 +204,8 @@ public class GameScreen extends AbstractScreen {
             debugRenderer.begin(ShapeType.Line);
             debugRenderer.setColor(1, 0, 0, Color.alpha(0.5f));
 
-            debugRenderer.rect(bob.getHitbox().x, bob.getHitbox().y,
-                    bob.getHitbox().width, bob.getHitbox().height);
+            debugRenderer.rect(bob.getHitboxes().x, bob.getHitboxes().y,
+                    bob.getHitboxes().width, bob.getHitboxes().height);
 
             debugRenderer.end();
         }
@@ -237,7 +238,7 @@ public class GameScreen extends AbstractScreen {
                 iter.remove();
             }
 
-            if (fo.isOverlapping(bob.getHitbox())) {
+            if (fo.isOverlapping(bob.getHitboxes())) {
                 fo.isCollided = true;
             }
         }
@@ -316,25 +317,7 @@ public class GameScreen extends AbstractScreen {
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         if (gameScreenState.isPaused && !gameScreenState.isDead)
             resume();
-        if (gameScreenState.isDead) {
-            Vector3 touchPos = new Vector3();
-            touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-            camera.unproject(touchPos);
 
-            if (homeButton.isPressed(touchPos)) {
-                movingObjects.clear();
-                game.endGame(gameScreenState);
-                //Gdx.app.exit();
-                game.gotoMainMenuScreen();
-            }
-
-            if (levelResetButton.isPressed(touchPos)) {
-                gameScreenState.gameReset();
-                movingObjects.clear();
-                bob.setPositionX(gameScreenState.bobX);
-                bob.setPositionY(gameScreenState.bobY);
-            }
-        }
         return true;
     }
 
@@ -355,6 +338,25 @@ public class GameScreen extends AbstractScreen {
                 bob.moveY(1, delta);
             if (bob.getPosition().y > touchPos.y)
                 bob.moveY(-1, delta);
+        }
+        if (gameScreenState.isDead) {
+            Vector3 touchPos = new Vector3();
+            touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+            camera.unproject(touchPos);
+
+            if (homeButton.isPressed(touchPos)) {
+                movingObjects.clear();
+                game.endGame(gameScreenState);
+                //Gdx.app.exit();
+                game.gotoMainMenuScreen();
+            }
+
+            if (levelResetButton.isPressed(touchPos)) {
+                gameScreenState.gameReset();
+                movingObjects.clear();
+                bob.setPositionX(gameScreenState.bobX);
+                bob.setPositionY(gameScreenState.bobY);
+            }
         }
         return true;
     }

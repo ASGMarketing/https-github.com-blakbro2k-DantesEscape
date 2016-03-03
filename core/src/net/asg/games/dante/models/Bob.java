@@ -20,6 +20,7 @@ public class Bob {
     private Rectangle bounds;
 
     private Rectangle hitboxBounds;
+    // TODO: 3/2/2016 Make an array of hitboxes
 
     private int offSetX;
 
@@ -27,6 +28,7 @@ public class Bob {
 
     public Bob(int posX, int posY, int height, int width,
                int offSetX, int offSetY, int hitHeight, int hitWidth) {
+        // TODO: 3/2/2016 pass in an array of hitboxes
         bounds = new Rectangle();
         hitboxBounds = new Rectangle();
 
@@ -83,7 +85,7 @@ public class Bob {
         return bounds;
     }
 
-    public Rectangle getHitbox() {
+    public Rectangle getHitboxes() {
         return hitboxBounds;
     }
 
@@ -114,9 +116,5 @@ public class Bob {
         bounds.y += speedRatio * SPEED * delta;
         hitboxBounds.y = bounds.y + offSetY;
         keepOnScreen();
-    }
-
-    public void setBounds(int width, int height) {
-        bounds.setSize(width, height);
     }
 }

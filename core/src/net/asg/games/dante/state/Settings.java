@@ -6,8 +6,8 @@ import com.badlogic.gdx.Preferences;
 /**
  * Created by Blakbro2k on 1/26/2016.
  */
-public class State {
-    private static final String preferencesName = "dante-game-preferences";
+public class Settings {
+    private static final String preferencesName = "net.asg.games.dante.settings";
 
     public static boolean isSoundOn() {
         Preferences prefs = Gdx.app.getPreferences(preferencesName);

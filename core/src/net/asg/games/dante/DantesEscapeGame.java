@@ -1,10 +1,12 @@
 package net.asg.games.dante;
 
+import net.asg.games.dante.StateManager.StateBundle;
 import net.asg.games.dante.providers.ImageProvider;
 import net.asg.games.dante.screens.GameScreen;
 import net.asg.games.dante.screens.GameScreenState;
 import net.asg.games.dante.providers.SoundProvider;
 import net.asg.games.dante.screens.MainMenuScreen;
+import net.asg.games.dante.screens.SettingsScreen;
 import net.asg.games.dante.screens.SplashScreen;
 
 import com.badlogic.gdx.Game;
@@ -17,6 +19,8 @@ public class DantesEscapeGame extends Game {
     private ImageProvider imageProvider;
     private GameScreen gameScreen;
     private MainMenuScreen mainMenuScreen;
+    private SettingsScreen settingsMenuScreen;
+
     //private GameState gameState;
 
     //private TextResources textResources;
@@ -48,7 +52,10 @@ public class DantesEscapeGame extends Game {
 
         gameScreen = new GameScreen(this, null);
         stateManager = new StateManager();
+        settingsMenuScreen = new SettingsScreen(this);
         mainMenuScreen = new MainMenuScreen(this);
+
+        StateBundle stateBundle = stateManager.retrieveState();
 
         //levelScreen = new LevelSelectScreen(this);
         setScreen(new SplashScreen(this));
@@ -122,7 +129,7 @@ public class DantesEscapeGame extends Game {
         imageProvider.dispose();
         soundProvider.dispose();
         mainMenuScreen.dispose();
-
+        settingsMenuScreen.dispose();
         //levelScreen.dispose();
         gameScreen.dispose();
     }

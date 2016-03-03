@@ -19,7 +19,6 @@ public class StateManager {
 
         StateBundle stBundle = new StateBundle();
         stBundle.gameScreenState = gameScreenState;
-        //stBundle.GameLevelState = gameLevelState;
 
         Json json = new Json();
         String state = json.toJson(stBundle);

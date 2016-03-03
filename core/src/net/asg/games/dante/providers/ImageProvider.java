@@ -15,10 +15,6 @@ import net.asg.games.dante.Constants;
 
 public class ImageProvider {
 
-    private int SCREEN_WIDTH = Constants.GAME_WIDTH;
-
-    private int SCREEN_HEIGHT = Constants.GAME_HEIGHT;
-
     private TextureAtlas atlas;
 
     private TextureAtlas textAtlas;
@@ -103,11 +99,11 @@ public class ImageProvider {
     }
 
     public int getScreenWidth() {
-        return SCREEN_WIDTH;
+        return Constants.GAME_WIDTH;
     }
 
     public int getScreenHeight() {
-        return SCREEN_HEIGHT;
+        return Constants.GAME_HEIGHT;
     }
 
     public Texture getBackground() {
@@ -169,7 +165,6 @@ public class ImageProvider {
     public Skin getDefaultUIskin() { return defaultUISkin; }
     public Skin getDefaultButtonSkin() { return defaultButtonSkin; }
 
-    ;
     private void buildButtonSkin (){
         defaultButtonSkin = new Skin();
         defaultButtonSkin.addRegions(buttonsAtlas);
@@ -204,16 +199,7 @@ public class ImageProvider {
         tempButtonStyle.pressedOffsetY = -1;
         return tempButtonStyle;
     }
-    /*
 
-    fireButtonStyle = new ImageButtonStyle();  //Instaciate
-fireButtonStyle.up = skinPadrao.getDrawable("uFireUpI");  //Set image for not pressed button
-fireButtonStyle.down = skinPadrao.getDrawable("uFireDownI");  //Set image for pressed
-fireButtonStyle.over = skinPadrao.getDrawable("uFireOverI");  //set image for mouse over
-fireButtonStyle.pressedOffsetX = 1;
-fireButtonStyle.pressedOffsetY = -1;
-
-     */
 	public TextureRegion getHelp() {
 		return atlas.findRegion("Help");
 	}
@@ -237,8 +223,6 @@ fireButtonStyle.pressedOffsetY = -1;
 	public TextureRegion getNumber(int number) {
 		return atlas.findRegion("number", number);
 	}
-
-
 
 	public TextureRegion getClockBase() {
 		return atlas.findRegion("base");
