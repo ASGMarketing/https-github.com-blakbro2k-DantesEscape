@@ -179,16 +179,30 @@ public class SoundProvider {
         isBGMStartFinished = false;
     }
     public void stopAllSounds(){
+        stopAllMusic();
+        stopAllFX();
+    }
+
+    private void stopAllMusic(){
         if(bgStart.isPlaying())
             bgStart.stop();
         if(bgLoop.isPlaying())
             bgLoop.stop();
         if(pauseMusic.isPlaying())
             pauseMusic.stop();
+    }
+
+    private void stopAllFX(){
         cannonSound.stop();
         flameBurst.stop();
         firewoosh.stop();
         buzzSound.stop();
         deathSound.stop();
+        goalHitSound.stop();
+    }
+
+    public boolean isSoundOn(float volume){
+        volume = 1f;
+        return volume > 0;
     }
 }

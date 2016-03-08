@@ -16,9 +16,10 @@ import net.asg.games.dante.DantesEscapeGame;
 
 public class MainMenuScreen extends AbstractScreen {
     private Stage stage;
+    private Table table;
+
 
     public MainMenuScreen(DantesEscapeGame game) {
-        // TODO Auto-generated constructor stub
         super();
         this.game = game;
     }
@@ -34,6 +35,9 @@ public class MainMenuScreen extends AbstractScreen {
                 imageProvider.getScreenHeight()));
 
         Table table = new Table();
+        //table.setFillParent(true);
+        //table.defaults().width(Gdx.graphics.getWidth() / 2).pad(20);
+
         Table heading = new Table();
 
         table.setPosition(imageProvider.getScreenWidth() / 2, imageProvider.getScreenHeight() / 4);

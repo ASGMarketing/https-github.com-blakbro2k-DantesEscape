@@ -2,6 +2,7 @@ package net.asg.games.dante;
 
 import net.asg.games.dante.StateManager.StateBundle;
 import net.asg.games.dante.providers.ImageProvider;
+import net.asg.games.dante.screens.AbstractScreen;
 import net.asg.games.dante.screens.GameScreen;
 import net.asg.games.dante.screens.GameScreenState;
 import net.asg.games.dante.providers.SoundProvider;
@@ -83,12 +84,6 @@ public class DantesEscapeGame extends Game {
         fpsLog.log();
     }
 
-    public void endGame(GameScreenState gameScreenState){
-        gameScreenState.gameReset();
-        soundProvider.stopAllSounds();
-        soundProvider.resetSoundBoard();
-    }
-
     public void gotoGameScreen() {
         setScreen(new GameScreen(this, null));
     }
@@ -101,6 +96,7 @@ public class DantesEscapeGame extends Game {
         setScreen(new SettingsScreen(this));
     }
 
+
     public ImageProvider getImageProvider() {
         return imageProvider;
     }
@@ -109,9 +105,9 @@ public class DantesEscapeGame extends Game {
         return soundProvider;
     }
 
-    public void showHelp() {
+    //public void showHelp() {
         //setScreen(new HelpScreen(this));
-    }
+    //}
 
 
     //public GameState getGameState() {
@@ -132,7 +128,6 @@ public class DantesEscapeGame extends Game {
         soundProvider.dispose();
         mainMenuScreen.dispose();
         settingsMenuScreen.dispose();
-        //levelScreen.dispose();
         gameScreen.dispose();
     }
 
@@ -140,5 +135,12 @@ public class DantesEscapeGame extends Game {
             gameScreenState.gameReset();
             gameScreenState.isPaused = false;
             soundProvider.resetSoundBoard();
+    }
+
+
+    public void endGame(GameScreenState gameScreenState){
+        gameScreenState.gameReset();
+        soundProvider.stopAllSounds();
+        soundProvider.resetSoundBoard();
     }
 }

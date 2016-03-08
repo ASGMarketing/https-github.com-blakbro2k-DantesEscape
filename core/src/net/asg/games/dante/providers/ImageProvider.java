@@ -73,7 +73,7 @@ public class ImageProvider {
 
 		//Skins
         defaultUISkin = new Skin(Gdx.files.internal("data/uiskin.json"));
-        buildButtonSkin();
+        buildButtonSkins();
 
         //Fonts
         defaultFont = new BitmapFont(Gdx.files.internal("data/default.fnt"), Gdx.files.internal("data/default.png"), false);
@@ -165,7 +165,7 @@ public class ImageProvider {
     public Skin getDefaultUIskin() { return defaultUISkin; }
     public Skin getDefaultButtonSkin() { return defaultButtonSkin; }
 
-    private void buildButtonSkin (){
+    private void buildButtonSkins (){
         defaultButtonSkin = new Skin();
         defaultButtonSkin.addRegions(buttonsAtlas);
     }
