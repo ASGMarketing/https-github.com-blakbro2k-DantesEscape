@@ -3,13 +3,18 @@ package net.asg.games.dante.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 import net.asg.games.dante.DantesEscapeGame;
 
@@ -18,6 +23,7 @@ import net.asg.games.dante.DantesEscapeGame;
  */
 public class SettingsScreen extends AbstractScreen {
     private Stage stage;
+
 
     public SettingsScreen(DantesEscapeGame game) {
         super();
@@ -29,27 +35,48 @@ public class SettingsScreen extends AbstractScreen {
 
         imageProvider = game.getImageProvider();
         batch = new SpriteBatch();
-        stage = new Stage(new StretchViewport(imageProvider.getScreenWidth(),
-                imageProvider.getScreenHeight()));
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, imageProvider.getScreenWidth(),
+                imageProvider.getScreenHeight());
+        stage = new Stage(new ScreenViewport(camera));
+
+        final ImageButton backGameButton = new ImageButton(imageProvider.getBackButtonStyle());
 
         Table table = new Table();
-        table.setPosition(imageProvider.getScreenWidth() / 2, imageProvider.getScreenHeight() / 4);
+        table.debug();
+        table.setPosition(200f, 440f);
 
         Label.LabelStyle headingStyle = new Label.LabelStyle(imageProvider.getRavieFont(), Color.RED);
         Label headingLabel = new Label("DANTE'S ESCAPE",headingStyle);
 
-        final TextButton backGameButton = new TextButton("Back",imageProvider.getDefaultUIskin());
+        //final TextButton backGameButton = new TextButton("Back",imageProvider.getDefaultUIskin());
         final Label musicLabel = new Label("Music",imageProvider.getDefaultUIskin());
         final Label soundFXlabel = new Label("Sound Effects",imageProvider.getDefaultUIskin());
         final TextButton googleGameButton = new TextButton("Sign In",imageProvider.getDefaultUIskin());
         final TextButton creditsGameButton = new TextButton("Credits",imageProvider.getDefaultUIskin());
 
-        // TODO: 3/4/2016 back buttong with settings title
+        table.add(backGameButton);
+        table.add(headingLabel);
+        table.row();
+        table.add(musicLabel);
+        table.row();
+        table.add(soundFXlabel);
+
+        backGameButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                event.stop();
+                game.gotoMainMenuScreen();
+            }
+        });
+
+
         // TODO: 3/4/2016 music slider
         // TODO: 3/4/2016 sound effects slider
         // TODO: 3/4/2016 Google Sign in
         // TODO: 3/4/2016 credits
-
+        stage.addActor(table);
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override

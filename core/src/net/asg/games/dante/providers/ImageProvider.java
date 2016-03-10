@@ -171,7 +171,7 @@ public class ImageProvider {
     }
 
     public ImageButtonStyle getExitButtonStyle() {
-        ImageButtonStyle tempButtonStyle = new ImageButtonStyle();  //Instaciate
+        ImageButtonStyle tempButtonStyle = new ImageButtonStyle();  //Instantiate
         tempButtonStyle.up = defaultButtonSkin.getDrawable("exit");  //Set image for not pressed button
         tempButtonStyle.down = defaultButtonSkin.getDrawable("exit_down");  //Set image for pressed
         tempButtonStyle.over = defaultButtonSkin.getDrawable("play_over");  //set image for mouse over
@@ -181,7 +181,7 @@ public class ImageProvider {
     }
 
     public ImageButtonStyle getConfigButtonStyle() {
-        ImageButtonStyle tempButtonStyle = new ImageButtonStyle();  //Instaciate
+        ImageButtonStyle tempButtonStyle = new ImageButtonStyle();  //Instantiate
         tempButtonStyle.up = defaultButtonSkin.getDrawable("config");  //Set image for not pressed button
         tempButtonStyle.down = defaultButtonSkin.getDrawable("config_down");  //Set image for pressed
         tempButtonStyle.over = defaultButtonSkin.getDrawable("config_over");  //set image for mouse over
@@ -191,7 +191,7 @@ public class ImageProvider {
     }
 
     public ImageButtonStyle getPlayButtonStyle() {
-        ImageButtonStyle tempButtonStyle = new ImageButtonStyle();  //Instaciate
+        ImageButtonStyle tempButtonStyle = new ImageButtonStyle();  //Instantiate
         tempButtonStyle.up = defaultButtonSkin.getDrawable("play");  //Set image for not pressed button
         tempButtonStyle.down = defaultButtonSkin.getDrawable("play_down");  //Set image for pressed
         tempButtonStyle.over = defaultButtonSkin.getDrawable("play_over");  //set image for mouse over
@@ -200,7 +200,17 @@ public class ImageProvider {
         return tempButtonStyle;
     }
 
-	public TextureRegion getHelp() {
+    public ImageButtonStyle getBackButtonStyle() {
+        ImageButtonStyle tempButtonStyle = new ImageButtonStyle();  //Instantiate
+        tempButtonStyle.up = defaultButtonSkin.getDrawable("back");  //Set image for not pressed button
+        tempButtonStyle.down = defaultButtonSkin.getDrawable("back_down");  //Set image for pressed
+        tempButtonStyle.over = defaultButtonSkin.getDrawable("back_over");  //set image for mouse over
+        tempButtonStyle.pressedOffsetX = 1;
+        tempButtonStyle.pressedOffsetY = -1;
+        return tempButtonStyle;
+    }
+
+    public TextureRegion getHelp() {
 		return atlas.findRegion("Help");
 	}
 	

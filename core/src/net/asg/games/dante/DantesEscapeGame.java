@@ -48,8 +48,9 @@ public class DantesEscapeGame extends Game {
         fpsLog = new FPSLogger();
         fpsLog.log();
 
-        gameScreen = new GameScreen(this, null);
         stateManager = new StateManager();
+
+        gameScreen = new GameScreen(this, null);
         settingsMenuScreen = new SettingsScreen(this);
         mainMenuScreen = new MainMenuScreen(this);
 

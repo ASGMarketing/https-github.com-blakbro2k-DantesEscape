@@ -16,7 +16,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
  *         <code>AbstractScreen</code> implements <code>Screen</code> and <code>InputProcessor</code>
  *         from libgdx API.  This class has all methods implemented. All other screens will extend this class
  */
-public abstract class AbstractScreen implements Screen, InputProcessor {
+public class AbstractScreen implements Screen, InputProcessor {
 
     protected SpriteBatch batch;
 
