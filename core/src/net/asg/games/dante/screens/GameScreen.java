@@ -120,7 +120,7 @@ public class GameScreen extends AbstractScreen {
         levelManager = new LevelManager();
 
         Gdx.input.setInputProcessor(this);
-        Gdx.input.setCatchBackKey(true);
+        //Gdx.input.setCatchBackKey(true);
     }
 
     @Override
