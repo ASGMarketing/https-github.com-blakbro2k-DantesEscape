@@ -41,8 +41,6 @@ public class GameScreen extends AbstractScreen {
 
     private Sprite foregroundSprite;
 
-    private TextureRegion bobRegion;
-
     private Bob bob;
 
     private Button levelResetButton;
@@ -100,11 +98,14 @@ public class GameScreen extends AbstractScreen {
         movingGameObjectFactory = new MovingGameObjectFactory(imageProvider,
                 soundProvider);
 
-        bobRegion = imageProvider.getBob();
+        //TextureRegion bobRegion = imageProvider.getBob(1);
+        //Gdx.app.log("Bob", "" + bobRegion);
         //Gdx.app.log(this.toString(), "" + bobRegion);
-        bob = new Bob(-1, -1, bobRegion.getRegionHeight(), bobRegion.getRegionWidth(),
+        bob = new Bob(-1, -1, imageProvider.getBob(1).getRegionHeight(), imageProvider.getBob(1).getRegionWidth(),
                 Constants.BOB_HITBOX[0], Constants.BOB_HITBOX[1], Constants.BOB_HITBOX[3], Constants.BOB_HITBOX[2]);
                 // TODO: 3/2/2016 make hitbox helper class to parse and return an array of hitboxes
+        bob.setBobAnimation(imageProvider);
+
         movingObjects = new Array<MovingGameObject>();
         scoreName = "score: 0";
         bitmapFontName = new BitmapFont();
@@ -158,7 +159,10 @@ public class GameScreen extends AbstractScreen {
         imageProvider.getDefaultFont().draw(batch, scoreName, 10, imageProvider.getScreenHeight() - 15);
 
         // Draw Bob on screen
-        batch.draw(bobRegion, bob.getPosition().x, bob.getPosition().y);
+        //Gdx.app.log("isBobNull", "" + bob.getBobFrame(delta));
+       // if(bob.getBobFrame(delta) != null) {
+            batch.draw(bob.getBobFrame(delta), bob.getPosition().x, bob.getPosition().y);
+        //}
 
         for (MovingGameObject movingObject : movingObjects) {
             movingObject.draw(batch);
@@ -186,7 +190,7 @@ public class GameScreen extends AbstractScreen {
         //Draw Debug Hitboxes and sprite boxes
         if (game.isDebugOn) {
 
-            //debugRenderer.setProjectionMatrix(camera.combined);
+            debugRenderer.setProjectionMatrix(camera.combined);
             debugRenderer.begin(ShapeType.Line);
             debugRenderer.setColor(Color.GREEN);
 

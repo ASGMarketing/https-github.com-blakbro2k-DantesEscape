@@ -35,10 +35,8 @@ public class SettingsScreen extends AbstractScreen {
 
         imageProvider = game.getImageProvider();
         batch = new SpriteBatch();
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false, imageProvider.getScreenWidth(),
-                imageProvider.getScreenHeight());
-        stage = new Stage(new ScreenViewport(camera));
+
+        stage = new Stage(new StretchViewport(imageProvider.getScreenWidth(),imageProvider.getScreenHeight()));
 
         final ImageButton backGameButton = new ImageButton(imageProvider.getBackButtonStyle());
 

@@ -1,12 +1,13 @@
 package net.asg.games.dante.models;
 
 import net.asg.games.dante.Constants;
+import net.asg.games.dante.providers.ImageProvider;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 
 public class Bob {
-
     private int SPEED = Constants.BOB_MOVE_SPEED;
 
     private int width;
@@ -16,6 +17,14 @@ public class Bob {
     private int screenWidth;
 
     private int screenHeight;
+
+    protected int frame = 0;
+
+    protected float time = 0;
+
+    protected float animationPeriod = Constants.DEFAULT_ANIMATION_PERIOD;
+
+    protected TextureRegion[] textureRegions;
 
     private Rectangle bounds;
 
@@ -40,7 +49,7 @@ public class Bob {
         this.offSetY = offSetY;
         bounds.width = width;
         bounds.height = height;
-        //Gdx.app.log(this.toString(), "X: " + posX + ", Y: " + posY);
+        textureRegions = new TextureRegion[3];
 
         if (posX < 0) {
             bounds.x = (screenWidth / 16);
@@ -116,5 +125,23 @@ public class Bob {
         bounds.y += speedRatio * SPEED * delta;
         hitboxBounds.y = bounds.y + offSetY;
         keepOnScreen();
+    }
+
+    public TextureRegion getBobFrame(float delta){
+        time += delta;
+        if (time > animationPeriod) {
+            time -= animationPeriod;
+            frame += 1;
+            if (frame >= textureRegions.length) {
+                frame = 0;
+            }
+        }
+        return textureRegions[frame];
+    }
+
+    public void setBobAnimation(ImageProvider imageProvider) {
+        textureRegions[0] = imageProvider.getBob(1);
+        textureRegions[1] = imageProvider.getBob(2);
+        textureRegions[2] = imageProvider.getBob(3);
     }
 }

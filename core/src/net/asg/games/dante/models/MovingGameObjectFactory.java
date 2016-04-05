@@ -39,22 +39,20 @@ public class MovingGameObjectFactory {
                 isHitboxActive, model);
     }
 
-    public net.asg.games.dante.models.FireWallMovingGameObject getFireWall() {
-        TextureRegion[] textureRegions = new TextureRegion[3];
-        textureRegions[0] = imageProvider.getFireWall(1);
-        textureRegions[1] = imageProvider.getFireWall(2);
-        textureRegions[2] = imageProvider.getFireWall(3);
+    public FireWallMovingGameObject getFireWall() {
+        TextureRegion[] textureRegions = new TextureRegion[1];
+        textureRegions[0] = imageProvider.getRock();
 
         soundProvider.playfirewooshSound();
         MovingGameObjectState model = new MovingGameObjectState();
         model.setType(MovingGameObjectType.FireWall);
 
-        return new net.asg.games.dante.models.FireWallMovingGameObject(imageProvider, textureRegions, soundProvider,
-                textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight(),
+        return new FireWallMovingGameObject(imageProvider, textureRegions, soundProvider,
+                textureRegions[0].getRegionWidth(), 500,
                 isHitboxActive, model);
     }
 
-    public net.asg.games.dante.models.DynamicFireWallMovingGameObject getDynamicFireWall() {
+    public DynamicFireWallMovingGameObject getDynamicFireWall() {
         TextureRegion[] textureRegions = new TextureRegion[3];
         textureRegions[0] = imageProvider.getFireWall(1);
         textureRegions[1] = imageProvider.getFireWall(2);
@@ -64,19 +62,19 @@ public class MovingGameObjectFactory {
         MovingGameObjectState model = new MovingGameObjectState();
         model.setType(MovingGameObjectType.DynamicWall);
 
-        return new net.asg.games.dante.models.DynamicFireWallMovingGameObject(imageProvider, textureRegions, soundProvider,
+        return new DynamicFireWallMovingGameObject(imageProvider, textureRegions, soundProvider,
                 textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight(),
                 isHitboxActive, model);
     }
 
-    public net.asg.games.dante.models.GoalMovingGameObject getGoal() {
+    public GoalMovingGameObject getGoal() {
         TextureRegion[] textureRegions = new TextureRegion[1];
         textureRegions[0] = imageProvider.getGoal();
 
         MovingGameObjectState model = new MovingGameObjectState();
         model.setType(MovingGameObjectType.GoalWall);
 
-        return new net.asg.games.dante.models.GoalMovingGameObject(imageProvider, textureRegions, soundProvider,
+        return new GoalMovingGameObject(imageProvider, textureRegions, soundProvider,
                 textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight(),
                 isHitboxActive, model);
     }

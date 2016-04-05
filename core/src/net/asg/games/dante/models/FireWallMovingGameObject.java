@@ -46,7 +46,7 @@ public class FireWallMovingGameObject extends MovingGameObject {
     }
 
     public void draw(SpriteBatch batch) {
-        batch.draw(textureRegions[frame], rect.x, rect.y);
+        batch.draw(textureRegions[frame], rect.x, rect.y,rect.width,rect.height);
         batch.draw(textureRegions[frame], lowerWall.x, lowerWall.y);
     }
 

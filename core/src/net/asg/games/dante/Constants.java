@@ -1,7 +1,7 @@
 package net.asg.games.dante;
 
 public class Constants {
-    public static final boolean DEBUG = false;
+    public static final boolean DEBUG = true;
     public static final boolean NO_CLIP_MODE_OFF = true;
 
     public static final int MAX_WIDTH = 1024;

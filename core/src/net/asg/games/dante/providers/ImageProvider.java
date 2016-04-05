@@ -138,12 +138,16 @@ public class ImageProvider {
         return atlas.findRegion("Fireball", frame);
     }
 
+    public TextureRegion getRock() {
+        return atlas.findRegion("rock");
+    }
+
     public TextureRegion getFireWall(int frame) {
         return atlas.findRegion("firewall", frame);
     }
 
-    public TextureRegion getBob() {
-        return atlas.findRegion("bob");
+    public TextureRegion getBob(int frame) {
+        return atlas.findRegion("bob",frame);
     }
 
     public TextureRegion getGoal() {
