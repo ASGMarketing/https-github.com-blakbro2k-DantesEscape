@@ -40,15 +40,17 @@ public class MovingGameObjectFactory {
     }
 
     public FireWallMovingGameObject getFireWall() {
-        TextureRegion[] textureRegions = new TextureRegion[1];
-        textureRegions[0] = imageProvider.getRock();
+        TextureRegion[] textureRegions = new TextureRegion[3];
+        textureRegions[0] = imageProvider.getFireWall(1);
+        textureRegions[1] = imageProvider.getFireWall(2);
+        textureRegions[2] = imageProvider.getFireWall(3);
 
         soundProvider.playfirewooshSound();
         MovingGameObjectState model = new MovingGameObjectState();
         model.setType(MovingGameObjectType.FireWall);
 
         return new FireWallMovingGameObject(imageProvider, textureRegions, soundProvider,
-                textureRegions[0].getRegionWidth(), 500,
+                textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight(),
                 isHitboxActive, model);
     }
 

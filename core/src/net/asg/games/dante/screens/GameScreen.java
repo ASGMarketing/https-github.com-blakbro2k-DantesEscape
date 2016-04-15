@@ -75,7 +75,6 @@ public class GameScreen extends AbstractScreen {
         }
         game.startGame(gameScreenState);
         this.game = game;
-
     }
 
     public void show() {
@@ -161,7 +160,7 @@ public class GameScreen extends AbstractScreen {
         // Draw Bob on screen
         //Gdx.app.log("isBobNull", "" + bob.getBobFrame(delta));
        // if(bob.getBobFrame(delta) != null) {
-            batch.draw(bob.getBobFrame(delta), bob.getPosition().x, bob.getPosition().y);
+            batch.draw(bob.getBobFrame(delta,gameScreenState.gameSpeed*80000), bob.getPosition().x, bob.getPosition().y);
         //}
 
         for (MovingGameObject movingObject : movingObjects) {
@@ -205,7 +204,7 @@ public class GameScreen extends AbstractScreen {
             //Gdx.gl.glEnable(GL30.GL_BLEND);
             //Gdx.gl.glBlendFunc(GL30.GL_SRC_ALPHA, GL30.GL_ONE_MINUS_SRC_ALPHA);
             //hitBoxRenderer.setProjectionMatrix(camera.combined);
-            debugRenderer.begin(ShapeType.Line);
+            debugRenderer.begin(ShapeType.Filled);
             debugRenderer.setColor(1, 0, 0, Color.alpha(0.5f));
 
             debugRenderer.rect(bob.getHitboxes().x, bob.getHitboxes().y,

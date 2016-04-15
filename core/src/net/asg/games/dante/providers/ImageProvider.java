@@ -154,19 +154,20 @@ public class ImageProvider {
         return atlas.findRegion("goalpole");
     }
 
+    public TextureRegion getHomeButton() {
+        return buttonsAtlas.findRegion("home");
+    }
+
     public TextureRegion getResetButton() {
-        return atlas.findRegion("resetButton");
+        return buttonsAtlas.findRegion("reset");
     }
 
     public BitmapFont getDefaultFont() { return defaultFont;}
 
     public BitmapFont getRavieFont() { return ravieFont;}
 
-    public TextureRegion getHomeButton() {
-        return atlas.findRegion("homeButton");
-	}
-
     public Skin getDefaultUIskin() { return defaultUISkin; }
+
     public Skin getDefaultButtonSkin() { return defaultButtonSkin; }
 
     private void buildButtonSkins (){
@@ -178,7 +179,7 @@ public class ImageProvider {
         ImageButtonStyle tempButtonStyle = new ImageButtonStyle();  //Instantiate
         tempButtonStyle.up = defaultButtonSkin.getDrawable("exit");  //Set image for not pressed button
         tempButtonStyle.down = defaultButtonSkin.getDrawable("exit_down");  //Set image for pressed
-        tempButtonStyle.over = defaultButtonSkin.getDrawable("play_over");  //set image for mouse over
+        tempButtonStyle.over = defaultButtonSkin.getDrawable("exit_over");  //set image for mouse over
         tempButtonStyle.pressedOffsetX = 1;
         tempButtonStyle.pressedOffsetY = -1;
         return tempButtonStyle;
