@@ -6,14 +6,16 @@ buildscript {
     }
     dependencies {
         classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.6'
-        classpath 'com.android.tools.build:gradle:1.2.3'
+        classpath 'com.android.tools.build:gradle:2.0.0'
         classpath 'org.robovm:robovm-gradle-plugin:1.2.0'
+        classpath 'me.tatarka:gradle-retrolambda:3.2.4'
     }
 }
 
 allprojects {
     apply plugin: "eclipse"
     apply plugin: "idea"
+    apply plugin: 'me.tatarka.retrolambda'
 
     version = '1.0'
     ext {
@@ -63,7 +65,7 @@ project(":android") {
     }
 }
 
-project(":ios") {
+/*project(":ios") {
     apply plugin: "java"
     apply plugin: "robovm"
 
@@ -76,7 +78,7 @@ project(":ios") {
         compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-ios"
         compile "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-ios"
     }
-}
+}*/
 
 project(":html") {
     apply plugin: "gwt"

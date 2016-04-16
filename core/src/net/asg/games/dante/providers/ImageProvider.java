@@ -23,6 +23,8 @@ public class ImageProvider {
 
     private Texture background;
 
+    private Texture middleground;
+
     private Texture foreground;
 
 	private Texture splashScreen;
@@ -35,11 +37,15 @@ public class ImageProvider {
 
     private Texture animatedForeground;
 
+    private Texture animatedMiddleground;
+
     private Texture pauseScreen;
 
     private Sprite backGroundSprite;
 
     private Sprite foreGroundSprite;
+
+    private Sprite middleGroundSprite;
 
     private Texture gameover;
 
@@ -57,19 +63,23 @@ public class ImageProvider {
         buttonsAtlas = new TextureAtlas(Gdx.files.internal("buttons.atlas"));
 
         //Textures
-        background = new Texture(Gdx.files.internal("background.png"));
-        foreground = new Texture(Gdx.files.internal("foreground.png"));
+        background = new Texture(Gdx.files.internal("cave_bg.png"));
+        middleground = new Texture(Gdx.files.internal("cave_mg.png"));
+        foreground = new Texture(Gdx.files.internal("cave_fg.png"));
 		splashScreen = new Texture(Gdx.files.internal("splash-screen.png"));
         pauseScreen = new Texture(Gdx.files.internal("paused.png"));
         gameover = new Texture(Gdx.files.internal("gameover.png"));
-        animatedBackground = new Texture(Gdx.files.internal("background.png"));
+        animatedBackground = new Texture(Gdx.files.internal("cave_bg.png"));
         animatedBackground.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
-        animatedForeground = new Texture(Gdx.files.internal("foreground.png"));
+        animatedMiddleground = new Texture(Gdx.files.internal("cave_mg.png"));
+        animatedMiddleground.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
+        animatedForeground = new Texture(Gdx.files.internal("cave_fg.png"));
         animatedForeground.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
 
 		//Sprites
         backGroundSprite = new Sprite(animatedBackground, 0, 0, this.getScreenWidth(), this.getScreenHeight());
         foreGroundSprite = new Sprite(animatedForeground, 0, 0, this.getScreenWidth(), this.getScreenHeight());
+        middleGroundSprite = new Sprite(animatedMiddleground, 0, 0, this.getScreenWidth(), this.getScreenHeight());
 
 		//Skins
         defaultUISkin = new Skin(Gdx.files.internal("data/uiskin.json"));
@@ -86,8 +96,10 @@ public class ImageProvider {
         textAtlas.dispose();
         buttonsAtlas.dispose();
         animatedBackground.dispose();
+        animatedMiddleground.dispose();
         animatedForeground.dispose();
         background.dispose();
+        middleground.dispose();
         foreground.dispose();
         gameover.dispose();
         pauseScreen.dispose();
@@ -106,16 +118,24 @@ public class ImageProvider {
         return Constants.GAME_HEIGHT;
     }
 
-    public Texture getBackground() {
-        return background;
-    }
-
     public Sprite getBackgroundSprite() {
         return backGroundSprite;
     }
 
+    public Sprite getForegroundSprite() {
+        return foreGroundSprite;
+    }
+
+    public Sprite getMiddlegroundSprite() {
+        return middleGroundSprite;
+    }
+
     public Texture getGameOverBoard() {
         return gameover;
+    }
+
+    public Texture getBackground() {
+        return background;
     }
 
     public Texture getForeground() {
@@ -125,10 +145,6 @@ public class ImageProvider {
 	public Texture getSplashScreen() {
 		return splashScreen;
 	}
-
-	public Sprite getForegroundSprite() {
-        return foreGroundSprite;
-    }
 
     public Texture getPauseScreen() {
         return pauseScreen;

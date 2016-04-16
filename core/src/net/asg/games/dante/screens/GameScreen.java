@@ -41,6 +41,8 @@ public class GameScreen extends AbstractScreen {
 
     private Sprite foregroundSprite;
 
+    private Sprite middleGroundSprite;
+
     private Bob bob;
 
     private Button levelResetButton;
@@ -48,6 +50,8 @@ public class GameScreen extends AbstractScreen {
     private Button homeButton;
 
     private float bgScrollTimer;
+
+    private float mgScrollTimer;
 
     private float fgScrollTimer;
 
@@ -85,6 +89,7 @@ public class GameScreen extends AbstractScreen {
 
         backgroundSprite = imageProvider.getBackgroundSprite();
         foregroundSprite = imageProvider.getForegroundSprite();
+        middleGroundSprite = imageProvider.getMiddlegroundSprite();
 
         debugRenderer = new ShapeRenderer();
 
@@ -134,11 +139,17 @@ public class GameScreen extends AbstractScreen {
         if (bgScrollTimer > 1.0f)
             bgScrollTimer = 0.0f;
 
+        if (mgScrollTimer > 1.0f)
+            mgScrollTimer = 0.0f;
+
         if (fgScrollTimer > 1.0f)
             fgScrollTimer = 0.0f;
 
         backgroundSprite.setU(bgScrollTimer);
         backgroundSprite.setU2(bgScrollTimer + 1);
+
+        middleGroundSprite.setU(mgScrollTimer);
+        middleGroundSprite.setU2(mgScrollTimer + 1);
 
         foregroundSprite.setU(fgScrollTimer);
         foregroundSprite.setU2(fgScrollTimer + 1);
@@ -149,6 +160,8 @@ public class GameScreen extends AbstractScreen {
         batch.begin();
         // Draw the Background
         backgroundSprite.draw(batch);
+        // Draw the middleground
+        middleGroundSprite.draw(batch);
         // Draw the foreground
         foregroundSprite.draw(batch);
 
@@ -220,6 +233,7 @@ public class GameScreen extends AbstractScreen {
         }
 
         bgScrollTimer += delta * gameScreenState.getBackgroundSpeed();
+        mgScrollTimer += delta * gameScreenState.getMiddlegroundSpeed();
         fgScrollTimer += delta * gameScreenState.getForegroundSpeed();
 
         gameScreenState.score += gameScreenState.standardMovingBonus * delta;

@@ -51,6 +51,10 @@ public class GameScreenState implements Serializable {
         return Constants.BACKGROUND_SPEED * gameSpeed;
     }
 
+    public float getMiddlegroundSpeed() {
+        return Constants.MIDGROUND_SPEED * gameSpeed;
+    }
+
     public float getForegroundSpeed() {
         return Constants.FOREGROUND_SPEED * gameSpeed;
     }
