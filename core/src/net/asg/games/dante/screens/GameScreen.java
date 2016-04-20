@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 import net.asg.games.dante.Constants;
 import net.asg.games.dante.DantesEscapeGame;
-import net.asg.games.dante.manager.LevelManager;
+import net.asg.games.dante.providers.LevelProvider;
 import net.asg.games.dante.models.Bob;
 import net.asg.games.dante.models.Button;
 import net.asg.games.dante.models.GameOverMessage;
@@ -20,7 +20,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector3;
@@ -59,7 +58,7 @@ public class GameScreen extends AbstractScreen {
 
     private Array<MovingGameObject> movingObjects;
 
-    private LevelManager levelManager;
+    private LevelProvider levelProvider;
 
     private GameScreenState gameScreenState;
 
@@ -122,7 +121,7 @@ public class GameScreen extends AbstractScreen {
         levelResetButton = new Button(imageProvider.getResetButton());
         levelResetButton.setPos(imageProvider.getScreenWidth() / 2 - 90, imageProvider.getScreenHeight() / 2 - 60);
 
-        levelManager = new LevelManager();
+        levelProvider = new LevelProvider();
 
         Gdx.input.setInputProcessor(this);
         //Gdx.input.setCatchBackKey(true);
@@ -180,7 +179,7 @@ public class GameScreen extends AbstractScreen {
             movingObject.draw(batch);
 
             if (movingObject.isCollided) {
-                levelManager.doLevelTransition(movingObject.doCollision(delta), gameScreenState);
+                levelProvider.doLevelTransition(movingObject.doCollision(delta), gameScreenState);
             }
         }
 
@@ -239,7 +238,7 @@ public class GameScreen extends AbstractScreen {
         gameScreenState.score += gameScreenState.standardMovingBonus * delta;
 
         if (TimeUtils.millis() - gameScreenState.lastGameObjTime > gameScreenState.spawnTime) {
-            movingObjects.add(levelManager.getNextObject(movingGameObjectFactory, gameScreenState));
+            movingObjects.add(levelProvider.getNextObject(movingGameObjectFactory, gameScreenState));
         }
         /*
          * Using Iterator, we update all objects on screen to move, and discard

@@ -1,4 +1,4 @@
-package net.asg.games.dante.manager;
+package net.asg.games.dante.providers;
 
 import net.asg.games.dante.Constants;
 import net.asg.games.dante.screens.GameScreenState;
@@ -12,7 +12,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 
-public class LevelManager {
+public class LevelProvider {
 
     public MovingGameObject getNextObject(MovingGameObjectFactory movingGameObjectFactory,
                                           GameScreenState st) {

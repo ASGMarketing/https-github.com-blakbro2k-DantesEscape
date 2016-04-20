@@ -20,6 +20,17 @@ public class Settings {
         prefs.flush();
     }
 
+    public static boolean isSoundFXOn() {
+        Preferences prefs = Gdx.app.getPreferences(preferencesName);
+        return prefs.getBoolean("SoundFXOn");
+    }
+
+    public static void setSoundFXOn(boolean on) {
+        Preferences prefs = Gdx.app.getPreferences(preferencesName);
+        prefs.putBoolean("SoundFXOn", on);
+        prefs.flush();
+    }
+
     public static boolean isLevelUnlocked(int level) {
         if (level == 0) {
             return true;
