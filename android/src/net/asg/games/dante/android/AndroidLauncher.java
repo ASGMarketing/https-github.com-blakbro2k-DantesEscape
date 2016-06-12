@@ -13,6 +13,7 @@ public class AndroidLauncher extends AndroidApplication {
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		// set context of action
 		actionResolverAndroid = new ActionResolverAndroid(this);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 		initialize(new DantesEscapeGame(actionResolverAndroid), config);

@@ -5,7 +5,9 @@ import android.content.Context;
 import com.badlogic.gdx.Gdx;
 
 import net.asg.games.dante.ActionResolver;
-
+import net.asg.games.dante.DantesEscapeGame;
+import net.asg.games.dante.screens.AbstractScreen;
+import net.asg.games.dante.screens.SettingsScreen;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 
@@ -15,13 +17,20 @@ import java.util.logging.LogRecord;
 public class ActionResolverAndroid implements ActionResolver {
     Context context;
 
+    /**
+     * Constructor to set context
+     * @param context
+     */
     public ActionResolverAndroid(Context context) {
         this.context = context;
     }
 
-    public void backButton() {
+    /**
+     * Implement interface back button
+     */
+    public void backButton(DantesEscapeGame game) {
         System.out.println("Hello World from the Back button");
         Gdx.app.debug("MyBackButton", "Hello world from the Back Button");
-//        Gdx.app.exit();
+        game.gotoMainMenuScreen();
     }
 }

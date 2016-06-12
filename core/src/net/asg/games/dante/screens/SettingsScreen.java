@@ -72,10 +72,11 @@ public class SettingsScreen extends AbstractScreen {
 
     @Override
     public void render(float delta) {
+//        intercepts and handles platform specific back keys
         Gdx.input.setInputProcessor(this);
         Gdx.input.setCatchBackKey(true);
         if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
-            this.game.actionResolver.backButton();
+            this.game.actionResolver.backButton(game);
         }
         super.render(delta);
         Gdx.gl.glClearColor(0, 0, 1, 1);
