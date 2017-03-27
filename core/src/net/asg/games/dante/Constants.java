@@ -55,6 +55,10 @@ public class Constants {
     public static final String BUTTONS_IMAGES_FOLDER_NAME = "buttons";
     public static final String BUTTONS_IMAGES_ATLAS_NAME = "buttons";
 
-    public static final long SPLASH_MINIMUM_MILLISECONDS = 1000L;
+    public static final long SPLASH_MINIMUM_MILLISECONDS = 3000L;
 
+    public static final int BOB_TOTAL_ANIMATION_FRAMES = 30;
+    public static final int FIREBALL_TOTAL_ANIMATION_FRAMES = 7;
+    public static final int FIREWALL_TOTAL_ANIMATION_FRAMES = 3;
+    public static final int DYNAMIC_FIREWALL_TOTAL_ANIMATION_FRAMES = 3;
 }

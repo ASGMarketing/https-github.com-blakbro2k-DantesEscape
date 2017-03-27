@@ -53,8 +53,35 @@ public class ImageProvider {
 
     private BitmapFont ravieFont;
 
+    public enum ObjectType{
+        FIREBALL, BOB, DFIREWALL, FIREWALL, GOVER, GOAL
+    }
 
     public ImageProvider() {
+    }
+
+    public void setAnimations(TextureRegion[] textureRegions, ImageProvider imageProvider, ObjectType objectType){
+        for(int f = 0; f < textureRegions.length; f++){
+            switch(objectType){
+                case BOB:
+                    textureRegions[f] = imageProvider.getBob(f + 1);
+                    break;
+                case FIREBALL:
+                    textureRegions[f] = imageProvider.getFireBall(f + 1);
+                    break;
+                case DFIREWALL:
+                    textureRegions[f] = imageProvider.getFireWall(f + 1);
+                    break;
+                case FIREWALL:
+                    textureRegions[f] = imageProvider.getFireWall(f + 1);
+                    break;
+                case GOVER:
+                    textureRegions[f] = imageProvider.getFireBall(f + 1);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     public void load() {

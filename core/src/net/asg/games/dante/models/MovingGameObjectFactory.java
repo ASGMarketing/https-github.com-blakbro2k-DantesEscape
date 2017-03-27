@@ -21,14 +21,9 @@ public class MovingGameObjectFactory {
     }
 
     public FireBallMovingGameObject getFireball() {
-        TextureRegion[] textureRegions = new TextureRegion[7];
-        textureRegions[0] = imageProvider.getFireBall(1);
-        textureRegions[1] = imageProvider.getFireBall(2);
-        textureRegions[2] = imageProvider.getFireBall(3);
-        textureRegions[3] = imageProvider.getFireBall(4);
-        textureRegions[4] = imageProvider.getFireBall(5);
-        textureRegions[5] = imageProvider.getFireBall(6);
-        textureRegions[6] = imageProvider.getFireBall(7);
+        TextureRegion[] textureRegions = new TextureRegion[Constants.FIREBALL_TOTAL_ANIMATION_FRAMES];
+
+        imageProvider.setAnimations(textureRegions, imageProvider, ImageProvider.ObjectType.FIREBALL);
 
         soundProvider.playflameBurstSound();
         MovingGameObjectState model = new MovingGameObjectState();
@@ -40,10 +35,9 @@ public class MovingGameObjectFactory {
     }
 
     public FireWallMovingGameObject getFireWall() {
-        TextureRegion[] textureRegions = new TextureRegion[3];
-        textureRegions[0] = imageProvider.getFireWall(1);
-        textureRegions[1] = imageProvider.getFireWall(2);
-        textureRegions[2] = imageProvider.getFireWall(3);
+        TextureRegion[] textureRegions = new TextureRegion[Constants.FIREWALL_TOTAL_ANIMATION_FRAMES];
+
+        imageProvider.setAnimations(textureRegions, imageProvider, ImageProvider.ObjectType.FIREWALL);
 
         soundProvider.playfirewooshSound();
         MovingGameObjectState model = new MovingGameObjectState();
@@ -55,10 +49,9 @@ public class MovingGameObjectFactory {
     }
 
     public DynamicFireWallMovingGameObject getDynamicFireWall() {
-        TextureRegion[] textureRegions = new TextureRegion[3];
-        textureRegions[0] = imageProvider.getFireWall(1);
-        textureRegions[1] = imageProvider.getFireWall(2);
-        textureRegions[2] = imageProvider.getFireWall(3);
+        TextureRegion[] textureRegions = new TextureRegion[Constants.DYNAMIC_FIREWALL_TOTAL_ANIMATION_FRAMES];
+
+        imageProvider.setAnimations(textureRegions, imageProvider, ImageProvider.ObjectType.FIREWALL);
 
         soundProvider.playfirewooshSound();
         MovingGameObjectState model = new MovingGameObjectState();

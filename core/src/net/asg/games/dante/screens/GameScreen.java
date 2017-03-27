@@ -93,8 +93,7 @@ public class GameScreen extends AbstractScreen {
         debugRenderer = new ShapeRenderer();
 
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, imageProvider.getScreenWidth(),
-                imageProvider.getScreenHeight());
+        camera.setToOrtho(false, imageProvider.getScreenWidth(), imageProvider.getScreenHeight());
 
         batch = new SpriteBatch();
 
@@ -134,7 +133,7 @@ public class GameScreen extends AbstractScreen {
         //set up the background and forground scroll properties
 
         //Gdx.app.log("GameScreen", gameScreenState.toString());
-
+        //this is where the world is rendered. Renderer.render(world)
         if (bgScrollTimer > 1.0f)
             bgScrollTimer = 0.0f;
 
@@ -184,8 +183,9 @@ public class GameScreen extends AbstractScreen {
         }
 
         if (gameScreenState.isDead) {
-            if (gameOverMessage == null)
+            if (gameOverMessage == null) {
                 gameOverMessage = new GameOverMessage(imageProvider, gameScreenState.score);
+            }
 
             gameOverMessage.draw(batch);
             levelResetButton.draw(batch);
@@ -231,6 +231,8 @@ public class GameScreen extends AbstractScreen {
             return;
         }
 
+        //This is where the world would be updated
+        //world.update(delta);
         bgScrollTimer += delta * gameScreenState.getBackgroundSpeed();
         mgScrollTimer += delta * gameScreenState.getMiddlegroundSpeed();
         fgScrollTimer += delta * gameScreenState.getForegroundSpeed();

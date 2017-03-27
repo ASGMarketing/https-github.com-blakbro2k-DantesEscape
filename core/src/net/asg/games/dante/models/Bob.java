@@ -45,7 +45,7 @@ public class Bob {
         this.offSetY = offSetY;
         bounds.width = width;
         bounds.height = height;
-        textureRegions = new TextureRegion[30];
+        textureRegions = new TextureRegion[Constants.BOB_TOTAL_ANIMATION_FRAMES];
 
         if (posX < 0) {
             bounds.x = (screenWidth / 16);
@@ -136,35 +136,6 @@ public class Bob {
     }
 
     public void setBobAnimation(ImageProvider imageProvider) {
-        textureRegions[0] = imageProvider.getBob(1);
-        textureRegions[1] = imageProvider.getBob(2);
-        textureRegions[2] = imageProvider.getBob(3);
-        textureRegions[3] = imageProvider.getBob(4);
-        textureRegions[4] = imageProvider.getBob(5);
-        textureRegions[5] = imageProvider.getBob(6);
-        textureRegions[6] = imageProvider.getBob(7);
-        textureRegions[7] = imageProvider.getBob(8);
-        textureRegions[8] = imageProvider.getBob(9);
-        textureRegions[9] = imageProvider.getBob(10);
-        textureRegions[10] = imageProvider.getBob(11);
-        textureRegions[11] = imageProvider.getBob(12);
-        textureRegions[12] = imageProvider.getBob(13);
-        textureRegions[13] = imageProvider.getBob(14);
-        textureRegions[14] = imageProvider.getBob(15);
-        textureRegions[15] = imageProvider.getBob(16);
-        textureRegions[16] = imageProvider.getBob(17);
-        textureRegions[17] = imageProvider.getBob(18);
-        textureRegions[18] = imageProvider.getBob(19);
-        textureRegions[19] = imageProvider.getBob(20);
-        textureRegions[20] = imageProvider.getBob(21);
-        textureRegions[21] = imageProvider.getBob(22);
-        textureRegions[22] = imageProvider.getBob(23);
-        textureRegions[23] = imageProvider.getBob(24);
-        textureRegions[24] = imageProvider.getBob(25);
-        textureRegions[25] = imageProvider.getBob(26);
-        textureRegions[26] = imageProvider.getBob(27);
-        textureRegions[27] = imageProvider.getBob(28);
-        textureRegions[28] = imageProvider.getBob(29);
-        textureRegions[29] = imageProvider.getBob(30);
+        imageProvider.setAnimations(textureRegions, imageProvider, ImageProvider.ObjectType.BOB);
     }
 }
