@@ -16,11 +16,11 @@ public class Bob {
 
     private int screenHeight;
 
-    protected int frame = 0;
+    private int frame = 0;
 
-    protected float time = 0;
+    private float time = 0;
 
-    protected TextureRegion[] textureRegions;
+    private TextureRegion[] textureRegions;
 
     private Rectangle bounds;
 

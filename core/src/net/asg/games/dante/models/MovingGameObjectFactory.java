@@ -12,7 +12,7 @@ public class MovingGameObjectFactory {
 
     private ImageProvider imageProvider;
     private SoundProvider soundProvider;
-    public boolean isHitboxActive = Constants.NO_CLIP_MODE_OFF;
+    private boolean isHitboxActive = Constants.NO_CLIP_MODE_OFF;
 
     public MovingGameObjectFactory(ImageProvider imageProvider, SoundProvider soundProvider) {
         this.imageProvider = imageProvider;
