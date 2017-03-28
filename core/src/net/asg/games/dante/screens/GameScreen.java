@@ -199,6 +199,7 @@ public class GameScreen extends AbstractScreen {
         batch.end();
 
         //Draw Debug Hitboxes and sprite boxes
+        game.isDebugOn = true;
         if (game.isDebugOn) {
 
             debugRenderer.setProjectionMatrix(camera.combined);

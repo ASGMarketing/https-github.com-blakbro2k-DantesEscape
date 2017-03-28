@@ -13,6 +13,7 @@ import net.asg.games.dante.screens.SplashScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.FPSLogger;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.Timer;
 
@@ -30,7 +31,10 @@ public class DantesEscapeGame extends Game {
     private StateManager stateManager;
     private FPSLogger fpsLog;
 
-    public DantesEscapeGame() {
+    public ActionResolver actionResolver;
+
+    public DantesEscapeGame(ActionResolver actionResolver) {
+        this.actionResolver = actionResolver;
     }
 
     public DantesEscapeGame(boolean isDebugOn) {
@@ -41,7 +45,6 @@ public class DantesEscapeGame extends Game {
     public void create() {
         imageProvider = new ImageProvider();
         imageProvider.load();
-
         soundProvider = new SoundProvider();
         soundProvider.load();
 
@@ -60,24 +63,23 @@ public class DantesEscapeGame extends Game {
         setScreen(new SplashScreen(this));
 
         final long splash_start_time = TimeUtils.millis();
-
-                Gdx.app.postRunnable(new Runnable() {
-                    @Override
-                    public void run() {
-                        long splash_elapsed_time = TimeUtils.millis() - splash_start_time;
-                        if (splash_elapsed_time < Constants.SPLASH_MINIMUM_MILLISECONDS) {
-                            Timer.schedule(
-                                    new Timer.Task() {
-                                        @Override
-                                        public void run() {
-                                            DantesEscapeGame.this.gotoMainMenuScreen();
-                                        }
-                                    }, (float) (Constants.SPLASH_MINIMUM_MILLISECONDS - splash_elapsed_time) / 1000);
-                        } else {
-                            DantesEscapeGame.this.gotoMainMenuScreen();
+        Gdx.app.postRunnable(new Runnable() {
+            @Override
+            public void run() {
+            long splash_elapsed_time = TimeUtils.millis() - splash_start_time;
+            if (splash_elapsed_time < Constants.SPLASH_MINIMUM_MILLISECONDS) {
+                Timer.schedule(
+                    new Timer.Task() {
+                        @Override
+                        public void run() {
+                        DantesEscapeGame.this.gotoMainMenuScreen();
                         }
-                    }
-                });
+                    }, (float) (Constants.SPLASH_MINIMUM_MILLISECONDS - splash_elapsed_time) / 1000);
+            } else {
+                DantesEscapeGame.this.gotoMainMenuScreen();
+            }
+            }
+        });
     }
 
     public void render() {

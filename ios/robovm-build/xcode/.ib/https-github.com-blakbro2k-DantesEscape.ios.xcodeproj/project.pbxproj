@@ -1,0 +1,319 @@
+{
+	"archiveVersion" = "1";
+	"classes" =
+		{
+		};
+	"objectVersion" = "46";
+	"objects" =
+		{
+			"100000000000000000000002" =
+				{
+					"isa" = "PBXGroup";
+					"children" =
+						("86F899E1200C43C190AF3795", "F58BB60E874F4B739ACDB4A5");
+					"sourceTree" = "<group>";
+				};
+			"100000000000000000000006" =
+				{
+					"isa" = "PBXNativeTarget";
+					"buildPhases" =
+						("100000000000000000000007");
+					"buildRules" =
+						();
+					"dependencies" =
+						();
+					"name" = "test";
+					"productName" = "test";
+					"productType" = "com.apple.product-type.application";
+				};
+			"100000000000000000000001" =
+				{
+					"isa" = "PBXProject";
+					"attributes" =
+						{
+							"LastUpgradeCheck" = "0620";
+						};
+					"buildConfigurationList" = "100000000000000000000003";
+					"compatibilityVersion" = "Xcode 3.2";
+					"developmentRegion" = "English";
+					"hasScannedForEncodings" = "0";
+					"knownRegions" =
+						("en");
+					"mainGroup" = "100000000000000000000002";
+					"projectDirPath" = "";
+					"projectRoot" = "";
+					"targets" =
+						("100000000000000000000006");
+				};
+			"100000000000000000000007" =
+				{
+					"isa" = "PBXSourcesBuildPhase";
+					"buildActionMask" = "2147483647";
+					"files" =
+						();
+					"runOnlyForDeploymentPostprocessing" = "0";
+				};
+			"100000000000000000000004" =
+				{
+					"isa" = "XCBuildConfiguration";
+					"buildSettings" =
+						{
+							"INFOPLIST_FILE" = "/Users/joshuabernitt/https-github.com-blakbro2k-DantesEscape/ios/Info.plist.xml";
+							"SDKROOT" = "iphoneos";
+							"TARGETED_DEVICE_FAMILY" = "1,2";
+							"GCC_PRECOMPILE_PREFIX_HEADER" = "YES";
+							"GCC_PREFIX_HEADER" = "/Users/joshuabernitt/https-github.com-blakbro2k-DantesEscape/ios/robovm-build/xcode/.ib/Prefix.pch";
+						};
+					"name" = "Debug";
+				};
+			"100000000000000000000005" =
+				{
+					"isa" = "XCBuildConfiguration";
+					"buildSettings" =
+						{
+							"INFOPLIST_FILE" = "/Users/joshuabernitt/https-github.com-blakbro2k-DantesEscape/ios/Info.plist.xml";
+							"SDKROOT" = "iphoneos";
+							"TARGETED_DEVICE_FAMILY" = "1,2";
+							"GCC_PRECOMPILE_PREFIX_HEADER" = "YES";
+							"GCC_PREFIX_HEADER" = "/Users/joshuabernitt/https-github.com-blakbro2k-DantesEscape/ios/robovm-build/xcode/.ib/Prefix.pch";
+						};
+					"name" = "Release";
+				};
+			"100000000000000000000003" =
+				{
+					"isa" = "XCConfigurationList";
+					"buildConfigurations" =
+						("100000000000000000000004", "100000000000000000000005");
+					"defaultConfigurationIsVisible" = "0";
+					"defaultConfigurationName" = "Release";
+				};
+			"86F899E1200C43C190AF3795" =
+				{
+					"isa" = "PBXGroup";
+					"children" =
+						("FE0AF06C552342A0BD223E62", "294573533C1F48A3AD683AB4", "0902A889BDE7494FA1F8D371",
+ "29CE2FF9012643C0B2D89D24", "25D69899750D4E3BAB4C5512", "AC3F14A0BF0C4452A08BBEB6",
+ "076C5572DDA045A399471C9D", "0F6378CB95014D0187FB1E46", "87654C412AE4445B9E6E1FD3",
+ "2A0598256DC243869F741315", "1B35F42A408D4654956422B5", "835E6E08900F4DBFA3D91F08",
+ "06B544079E14421FAE1CB834", "167D3D02C4944B6485447AD5", "4AC9BD46AF724D2D84427476",
+ "79C2F5F4376442ECB8EDBB83", "50E12A471DEB43CB8A24A4A0", "7A88C4F0F68C4A30A09BDFCB",
+ "C349869380754A2AAA5F272A", "C0126ED088424DBCB4AE6CBC", "D8F173520EE741F783A9C0DC"
+);
+					"name" = "Resources";
+					"sourceTree" = "<absolute>";
+					"path" = "/Users/joshuabernitt/https-github.com-blakbro2k-DantesEscape/ios/../android/assets";
+				};
+			"0902A889BDE7494FA1F8D371" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "background.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "background.png";
+				};
+			"29CE2FF9012643C0B2D89D24" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "buttons.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "buttons.png";
+				};
+			"A2E303CBF6D844DF8906FE2C" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "default.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "default.png";
+				};
+			"FE0AF06C552342A0BD223E62" =
+				{
+					"isa" = "PBXGroup";
+					"children" =
+						("A2E303CBF6D844DF8906FE2C", "C9FCC984744748E389C18A3D");
+					"name" = "data";
+					"sourceTree" = "<group>";
+					"path" = "data";
+				};
+			"C9FCC984744748E389C18A3D" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "uiskin.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "uiskin.png";
+				};
+			"557DCD07B56C407EA915D7F3" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "ravie.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "ravie.png";
+				};
+			"294573533C1F48A3AD683AB4" =
+				{
+					"isa" = "PBXGroup";
+					"children" =
+						("557DCD07B56C407EA915D7F3");
+					"name" = "fonts";
+					"sourceTree" = "<group>";
+					"path" = "fonts";
+				};
+			"835E6E08900F4DBFA3D91F08" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "foreground.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "foreground.png";
+				};
+			"06B544079E14421FAE1CB834" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "gameover.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "gameover.png";
+				};
+			"167D3D02C4944B6485447AD5" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "games.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "games.png";
+				};
+			"C349869380754A2AAA5F272A" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "paused.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "paused.png";
+				};
+			"C0126ED088424DBCB4AE6CBC" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "splash-screen.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "splash-screen.png";
+				};
+			"D8F173520EE741F783A9C0DC" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "text-images.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "text-images.png";
+				};
+			"49A4D7BFDC2B467B8BADBB1B" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "Info.plist";
+					"explicitFileType" = "text.plist.info";
+					"sourceTree" = "<group>";
+					"path" = "Info.plist.xml";
+				};
+			"F58BB60E874F4B739ACDB4A5" =
+				{
+					"isa" = "PBXGroup";
+					"children" =
+						("49A4D7BFDC2B467B8BADBB1B");
+					"name" = "Supporting Files";
+					"sourceTree" = "<absolute>";
+					"path" = "/Users/joshuabernitt/https-github.com-blakbro2k-DantesEscape/ios";
+				};
+			"25D69899750D4E3BAB4C5512" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "Default-375w-667h@2x.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "Default-375w-667h@2x.png";
+				};
+			"AC3F14A0BF0C4452A08BBEB6" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "Default-414w-736h@3x.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "Default-414w-736h@3x.png";
+				};
+			"076C5572DDA045A399471C9D" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "Default-568h@2x.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "Default-568h@2x.png";
+				};
+			"0F6378CB95014D0187FB1E46" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "Default.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "Default.png";
+				};
+			"87654C412AE4445B9E6E1FD3" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "Default@2x.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "Default@2x.png";
+				};
+			"2A0598256DC243869F741315" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "Default@2x~ipad.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "Default@2x~ipad.png";
+				};
+			"1B35F42A408D4654956422B5" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "Default~ipad.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "Default~ipad.png";
+				};
+			"4AC9BD46AF724D2D84427476" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "Icon-72.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "Icon-72.png";
+				};
+			"79C2F5F4376442ECB8EDBB83" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "Icon-72@2x.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "Icon-72@2x.png";
+				};
+			"50E12A471DEB43CB8A24A4A0" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "Icon.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "Icon.png";
+				};
+			"7A88C4F0F68C4A30A09BDFCB" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "Icon@2x.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "Icon@2x.png";
+				};
+		};
+	"rootObject" = "100000000000000000000001";
+}

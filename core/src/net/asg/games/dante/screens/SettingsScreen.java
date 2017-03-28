@@ -1,6 +1,7 @@
 package net.asg.games.dante.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -15,8 +16,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-
 import net.asg.games.dante.DantesEscapeGame;
+
+import javafx.scene.control.ToggleButton;
 
 /**
  * Created by Blakbro2k on 3/1/2016.
@@ -24,7 +26,7 @@ import net.asg.games.dante.DantesEscapeGame;
 public class SettingsScreen extends AbstractScreen {
     private Stage stage;
 
-
+    private DantesEscapeGame game;
     public SettingsScreen(DantesEscapeGame game) {
         super();
         this.game = game;
@@ -32,7 +34,6 @@ public class SettingsScreen extends AbstractScreen {
 
     @Override
     public void show() {
-
         imageProvider = game.getImageProvider();
         batch = new SpriteBatch();
 
@@ -48,7 +49,7 @@ public class SettingsScreen extends AbstractScreen {
         Label headingLabel = new Label("DANTE'S ESCAPE",headingStyle);
 
         //final TextButton backGameButton = new TextButton("Back",imageProvider.getDefaultUIskin());
-        final Label musicLabel = new Label("Music",imageProvider.getDefaultUIskin());
+        final TextButton musicLabel = new TextButton("Music",imageProvider.getDefaultUIskin());
         final Label soundFXlabel = new Label("Sound Effects",imageProvider.getDefaultUIskin());
         final TextButton googleGameButton = new TextButton("Sign In",imageProvider.getDefaultUIskin());
         final TextButton creditsGameButton = new TextButton("Credits",imageProvider.getDefaultUIskin());
@@ -60,15 +61,7 @@ public class SettingsScreen extends AbstractScreen {
         table.row();
         table.add(soundFXlabel);
 
-        backGameButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                event.stop();
-                game.gotoMainMenuScreen();
-            }
-        });
-
-
+        // TODO: back button uses system button
         // TODO: 3/4/2016 music slider
         // TODO: 3/4/2016 sound effects slider
         // TODO: 3/4/2016 Google Sign in
@@ -79,6 +72,12 @@ public class SettingsScreen extends AbstractScreen {
 
     @Override
     public void render(float delta) {
+//        intercepts and handles platform specific back keys
+        Gdx.input.setInputProcessor(this);
+        Gdx.input.setCatchBackKey(true);
+        if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
+            this.game.actionResolver.backButton(game);
+        }
         super.render(delta);
         Gdx.gl.glClearColor(0, 0, 1, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
@@ -87,5 +86,4 @@ public class SettingsScreen extends AbstractScreen {
         stage.draw();
         batch.end();
     }
-
 }
