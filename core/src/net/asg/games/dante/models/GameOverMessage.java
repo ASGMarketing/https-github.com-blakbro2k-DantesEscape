@@ -16,26 +16,20 @@ public class GameOverMessage {
 
     private Texture board;
 
-    private TextureRegion gameOverLabel;
-
-    private TextureRegion startLabel;
-
     private int boardX;
 
     private int boardY;
 
     private LayoutItem startLayoutItem;
 
-    private LayoutItem youLoseLayoutItem;
-
     private SimpleLayoutManager simpleLayoutManager;
 
     public GameOverMessage(ImageProvider imageProvider, int score) {
         this.board = imageProvider.getGameOverBoard();
 
-        gameOverLabel = imageProvider.getYouLoseLabel();
+        TextureRegion gameOverLabel = imageProvider.getYouLoseLabel();
 
-        startLabel = imageProvider.getStartLabel();
+        TextureRegion startLabel = imageProvider.getStartLabel();
 
         int screenWidth = imageProvider.getScreenWidth();
         int screenHeight = imageProvider.getScreenHeight();
@@ -49,7 +43,7 @@ public class GameOverMessage {
         simpleLayoutManager = new SimpleLayoutManager(board.getWidth(),
                 board.getHeight(), boardX, boardY);
 
-        youLoseLayoutItem = new LayoutItem(gameOverLabel);
+        LayoutItem youLoseLayoutItem = new LayoutItem(gameOverLabel);
         simpleLayoutManager.add(youLoseLayoutItem,
                 Layout.CENTER_HORIZONTAL | Layout.ALIGN_BOTTOM,
                 new Margin(0, 0, 0, boardTopPadding));

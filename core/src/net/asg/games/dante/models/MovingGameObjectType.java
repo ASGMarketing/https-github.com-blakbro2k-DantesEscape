@@ -18,7 +18,7 @@ public enum MovingGameObjectType {
         return value;
     }
 
-    private MovingGameObjectType(int value) {
+    MovingGameObjectType(int value) {
         this.value = value;
     }
 

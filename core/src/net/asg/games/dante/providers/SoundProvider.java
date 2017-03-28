@@ -36,7 +36,7 @@ public class SoundProvider {
 
     }
 
-    public void setSoundOn(boolean isSoundOn) {
+    public void setSound(boolean isSoundOn) {
         this.isSoundOn = isSoundOn;
     }
 
@@ -201,8 +201,7 @@ public class SoundProvider {
         goalHitSound.stop();
     }
 
-    public boolean isSoundOn(float volume){
-        volume = 1f;
-        return volume > 0;
+    public boolean isSoundOn(){
+        return isSoundOn;
     }
 }

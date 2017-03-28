@@ -83,7 +83,7 @@ public class GameScreen extends AbstractScreen {
     public void show() {
         imageProvider = game.getImageProvider();
         soundProvider = game.getSoundProvider();
-        soundProvider.setSoundOn(true);
+        soundProvider.setSound(true);
         soundProvider.playBgSound();
 
         backgroundSprite = imageProvider.getBackgroundSprite();

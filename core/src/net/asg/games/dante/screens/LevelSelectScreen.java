@@ -15,8 +15,6 @@ public class LevelSelectScreen extends AbstractScreen {
 
     private Texture backgroundImage;
 
-    private Button[] buttons;
-
     public LevelSelectScreen(DantesEscapeGame game) {
         super();
         this.game = game;
@@ -28,7 +26,7 @@ public class LevelSelectScreen extends AbstractScreen {
         //backgroundImage = imageProvider.getBackgroundFire();
         //TextureRegion buttonBg = imageProvider.getButton();
 
-        buttons = new Button[2];
+        Button[] buttons = new Button[2];
         //buttons[0] = new Button(buttonBg, imageProvider.getLevel());
 
         camera = new OrthographicCamera();
