@@ -45,7 +45,7 @@ public class MovingGameObject {
 
     protected Rectangle rect;
 
-    protected Rectangle[] hitboxes;
+    protected Rectangle hitboxBounds;
 
     protected int frame = 0;
 
@@ -65,13 +65,14 @@ public class MovingGameObject {
 
     protected MovingGameObjectState state;
 
-    protected Rectangle getPosition() {
-        return rect;
-    }
+    protected int offSetX;
+
+    protected int offSetY;
 
     public MovingGameObject(ImageProvider imageProvider,
                             TextureRegion[] textureRegions, SoundProvider soundProvider,
-                            int width, int height, boolean isHitboxActive, MovingGameObjectState state) {
+                            int width, int height, boolean isHitboxActive, MovingGameObjectState state,
+                            int[] hitBoxConfig) {
 
         this.imageProvider = imageProvider;
         this.soundProvider = soundProvider;
@@ -88,8 +89,21 @@ public class MovingGameObject {
         this.rect.y = 0;
 
         this.state = state;
+
+        hitboxBounds = new Rectangle();
+
+        this.offSetX = hitBoxConfig[0];
+        this.offSetY = hitBoxConfig[1];
+
+        hitboxBounds.width = hitBoxConfig[2];
+        hitboxBounds.height = hitBoxConfig[3];
+
+        setHitboxBounds(rect);
+
         state.setPosX((int) rect.x);
         state.setPosY((int) rect.y);
+        state.setHitPosX((int) hitboxBounds.x);
+        state.setHitPosY((int) hitboxBounds.y);
         state.setCollided(isCollided);
         state.setHitboxActive(isHitboxActive);
         state.setSoundTriggered(isSoundTriggered);
@@ -97,6 +111,8 @@ public class MovingGameObject {
 
     public void moveLeft(float delta, float speedBonus) {
         rect.x -= moveSpeed * delta * speedBonus;
+        setHitboxBounds(rect);
+
         state.setPosY((int) rect.y);
         time += delta;
         if (time > animationPeriod) {
@@ -118,6 +134,15 @@ public class MovingGameObject {
 
     public void drawDebug(ShapeRenderer debugRenderer) {
         debugRenderer.rect(rect.x, rect.y, rect.width, rect.height);
+    }
+
+    public void drawHitbox(ShapeRenderer debugRenderer) {
+        debugRenderer.rect(hitboxBounds.x, hitboxBounds.y, hitboxBounds.width, hitboxBounds.height);
+    }
+
+    public void setHitboxBounds(Rectangle rect){
+        hitboxBounds.x = rect.x + offSetX;
+        hitboxBounds.y = rect.y + offSetY;
     }
 
     public boolean isOverlapping(Rectangle otherRect) {

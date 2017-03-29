@@ -1,5 +1,7 @@
 package net.asg.games.dante;
 
+import net.asg.games.dante.models.HitboxConfiguration;
+
 public class Constants {
     public static final boolean DEBUG = true;
     public static final boolean NO_CLIP_MODE_OFF = true;
@@ -13,6 +15,12 @@ public class Constants {
     //view constants
     public static final int BOB_MOVE_SPEED = 510;
     public static final int[] BOB_HITBOX = {0, 12, 70, 48};
+
+    public static final int[] FIREBALL_HITBOX = {0, 12, 50, 45};
+    public static final int[] FIREWALL_HITBOX = {0, 0, 16, 800};
+    public static final int[] DWALL_HITBOX = {0, 0, 16, 800};
+    public static final int[] GOAL_HITBOX = {0, 0, 16, 800};
+
     public static final int OBJECT_MOVE_SPEED = 550;
     public static final int GOAL_OBJECT_MOVE_SPEED = 800;
     public static final int WALL_OBJECT_MOVE_SPEED = 750;
@@ -34,6 +42,7 @@ public class Constants {
     public static final int WALL_POSITION_SIX = 300;
     public static final int WALL_BASE_OFFSET = 450;
     public static final int HIGH_SCORES_COUNT = 5;
+    public static final int FIREBALL_SPEED = 820;
 
 
     public static final float DEFAULT_ANIMATION_PERIOD = 0.10f;
@@ -41,7 +50,6 @@ public class Constants {
     public static final float BACKGROUND_SPEED = 0.7f;
     public static final float MIDGROUND_SPEED = 1.1f;
     public static final float FOREGROUND_SPEED = 1.7f;
-    public static final float FIREBALL_SPEED = 0.7f;
 
     public static final String GAME_TITLE = "Jerry's Escape";
     public static final String SOURCE_ASSETS_FOLDER_PATH = "../../desktop/";

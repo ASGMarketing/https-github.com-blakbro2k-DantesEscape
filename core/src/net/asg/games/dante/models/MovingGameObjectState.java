@@ -8,17 +8,13 @@ import com.badlogic.gdx.utils.JsonValue;
 
 public class MovingGameObjectState implements Serializable {
     private MovingGameObjectType type;
-
     private int index;
-
     private int posX = -1;
-
     private int posY = -1;
-
+    private int hitPosX = -1;
+    private int hitPosY = -1;
     private boolean isCollided;
-
     private boolean isSoundTriggered;
-
     private boolean isHitboxActive;
 
     public MovingGameObjectType getType() {
@@ -37,10 +33,17 @@ public class MovingGameObjectState implements Serializable {
         this.posX = posX;
     }
 
+    public void setHitPosX(int posX) {
+        this.hitPosX = posX;
+    }
+
     public int getPosY() {
         return posY;
     }
 
+    public void setHitPosY(int posY) {
+        this.hitPosY = posY;
+    }
     public void setPosY(int posY) {
         this.posY = posY;
     }

@@ -31,7 +31,7 @@ public class MovingGameObjectFactory {
 
         return new FireBallMovingGameObject(imageProvider, textureRegions, soundProvider,
                 textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight(),
-                isHitboxActive, model);
+                isHitboxActive, model, Constants.FIREBALL_HITBOX);
     }
 
     public FireWallMovingGameObject getFireWall() {
@@ -45,7 +45,7 @@ public class MovingGameObjectFactory {
 
         return new FireWallMovingGameObject(imageProvider, textureRegions, soundProvider,
                 textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight(),
-                isHitboxActive, model);
+                isHitboxActive, model, Constants.FIREWALL_HITBOX);
     }
 
     public DynamicFireWallMovingGameObject getDynamicFireWall() {
@@ -59,7 +59,7 @@ public class MovingGameObjectFactory {
 
         return new DynamicFireWallMovingGameObject(imageProvider, textureRegions, soundProvider,
                 textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight(),
-                isHitboxActive, model);
+                isHitboxActive, model, Constants.FIREWALL_HITBOX);
     }
 
     public GoalMovingGameObject getGoal() {
@@ -71,6 +71,6 @@ public class MovingGameObjectFactory {
 
         return new GoalMovingGameObject(imageProvider, textureRegions, soundProvider,
                 textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight(),
-                isHitboxActive, model);
+                isHitboxActive, model, Constants.FIREWALL_HITBOX);
     }
 }

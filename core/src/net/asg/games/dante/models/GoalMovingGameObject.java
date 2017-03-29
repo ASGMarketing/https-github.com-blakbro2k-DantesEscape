@@ -17,16 +17,18 @@ public class GoalMovingGameObject extends MovingGameObject {
     private int velocityX = Constants.GOAL_OBJECT_X_VELOCITY;
     // private int animationPattern[];
 
-    public GoalMovingGameObject(ImageProvider imageProvider,
-                                TextureRegion[] textureRegions, SoundProvider soundProvider,
-                                int width, int height, boolean isHitboxActive, MovingGameObjectState state) {
+    public GoalMovingGameObject(ImageProvider imageProvider, TextureRegion[] textureRegions,
+                                SoundProvider soundProvider, int width, int height, boolean isHitboxActive,
+                                MovingGameObjectState state, int[] hitBoxConfig) {
         super(imageProvider, textureRegions, soundProvider, width, height,
-                isHitboxActive, state);
+                isHitboxActive, state, hitBoxConfig);
     }
 
     public void moveLeft(float delta, float speedBonus) {
         int moveSpeed = Constants.GOAL_OBJECT_MOVE_SPEED;
         rect.x -= moveSpeed * delta;
+        setHitboxBounds(rect);
+
         state.setPosX((int) rect.x);
         time += delta;
         if (time > animationPeriod) {
@@ -46,6 +48,7 @@ public class GoalMovingGameObject extends MovingGameObject {
 
         rect.y -= 1300 * delta;
         rect.x += velocityX * delta;
+        setHitboxBounds(rect);
         state.setPosX((int) rect.x);
         state.setPosX((int) rect.y);
         velocityX -= 1;

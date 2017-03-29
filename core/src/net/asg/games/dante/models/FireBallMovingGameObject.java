@@ -1,5 +1,6 @@
 package net.asg.games.dante.models;
 
+import net.asg.games.dante.Constants;
 import net.asg.games.dante.providers.ImageProvider;
 import net.asg.games.dante.providers.SoundProvider;
 
@@ -13,10 +14,11 @@ public class FireBallMovingGameObject extends MovingGameObject {
 
     public FireBallMovingGameObject(ImageProvider imageProvider,
                                     TextureRegion[] textureRegions, SoundProvider soundProvider, int width, int height,
-                                    boolean isHitboxActive, MovingGameObjectState state) {
-        super(imageProvider, textureRegions, soundProvider, width, height, isHitboxActive, state);
-        this.setMoveSpeed(820);
+                                    boolean isHitboxActive, MovingGameObjectState state, int[] hitBoxConfig) {
+        super(imageProvider, textureRegions, soundProvider, width, height, isHitboxActive, state, hitBoxConfig);
+        this.setMoveSpeed(Constants.FIREBALL_SPEED);
 
         rect.y = MathUtils.random(0, imageProvider.getScreenHeight() - height);
+        setHitboxBounds(rect);
     }
 }

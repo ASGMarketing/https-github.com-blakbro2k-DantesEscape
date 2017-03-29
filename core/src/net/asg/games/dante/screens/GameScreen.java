@@ -20,6 +20,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector3;
@@ -103,9 +104,12 @@ public class GameScreen extends AbstractScreen {
         //TextureRegion bobRegion = imageProvider.getBob(1);
         //Gdx.app.log("Bob", "" + bobRegion);
         //Gdx.app.log(this.toString(), "" + bobRegion);
-        bob = new Bob(-1, -1, imageProvider.getBob(1).getRegionHeight(), imageProvider.getBob(1).getRegionWidth(),
-                Constants.BOB_HITBOX[0], Constants.BOB_HITBOX[1], Constants.BOB_HITBOX[3], Constants.BOB_HITBOX[2]);
-                // TODO: 3/2/2016 make hitbox helper class to parse and return an array of hitboxes
+
+        TextureRegion bobTexture = imageProvider.getBob(1);
+
+        bob = new Bob(-1, -1, bobTexture.getRegionWidth(), bobTexture.getRegionHeight(), Constants.BOB_HITBOX);
+        //TODO: 3/2/2016 make hitbox helper class to parse and return an array of hitboxes
+
         bob.setBobAnimation(imageProvider);
 
         movingObjects = new Array<MovingGameObject>();
@@ -199,10 +203,10 @@ public class GameScreen extends AbstractScreen {
         batch.end();
 
         //Draw Debug Hitboxes and sprite boxes
-        game.isDebugOn = true;
         if (game.isDebugOn) {
 
             debugRenderer.setProjectionMatrix(camera.combined);
+
             debugRenderer.begin(ShapeType.Line);
             debugRenderer.setColor(Color.GREEN);
 
@@ -223,6 +227,9 @@ public class GameScreen extends AbstractScreen {
             debugRenderer.rect(bob.getHitboxes().x, bob.getHitboxes().y,
                     bob.getHitboxes().width, bob.getHitboxes().height);
 
+            for (MovingGameObject movingObject : movingObjects) {
+                movingObject.drawHitbox(debugRenderer);
+            }
             debugRenderer.end();
         }
 
@@ -243,6 +250,7 @@ public class GameScreen extends AbstractScreen {
         if (TimeUtils.millis() - gameScreenState.lastGameObjTime > gameScreenState.spawnTime) {
             movingObjects.add(levelProvider.getNextObject(movingGameObjectFactory, gameScreenState));
         }
+
         /*
          * Using Iterator, we update all objects on screen to move, and discard
 	     * all objects off screen All hit detection happens here also
