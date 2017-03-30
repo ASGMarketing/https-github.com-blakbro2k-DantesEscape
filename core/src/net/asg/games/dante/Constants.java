@@ -3,7 +3,7 @@ package net.asg.games.dante;
 import net.asg.games.dante.models.HitboxConfiguration;
 
 public class Constants {
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
     public static final boolean NO_CLIP_MODE_OFF = true;
 
     public static final int MAX_WIDTH = 1024;
@@ -16,9 +16,8 @@ public class Constants {
     public static final int BOB_MOVE_SPEED = 510;
     public static final int[] BOB_HITBOX = {0, 12, 70, 48};
 
-    public static final int[] FIREBALL_HITBOX = {0, 12, 50, 45};
-    public static final int[] FIREWALL_HITBOX = {0, 0, 16, 800};
-    public static final int[] DWALL_HITBOX = {0, 0, 16, 800};
+    public static final int[] FIREBALL_HITBOX = {0,8, 50, 45};
+    public static final int[] FIREWALL_HITBOX = {0, 0, 16, -1};
     public static final int[] GOAL_HITBOX = {0, 0, 16, 800};
 
     public static final int OBJECT_MOVE_SPEED = 550;
@@ -63,10 +62,11 @@ public class Constants {
     public static final String BUTTONS_IMAGES_FOLDER_NAME = "buttons";
     public static final String BUTTONS_IMAGES_ATLAS_NAME = "buttons";
 
-    public static final long SPLASH_MINIMUM_MILLISECONDS = 3000L;
+    public static final long SPLASH_MINIMUM_MILLISECONDS = 2500L;
 
     public static final int BOB_TOTAL_ANIMATION_FRAMES = 30;
     public static final int FIREBALL_TOTAL_ANIMATION_FRAMES = 9;
-    public static final int FIREWALL_TOTAL_ANIMATION_FRAMES = 3;
+    public static final int FIREWALL_TOTAL_ANIMATION_FRAMES = 5;
     public static final int DYNAMIC_FIREWALL_TOTAL_ANIMATION_FRAMES = 3;
+    public static final int GOAL_HIT_SPEED = 1300;
 }

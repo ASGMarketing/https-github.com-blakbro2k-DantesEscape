@@ -71,6 +71,6 @@ public class MovingGameObjectFactory {
 
         return new GoalMovingGameObject(imageProvider, textureRegions, soundProvider,
                 textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight(),
-                isHitboxActive, model, Constants.FIREWALL_HITBOX);
+                isHitboxActive, model, Constants.GOAL_HITBOX);
     }
 }

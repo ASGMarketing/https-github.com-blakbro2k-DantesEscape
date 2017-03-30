@@ -95,9 +95,7 @@ public class MovingGameObject {
         this.offSetX = hitBoxConfig[0];
         this.offSetY = hitBoxConfig[1];
 
-        hitboxBounds.width = hitBoxConfig[2];
-        hitboxBounds.height = hitBoxConfig[3];
-
+        setRectSize(hitboxBounds, hitBoxConfig);
         setHitboxBounds(rect);
 
         state.setPosX((int) rect.x);
@@ -146,7 +144,7 @@ public class MovingGameObject {
     }
 
     public boolean isOverlapping(Rectangle otherRect) {
-        return rect.overlaps(otherRect);
+        return hitboxBounds.overlaps(otherRect);
     }
 
     public void setHitboxActive(boolean bool) {
@@ -174,6 +172,19 @@ public class MovingGameObject {
         return LevelState.NOLCLIP;
     }
 
+    public void setRectSize(Rectangle rect, int[] size){
+        if(size[2] != -1){
+            rect.width = size[2];
+        } else {
+            rect.width = this.width;
+        }
+
+        if(size[3] != -1){
+            rect.height = size[3];
+        } else {
+            rect.height = this.height;
+        }
+    }
     public MovingGameObjectState getState() {
         return state;
     }

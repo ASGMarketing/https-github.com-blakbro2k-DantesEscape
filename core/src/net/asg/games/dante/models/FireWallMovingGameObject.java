@@ -12,8 +12,9 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class FireWallMovingGameObject extends MovingGameObject {
     protected Rectangle lowerWall;
+    protected Rectangle lowerHitboxBounds;
 
-    private int position;
+    protected int position;
     private int holeSize;
     public boolean isMobile = false;
     private int isMovingDown = 0;
@@ -26,7 +27,7 @@ public class FireWallMovingGameObject extends MovingGameObject {
         super(imageProvider, textureRegions, soundProvider, width, height,
                 isHitboxActive, state, hitBoxConfig);
 
-        this.rect = new Rectangle();
+        //this.rect = new Rectangle();
         this.rect.width = width;
         this.rect.height = height;
 
@@ -43,6 +44,12 @@ public class FireWallMovingGameObject extends MovingGameObject {
         this.lowerWall.x = this.imageProvider.getScreenWidth();
         this.lowerWall.y = Constants.WALL_BASE_OFFSET - rect.height - holeSize - position;
 
+        lowerHitboxBounds = new Rectangle();
+
+        setRectSize(lowerHitboxBounds, hitBoxConfig);
+        setHitboxBounds(rect);
+        setLowerHitboxBounds(lowerWall);
+
         this.setAnimationSpeed(0.1f);
     }
 
@@ -56,17 +63,21 @@ public class FireWallMovingGameObject extends MovingGameObject {
         debugRenderer.rect(lowerWall.x, lowerWall.y, lowerWall.width, lowerWall.height);
     }
 
-    public void setPosition(int position) {
-        this.position = position;
-    }
+    public void drawHitbox(ShapeRenderer debugRenderer) {
+        debugRenderer.rect(hitboxBounds.x, hitboxBounds.y, hitboxBounds.width, hitboxBounds.height);
+        debugRenderer.rect(lowerHitboxBounds.x, lowerHitboxBounds.y, lowerHitboxBounds.width, lowerHitboxBounds.height);
+   }
 
-    public void setHoleSize(int holeSize) {
-        this.holeSize = holeSize;
+    public void setLowerHitboxBounds(Rectangle rect){
+        lowerHitboxBounds.x = lowerWall.x + offSetX;
+        lowerHitboxBounds.y = lowerWall.y + offSetY;
     }
 
     public void moveLeft(float delta, float speedBonus) {
         rect.x -= moveSpeed * delta * speedBonus;
         lowerWall.x -= moveSpeed * delta * speedBonus;
+        setHitboxBounds(rect);
+        setLowerHitboxBounds(lowerWall);
 
         if (isMobile) {
             switch (isMovingDown) {
@@ -99,6 +110,6 @@ public class FireWallMovingGameObject extends MovingGameObject {
     }
 
     public boolean isOverlapping(Rectangle otherRect) {
-        return rect.overlaps(otherRect) || lowerWall.overlaps(otherRect);
+        return hitboxBounds.overlaps(otherRect) || lowerHitboxBounds.overlaps(otherRect);
     }
 }

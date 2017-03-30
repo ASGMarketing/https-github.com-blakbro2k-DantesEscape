@@ -46,9 +46,10 @@ public class GoalMovingGameObject extends MovingGameObject {
             state.setSoundTriggered(isSoundTriggered = true);
         }
 
-        rect.y -= 1300 * delta;
+        rect.y -= Constants.GOAL_HIT_SPEED * delta;
         rect.x += velocityX * delta;
         setHitboxBounds(rect);
+
         state.setPosX((int) rect.x);
         state.setPosX((int) rect.y);
         velocityX -= 1;
