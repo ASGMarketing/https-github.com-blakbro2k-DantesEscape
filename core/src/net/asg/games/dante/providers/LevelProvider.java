@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 
 public class LevelProvider {
+    private PhaseProvider phase;
 
     public MovingGameObject getNextObject(MovingGameObjectFactory movingGameObjectFactory,
                                           GameScreenState st) {
@@ -24,22 +25,27 @@ public class LevelProvider {
         }
 
         switch (st.stageType) {
-            case 0:
+            case 0:  //is Goal Level
                 st.lastGameObjTime = TimeUtils.millis();
                 mObj = movingGameObjectFactory.getGoal();
                 break;
-            case 1:
+            case 1:  //is Fireball Level
                 st.lastGameObjTime = TimeUtils.millis();
                 mObj = movingGameObjectFactory.getFireball();
                 st.spawnTime = Constants.FIREBALL_SPAWN_TIME;
                 break;
-            case 2:
+            case 2:  //is Lava wall Level
                 st.lastGameObjTime = TimeUtils.millis();
                 mObj = movingGameObjectFactory.getDynamicFireWall();
                 st.spawnTime = Constants.DYNAMIC_FIREWALL_SPAWN_TIME;
                 // mObj.setMoveSpeed(100);
                 break;
-            case 3:
+            case 3:  //is Ground wall Level
+                st.lastGameObjTime = TimeUtils.millis();
+                st.spawnTime = Constants.FIREWALL_SPAWN_TIME;
+                mObj = movingGameObjectFactory.getFireWall();
+                break;
+            case 4:  //is Missle Level
                 st.lastGameObjTime = TimeUtils.millis();
                 st.spawnTime = Constants.FIREWALL_SPAWN_TIME;
                 mObj = movingGameObjectFactory.getFireWall();
@@ -79,8 +85,19 @@ public class LevelProvider {
                             temp.add(x);
                         }
                     }
-                    st.stageType = temp.get(MathUtils.random(0, temp.size - 1));
-                    //stageType = 3;
+
+                    //TODO: Chose next stage type base off of phase
+                    if(phase == null){
+                        phase = new PhaseProvider();
+                    }
+
+                    if(!phase.hasNext()){
+                        phase.buildPhase(st);
+                    }
+
+                    //st.stageType = temp.get(MathUtils.random(0, temp.size - 1));
+                    st.stageType = phase.nextStage();
+
                     st.roundEndTime = TimeUtils.millis() + Constants.ROUND_TIME_DURATION;
                     st.roundCount++;
                     st.isLevelStarted = true;
@@ -91,7 +108,5 @@ public class LevelProvider {
             default:
                 break;
         }
-
-
     }
 }

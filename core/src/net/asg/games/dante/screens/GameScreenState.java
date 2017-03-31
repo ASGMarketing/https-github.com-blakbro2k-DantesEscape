@@ -28,6 +28,7 @@ public class GameScreenState implements Serializable {
     public int stageType;
     public int lastStageType;
     public int standardMovingBonus = 1000;
+    public int totalDeaths = 0;
 
     public boolean isPaused;
     public boolean isLevelStarted;
@@ -68,10 +69,9 @@ public class GameScreenState implements Serializable {
     }
 
     public void gameReset() {
+        levelReset();
         score = 0;
         roundCount = 0;
-        stageType = 0;
-        spawnTime = Constants.STARTING_SPAWNTIME;
         isLevelStarted = false;
         lastStageType = 0;
         lastGameObjTime = 0;

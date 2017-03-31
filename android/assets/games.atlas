@@ -6,301 +6,419 @@ filter: Nearest,Nearest
 repeat: none
 Fireball
   rotate: false
-  xy: 684, 448
+  xy: 608, 2
   size: 129, 60
   orig: 129, 60
   offset: 0, 0
   index: 1
 Fireball
   rotate: false
-  xy: 684, 386
+  xy: 739, 2
   size: 129, 60
   orig: 129, 60
   offset: 0, 0
   index: 2
 Fireball
   rotate: false
-  xy: 684, 324
+  xy: 870, 2
   size: 129, 60
   orig: 129, 60
   offset: 0, 0
   index: 3
-Fireball
-  rotate: false
-  xy: 806, 546
-  size: 129, 60
-  orig: 129, 60
-  offset: 0, 0
-  index: 4
-Fireball
-  rotate: false
-  xy: 815, 484
-  size: 129, 60
-  orig: 129, 60
-  offset: 0, 0
-  index: 5
-Fireball
-  rotate: false
-  xy: 815, 422
-  size: 129, 60
-  orig: 129, 60
-  offset: 0, 0
-  index: 6
-Fireball
-  rotate: false
-  xy: 815, 360
-  size: 129, 60
-  orig: 129, 60
-  offset: 0, 0
-  index: 7
-Fireball
-  rotate: false
-  xy: 815, 298
-  size: 129, 60
-  orig: 129, 60
-  offset: 0, 0
-  index: 8
-Fireball
-  rotate: false
-  xy: 684, 262
-  size: 129, 60
-  orig: 129, 60
-  offset: 0, 0
-  index: 9
 bob
   rotate: false
-  xy: 74, 706
+  xy: 608, 162
   size: 120, 96
   orig: 120, 96
   offset: 0, 0
   index: 1
 bob
   rotate: false
-  xy: 74, 608
+  xy: 608, 64
   size: 120, 96
   orig: 120, 96
   offset: 0, 0
   index: 2
 bob
   rotate: false
-  xy: 196, 706
+  xy: 730, 162
   size: 120, 96
   orig: 120, 96
   offset: 0, 0
   index: 3
 bob
   rotate: false
-  xy: 74, 510
+  xy: 730, 64
   size: 120, 96
   orig: 120, 96
   offset: 0, 0
   index: 4
 bob
   rotate: false
-  xy: 196, 608
+  xy: 852, 162
   size: 120, 96
   orig: 120, 96
   offset: 0, 0
   index: 5
 bob
   rotate: false
-  xy: 318, 706
+  xy: 852, 64
   size: 120, 96
   orig: 120, 96
   offset: 0, 0
   index: 6
+firewall
+  rotate: false
+  xy: 911, 508
+  size: 48, 512
+  orig: 48, 512
+  offset: 0, 0
+  index: 1
+firewall
+  rotate: false
+  xy: 911, 508
+  size: 48, 512
+  orig: 48, 512
+  offset: 0, 0
+  index: 5
+firewall
+  rotate: false
+  xy: 961, 508
+  size: 48, 512
+  orig: 48, 512
+  offset: 0, 0
+  index: 2
+firewall
+  rotate: false
+  xy: 961, 508
+  size: 48, 512
+  orig: 48, 512
+  offset: 0, 0
+  index: 4
+lbubble
+  rotate: false
+  xy: 2, 774
+  size: 301, 246
+  orig: 301, 246
+  offset: 0, 0
+  index: 1
+lbubble
+  rotate: false
+  xy: 305, 774
+  size: 301, 246
+  orig: 301, 246
+  offset: 0, 0
+  index: 2
+lbubble
+  rotate: false
+  xy: 608, 774
+  size: 301, 246
+  orig: 301, 246
+  offset: 0, 0
+  index: 3
+lbubble
+  rotate: false
+  xy: 2, 260
+  size: 301, 246
+  orig: 301, 246
+  offset: 0, 0
+  index: 4
+lbubble
+  rotate: false
+  xy: 2, 526
+  size: 301, 246
+  orig: 301, 246
+  offset: 0, 0
+  index: 5
+lbubble
+  rotate: false
+  xy: 2, 12
+  size: 301, 246
+  orig: 301, 246
+  offset: 0, 0
+  index: 6
+lbubble
+  rotate: false
+  xy: 305, 260
+  size: 301, 246
+  orig: 301, 246
+  offset: 0, 0
+  index: 7
+lbubble
+  rotate: false
+  xy: 305, 526
+  size: 301, 246
+  orig: 301, 246
+  offset: 0, 0
+  index: 8
+lbubble
+  rotate: false
+  xy: 305, 12
+  size: 301, 246
+  orig: 301, 246
+  offset: 0, 0
+  index: 9
+lbubble
+  rotate: false
+  xy: 608, 260
+  size: 301, 246
+  orig: 301, 246
+  offset: 0, 0
+  index: 10
+lbubble
+  rotate: false
+  xy: 608, 526
+  size: 301, 246
+  orig: 301, 246
+  offset: 0, 0
+  index: 11
+
+games2.png
+size: 512,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Fireball
+  rotate: false
+  xy: 170, 456
+  size: 129, 60
+  orig: 129, 60
+  offset: 0, 0
+  index: 4
+Fireball
+  rotate: false
+  xy: 142, 198
+  size: 129, 60
+  orig: 129, 60
+  offset: 0, 0
+  index: 5
+Fireball
+  rotate: false
+  xy: 301, 456
+  size: 129, 60
+  orig: 129, 60
+  offset: 0, 0
+  index: 6
+Fireball
+  rotate: false
+  xy: 273, 198
+  size: 129, 60
+  orig: 129, 60
+  offset: 0, 0
+  index: 7
+Fireball
+  rotate: false
+  xy: 368, 136
+  size: 129, 60
+  orig: 129, 60
+  offset: 0, 0
+  index: 8
+Fireball
+  rotate: false
+  xy: 368, 74
+  size: 129, 60
+  orig: 129, 60
+  offset: 0, 0
+  index: 9
 bob
   rotate: false
-  xy: 74, 412
+  xy: 20, 396
   size: 120, 96
   orig: 120, 96
   offset: 0, 0
   index: 7
 bob
   rotate: false
-  xy: 196, 510
+  xy: 170, 910
   size: 120, 96
   orig: 120, 96
   offset: 0, 0
   index: 8
 bob
   rotate: false
-  xy: 318, 608
+  xy: 20, 298
   size: 120, 96
   orig: 120, 96
   offset: 0, 0
   index: 9
 bob
   rotate: false
-  xy: 440, 706
+  xy: 170, 812
   size: 120, 96
   orig: 120, 96
   offset: 0, 0
   index: 10
 bob
   rotate: false
-  xy: 74, 314
+  xy: 292, 910
   size: 120, 96
   orig: 120, 96
   offset: 0, 0
   index: 11
 bob
   rotate: false
-  xy: 196, 412
+  xy: 170, 714
   size: 120, 96
   orig: 120, 96
   offset: 0, 0
   index: 12
 bob
   rotate: false
-  xy: 318, 510
+  xy: 292, 812
   size: 120, 96
   orig: 120, 96
   offset: 0, 0
   index: 13
 bob
   rotate: false
-  xy: 440, 608
+  xy: 170, 616
   size: 120, 96
   orig: 120, 96
   offset: 0, 0
   index: 14
 bob
   rotate: false
-  xy: 562, 706
+  xy: 292, 714
   size: 120, 96
   orig: 120, 96
   offset: 0, 0
   index: 15
 bob
   rotate: false
-  xy: 196, 314
+  xy: 170, 518
   size: 120, 96
   orig: 120, 96
   offset: 0, 0
   index: 16
 bob
   rotate: false
-  xy: 318, 412
+  xy: 292, 616
   size: 120, 96
   orig: 120, 96
   offset: 0, 0
   index: 17
 bob
   rotate: false
-  xy: 440, 510
+  xy: 292, 518
   size: 120, 96
   orig: 120, 96
   offset: 0, 0
   index: 18
 bob
   rotate: false
-  xy: 562, 608
+  xy: 20, 200
   size: 120, 96
   orig: 120, 96
   offset: 0, 0
   index: 19
 bob
   rotate: false
-  xy: 684, 706
+  xy: 2, 102
   size: 120, 96
   orig: 120, 96
   offset: 0, 0
   index: 20
 bob
   rotate: false
-  xy: 318, 314
+  xy: 2, 4
   size: 120, 96
   orig: 120, 96
   offset: 0, 0
   index: 21
 bob
   rotate: false
-  xy: 440, 412
+  xy: 142, 358
   size: 120, 96
   orig: 120, 96
   offset: 0, 0
   index: 22
 bob
   rotate: false
-  xy: 562, 510
+  xy: 142, 260
   size: 120, 96
   orig: 120, 96
   offset: 0, 0
   index: 23
 bob
   rotate: false
-  xy: 684, 608
+  xy: 124, 100
   size: 120, 96
   orig: 120, 96
   offset: 0, 0
   index: 24
 bob
   rotate: false
-  xy: 806, 706
+  xy: 124, 2
   size: 120, 96
   orig: 120, 96
   offset: 0, 0
   index: 25
 bob
   rotate: false
-  xy: 440, 314
+  xy: 264, 358
   size: 120, 96
   orig: 120, 96
   offset: 0, 0
   index: 26
 bob
   rotate: false
-  xy: 562, 412
+  xy: 264, 260
   size: 120, 96
   orig: 120, 96
   offset: 0, 0
   index: 27
 bob
   rotate: false
-  xy: 684, 510
+  xy: 246, 100
   size: 120, 96
   orig: 120, 96
   offset: 0, 0
   index: 28
 bob
   rotate: false
-  xy: 806, 608
+  xy: 246, 2
   size: 120, 96
   orig: 120, 96
   offset: 0, 0
   index: 29
 bob
   rotate: false
-  xy: 562, 314
+  xy: 386, 358
   size: 120, 96
   orig: 120, 96
   offset: 0, 0
   index: 30
 firewall
   rotate: false
-  xy: 20, 302
-  size: 16, 500
-  orig: 16, 500
-  offset: 0, 0
-  index: 1
-firewall
-  rotate: false
-  xy: 38, 302
-  size: 16, 500
-  orig: 16, 500
-  offset: 0, 0
-  index: 2
-firewall
-  rotate: false
-  xy: 56, 302
-  size: 16, 500
-  orig: 16, 500
+  xy: 20, 494
+  size: 48, 512
+  orig: 48, 512
   offset: 0, 0
   index: 3
+firewall
+  rotate: false
+  xy: 70, 494
+  size: 48, 512
+  orig: 48, 512
+  offset: 0, 0
+  index: 6
+firewall
+  rotate: false
+  xy: 70, 494
+  size: 48, 512
+  orig: 48, 512
+  offset: 0, 0
+  index: 8
+firewall
+  rotate: false
+  xy: 120, 494
+  size: 48, 512
+  orig: 48, 512
+  offset: 0, 0
+  index: 7
 goalpole
   rotate: false
-  xy: 2, 2
+  xy: 2, 206
   size: 16, 800
   orig: 16, 800
   offset: 0, 0

@@ -367,6 +367,9 @@ public class GameScreen extends AbstractScreen {
                 bob.moveY(-1, delta);
         }
         if (gameScreenState.isDead) {
+            gameScreenState.totalDeaths += 1;
+            System.out.println(gameScreenState.totalDeaths);
+
             Vector3 touchPos = new Vector3();
             touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             camera.unproject(touchPos);

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "93865340096",
+    "firebase_url": "https://https-githubcom-blakbro2k-dant.firebaseio.com",
+    "project_id": "https-githubcom-blakbro2k-dant",
+    "storage_bucket": "https-githubcom-blakbro2k-dant.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:93865340096:android:b53f443d1a03591a",
+        "android_client_info": {
+          "package_name": "net.asg.games.dante.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "93865340096-aas135g9usid1kk7s92jlpuo74ib5bf5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.asg.games.dante.android",
+            "certificate_hash": "ea1c5a35c1bce9367fb819a28961a072d3db1210"
+          }
+        },
+        {
+          "client_id": "93865340096-g9a49o440u45fmqnlpj054dmmfl6fkhl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAri7T8HVkBWVYmr9j-O3pl8vocWcqG-EM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "93865340096-g9a49o440u45fmqnlpj054dmmfl6fkhl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
