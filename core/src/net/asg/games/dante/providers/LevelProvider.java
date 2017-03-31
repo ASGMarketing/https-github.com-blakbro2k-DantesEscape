@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 
 public class LevelProvider {
+
     private PhaseProvider phase;
 
     public MovingGameObject getNextObject(MovingGameObjectFactory movingGameObjectFactory,

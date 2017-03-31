@@ -5,6 +5,7 @@ package net.asg.games.dante.screens;
 
 import net.asg.games.dante.Constants;
 import net.asg.games.dante.models.MovingGameObjectState;
+import net.asg.games.dante.models.MovingGameObjectType;
 
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
@@ -62,7 +63,7 @@ public class GameScreenState implements Serializable {
 
     public void levelReset() {
         lastStageType = stageType;
-        stageType = 0;
+        stageType = MovingGameObjectType.GoalWall.getValue();
         spawnTime = Constants.STARTING_SPAWNTIME;
         isLevelStarted = false;
         //gameState = LevelState.RUNNING;
@@ -70,10 +71,10 @@ public class GameScreenState implements Serializable {
 
     public void gameReset() {
         levelReset();
+        lastStageType = stageType; //set to goal
         score = 0;
         roundCount = 0;
         isLevelStarted = false;
-        lastStageType = 0;
         lastGameObjTime = 0;
         bobX = -1;
         bobY = -1;
