@@ -1,4 +1,4 @@
-package net.asg.games.dante.state;
+package net.asg.games.dante.states;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;

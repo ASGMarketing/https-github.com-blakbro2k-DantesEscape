@@ -1,10 +1,10 @@
 /**
  *
  */
-package net.asg.games.dante.screens;
+package net.asg.games.dante.states;
 
 import net.asg.games.dante.Constants;
-import net.asg.games.dante.models.MovingGameObjectState;
+import net.asg.games.dante.states.MovingGameObjectState;
 import net.asg.games.dante.models.MovingGameObjectType;
 
 import com.badlogic.gdx.utils.Array;
@@ -30,6 +30,7 @@ public class GameScreenState implements Serializable {
     public int lastStageType;
     public int standardMovingBonus = 1000;
     public int totalDeaths = 0;
+    public int levelGroup = 1;
 
     public boolean isPaused;
     public boolean isLevelStarted;
@@ -66,6 +67,7 @@ public class GameScreenState implements Serializable {
         stageType = MovingGameObjectType.GoalWall.getValue();
         spawnTime = Constants.STARTING_SPAWNTIME;
         isLevelStarted = false;
+        levelGroup++;
         //gameState = LevelState.RUNNING;
     }
 
@@ -80,6 +82,7 @@ public class GameScreenState implements Serializable {
         bobY = -1;
         isDead = false;
         roundEndTime = TimeUtils.millis() + Constants.ROUND_TIME_DURATION;
+        levelGroup = 1;
         //gameState = LevelState.RUNNING;
     }
 
@@ -100,6 +103,8 @@ public class GameScreenState implements Serializable {
         json.writeValue("gameSpeed", gameSpeed);
         json.writeValue("lastGameObjTime", lastGameObjTime);
         json.writeValue("roundEndTime", roundEndTime);
+        json.writeValue("totalDeaths", totalDeaths);
+        json.writeValue("levelGroup", levelGroup);
 
         json.writeArrayStart("movingObjects");
         for (MovingGameObjectState movingObjectState : movingObjectStates) {
@@ -127,6 +132,8 @@ public class GameScreenState implements Serializable {
         gameSpeed = json.readValue("gameSpeed", Long.class, jsonData);
         lastGameObjTime = json.readValue("lastGameObjTime", Long.class, jsonData);
         roundEndTime = json.readValue("roundEndTime", Long.class, jsonData);
+        totalDeaths = json.readValue("totalDeaths", Integer.class, jsonData);
+        levelGroup = json.readValue("levelGroup", Integer.class, jsonData);
 
         movingObjectStates = json.readValue("movingObjects", Array.class,
                 MovingGameObjectState.class, jsonData);
@@ -149,7 +156,8 @@ public class GameScreenState implements Serializable {
                 "gameSpeed: " + gameSpeed + "\n" +
                 "lastGameObjTime: " + lastGameObjTime + "\n" +
                 "roundEndTime: " + roundEndTime + "\n" +
+                "totalDeaths: " + totalDeaths + "\n" +
+                "levelGroup: " + levelGroup + "\n" +
                 "CurrentTime: " + TimeUtils.millis();
     }
-
 }

@@ -26,7 +26,7 @@ public class MovingGameObjectFactory {
         imageProvider.setAnimations(textureRegions, imageProvider, ImageProvider.ObjectType.FIREBALL);
 
         soundProvider.playflameBurstSound();
-        MovingGameObjectState model = new MovingGameObjectState();
+        net.asg.games.dante.states.MovingGameObjectState model = new net.asg.games.dante.states.MovingGameObjectState();
         model.setType(MovingGameObjectType.Fireball);
 
         return new FireBallMovingGameObject(imageProvider, textureRegions, soundProvider,
@@ -34,43 +34,57 @@ public class MovingGameObjectFactory {
                 isHitboxActive, model, Constants.FIREBALL_HITBOX);
     }
 
-    public FireWallMovingGameObject getFireWall() {
+    public RockWallMovingGameObject getRockWall() {
         TextureRegion[] textureRegions = new TextureRegion[Constants.FIREWALL_TOTAL_ANIMATION_FRAMES];
 
         imageProvider.setAnimations(textureRegions, imageProvider, ImageProvider.ObjectType.FIREWALL);
 
         soundProvider.playfirewooshSound();
-        MovingGameObjectState model = new MovingGameObjectState();
-        model.setType(MovingGameObjectType.FireWall);
+        net.asg.games.dante.states.MovingGameObjectState model = new net.asg.games.dante.states.MovingGameObjectState();
+        model.setType(MovingGameObjectType.RockWall);
 
-        return new FireWallMovingGameObject(imageProvider, textureRegions, soundProvider,
+        return new RockWallMovingGameObject(imageProvider, textureRegions, soundProvider,
                 textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight(),
-                isHitboxActive, model, Constants.FIREWALL_HITBOX);
+                isHitboxActive, model, Constants.ROCKWALL_HITBOX);
     }
 
-    public DynamicFireWallMovingGameObject getDynamicFireWall() {
+    public FireWallMovingGameObject getFireWall() {
         TextureRegion[] textureRegions = new TextureRegion[Constants.DYNAMIC_FIREWALL_TOTAL_ANIMATION_FRAMES];
 
         imageProvider.setAnimations(textureRegions, imageProvider, ImageProvider.ObjectType.FIREWALL);
 
         soundProvider.playfirewooshSound();
-        MovingGameObjectState model = new MovingGameObjectState();
-        model.setType(MovingGameObjectType.DynamicWall);
+        net.asg.games.dante.states.MovingGameObjectState model = new net.asg.games.dante.states.MovingGameObjectState();
+        model.setType(MovingGameObjectType.LavaWall);
 
-        return new DynamicFireWallMovingGameObject(imageProvider, textureRegions, soundProvider,
+        return new FireWallMovingGameObject(imageProvider, textureRegions, soundProvider,
                 textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight(),
-                isHitboxActive, model, Constants.FIREWALL_HITBOX);
+                isHitboxActive, model, Constants.ROCKWALL_HITBOX);
     }
 
     public GoalMovingGameObject getGoal() {
         TextureRegion[] textureRegions = new TextureRegion[1];
         textureRegions[0] = imageProvider.getGoal();
 
-        MovingGameObjectState model = new MovingGameObjectState();
+        net.asg.games.dante.states.MovingGameObjectState model = new net.asg.games.dante.states.MovingGameObjectState();
         model.setType(MovingGameObjectType.GoalWall);
 
         return new GoalMovingGameObject(imageProvider, textureRegions, soundProvider,
                 textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight(),
                 isHitboxActive, model, Constants.GOAL_HITBOX);
+    }
+
+    public SlidingRockWallMovingGameObject getSlidingRockWall() {
+        TextureRegion[] textureRegions = new TextureRegion[Constants.FIREWALL_TOTAL_ANIMATION_FRAMES];
+
+        imageProvider.setAnimations(textureRegions, imageProvider, ImageProvider.ObjectType.FIREWALL);
+
+        soundProvider.playfirewooshSound();
+        net.asg.games.dante.states.MovingGameObjectState model = new net.asg.games.dante.states.MovingGameObjectState();
+        model.setType(MovingGameObjectType.SlidingRockWall);
+
+        return new SlidingRockWallMovingGameObject(imageProvider, textureRegions, soundProvider,
+                textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight(),
+                isHitboxActive, model, Constants.ROCKWALL_HITBOX);
     }
 }

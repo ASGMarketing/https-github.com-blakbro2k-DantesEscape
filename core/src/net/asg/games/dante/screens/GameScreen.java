@@ -10,7 +10,7 @@ import net.asg.games.dante.models.Button;
 import net.asg.games.dante.models.GameOverMessage;
 import net.asg.games.dante.models.MovingGameObject;
 import net.asg.games.dante.models.MovingGameObjectFactory;
-import net.asg.games.dante.models.MovingGameObjectState;
+import net.asg.games.dante.states.*;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -61,7 +61,7 @@ public class GameScreen extends AbstractScreen {
 
     private LevelProvider levelProvider;
 
-    private GameScreenState gameScreenState;
+    private net.asg.games.dante.states.GameScreenState gameScreenState;
 
     private String scoreName;
 
@@ -71,11 +71,11 @@ public class GameScreen extends AbstractScreen {
 
     private GameOverMessage gameOverMessage;
 
-    public GameScreen(DantesEscapeGame game, GameScreenState state) {
+    public GameScreen(DantesEscapeGame game, net.asg.games.dante.states.GameScreenState state) {
         if (state != null) {
             gameScreenState = state;
         } else {
-            gameScreenState = new GameScreenState();
+            gameScreenState = new net.asg.games.dante.states.GameScreenState();
         }
         game.startGame(gameScreenState);
         this.game = game;
@@ -368,7 +368,7 @@ public class GameScreen extends AbstractScreen {
         }
         if (gameScreenState.isDead) {
             gameScreenState.totalDeaths += 1;
-            System.out.println(gameScreenState.totalDeaths);
+            levelProvider.flushPhases();
 
             Vector3 touchPos = new Vector3();
             touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);

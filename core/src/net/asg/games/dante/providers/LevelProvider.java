@@ -1,16 +1,12 @@
 package net.asg.games.dante.providers;
 
+import com.badlogic.gdx.utils.TimeUtils;
+
 import net.asg.games.dante.Constants;
-import net.asg.games.dante.screens.GameScreenState;
-import net.asg.games.dante.screens.GameScreenState.LevelState;
-import net.asg.games.dante.models.FireBallMovingGameObject;
-import net.asg.games.dante.models.FireWallMovingGameObject;
 import net.asg.games.dante.models.MovingGameObject;
 import net.asg.games.dante.models.MovingGameObjectFactory;
-
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.TimeUtils;
+import net.asg.games.dante.states.GameScreenState;
+import net.asg.games.dante.states.GameScreenState.LevelState;
 
 public class LevelProvider {
 
@@ -26,48 +22,38 @@ public class LevelProvider {
         }
 
         switch (st.stageType) {
-            case 0:  //is Goal Level
+            case 3:  //is Goal Level
                 st.lastGameObjTime = TimeUtils.millis();
                 mObj = movingGameObjectFactory.getGoal();
                 break;
-            case 1:  //is Fireball Level
+            case 0:  //is Fireball Level
                 st.lastGameObjTime = TimeUtils.millis();
                 mObj = movingGameObjectFactory.getFireball();
                 st.spawnTime = Constants.FIREBALL_SPAWN_TIME;
                 break;
             case 2:  //is Lava wall Level
                 st.lastGameObjTime = TimeUtils.millis();
-                mObj = movingGameObjectFactory.getDynamicFireWall();
+                mObj = movingGameObjectFactory.getFireWall();
                 st.spawnTime = Constants.DYNAMIC_FIREWALL_SPAWN_TIME;
                 // mObj.setMoveSpeed(100);
                 break;
-            case 3:  //is Ground wall Level
+            case 1:  //is Rock wall Level
                 st.lastGameObjTime = TimeUtils.millis();
                 st.spawnTime = Constants.FIREWALL_SPAWN_TIME;
-                mObj = movingGameObjectFactory.getFireWall();
+                mObj = movingGameObjectFactory.getRockWall();
                 break;
-            case 4:  //is Missle Level
+            case 4:  //is Sliding Rock Level
                 st.lastGameObjTime = TimeUtils.millis();
                 st.spawnTime = Constants.FIREWALL_SPAWN_TIME;
-                mObj = movingGameObjectFactory.getFireWall();
+                mObj = movingGameObjectFactory.getSlidingRockWall();
                 break;
-        }
-
-        return processLevelDesign(mObj, st);
-    }
-
-    public MovingGameObject processLevelDesign(MovingGameObject mObj, GameScreenState st) {
-        if (mObj instanceof FireWallMovingGameObject) {
-            if (st.roundCount > 2 && (MathUtils.random(0, 2) == 1))
-                ((FireWallMovingGameObject) mObj).isMobile = true;
-        }
-
-        if (mObj instanceof FireBallMovingGameObject) {
-            if (st.roundCount > 6)
-                mObj.setAnimationSpeed(500);
         }
 
         return mObj;
+    }
+
+    public void flushPhases(){
+        phase.flush();
     }
 
     public void doLevelTransition(LevelState state, GameScreenState st) {
@@ -79,15 +65,6 @@ public class LevelProvider {
                 break;
             case GOALHIT:
                 if (!st.isLevelStarted) {
-
-                    Array<Integer> temp = new Array<Integer>();
-                    for (int x = 1; x < 4; x++) {
-                        if (x != st.lastStageType) {
-                            temp.add(x);
-                        }
-                    }
-
-                    //TODO: Chose next stage type base off of phase
                     if(phase == null){
                         phase = new PhaseProvider();
                     }
@@ -96,9 +73,7 @@ public class LevelProvider {
                         phase.buildPhase(st);
                     }
 
-                    //st.stageType = temp.get(MathUtils.random(0, temp.size - 1));
                     st.stageType = phase.nextStage();
-
                     st.roundEndTime = TimeUtils.millis() + Constants.ROUND_TIME_DURATION;
                     st.roundCount++;
                     st.isLevelStarted = true;

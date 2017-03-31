@@ -14,7 +14,7 @@ public class FireBallMovingGameObject extends MovingGameObject {
 
     public FireBallMovingGameObject(ImageProvider imageProvider,
                                     TextureRegion[] textureRegions, SoundProvider soundProvider, int width, int height,
-                                    boolean isHitboxActive, MovingGameObjectState state, int[] hitBoxConfig) {
+                                    boolean isHitboxActive, net.asg.games.dante.states.MovingGameObjectState state, int[] hitBoxConfig) {
         super(imageProvider, textureRegions, soundProvider, width, height, isHitboxActive, state, hitBoxConfig);
         this.setMoveSpeed(Constants.FIREBALL_SPEED);
 

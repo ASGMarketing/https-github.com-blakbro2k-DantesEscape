@@ -18,7 +18,7 @@ package net.asg.games.dante.models;
 
 import net.asg.games.dante.Constants;
 import net.asg.games.dante.providers.ImageProvider;
-import net.asg.games.dante.screens.GameScreenState.LevelState;
+import net.asg.games.dante.states.GameScreenState.LevelState;
 import net.asg.games.dante.providers.SoundProvider;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -63,7 +63,7 @@ public class MovingGameObject {
 
     protected boolean isSoundTriggered = false;
 
-    protected MovingGameObjectState state;
+    protected net.asg.games.dante.states.MovingGameObjectState state;
 
     protected int offSetX;
 
@@ -71,7 +71,7 @@ public class MovingGameObject {
 
     public MovingGameObject(ImageProvider imageProvider,
                             TextureRegion[] textureRegions, SoundProvider soundProvider,
-                            int width, int height, boolean isHitboxActive, MovingGameObjectState state,
+                            int width, int height, boolean isHitboxActive, net.asg.games.dante.states.MovingGameObjectState state,
                             int[] hitBoxConfig) {
 
         this.imageProvider = imageProvider;
@@ -185,7 +185,7 @@ public class MovingGameObject {
             rect.height = this.height;
         }
     }
-    public MovingGameObjectState getState() {
+    public net.asg.games.dante.states.MovingGameObjectState getState() {
         return state;
     }
 }

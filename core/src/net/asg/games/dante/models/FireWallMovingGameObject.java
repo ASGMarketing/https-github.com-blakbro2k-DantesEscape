@@ -1,38 +1,31 @@
 package net.asg.games.dante.models;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
+
 import net.asg.games.dante.Constants;
 import net.asg.games.dante.providers.ImageProvider;
 import net.asg.games.dante.providers.SoundProvider;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Rectangle;
-
-public class FireWallMovingGameObject extends MovingGameObject {
-    protected Rectangle lowerWall;
-    protected Rectangle lowerHitboxBounds;
-
-    protected int position;
-    private int holeSize;
-    public boolean isMobile = false;
-    private int isMovingDown = 0;
-    protected int moveSpeed = Constants.WALL_OBJECT_MOVE_SPEED;
+public class FireWallMovingGameObject extends RockWallMovingGameObject {
+    private boolean isClosingType;
 
     public FireWallMovingGameObject(ImageProvider imageProvider,
                                     TextureRegion[] textureRegions, SoundProvider soundProvider,
-                                    int width, int height, boolean isHitboxActive, MovingGameObjectState state,
+                                    int width, int height, boolean isHitboxActive, net.asg.games.dante.states.MovingGameObjectState state,
                                     int[] hitBoxConfig) {
         super(imageProvider, textureRegions, soundProvider, width, height,
                 isHitboxActive, state, hitBoxConfig);
 
+        isClosingType = MathUtils.random(0, 1) == 0;
+
+        //isClosingType = true;
+        position = MathUtils.random(1, 4) * 50;
+
         //this.rect = new Rectangle();
         this.rect.width = width;
         this.rect.height = height;
-
-        position = MathUtils.random(0, 6) * 50;
-        holeSize = Constants.MEDIUM_WALL_GAP_SIZE;
 
         this.lowerWall = new Rectangle();
         this.lowerWall.width = width;
@@ -42,36 +35,24 @@ public class FireWallMovingGameObject extends MovingGameObject {
         this.rect.y = Constants.WALL_BASE_OFFSET - position;
 
         this.lowerWall.x = this.imageProvider.getScreenWidth();
-        this.lowerWall.y = Constants.WALL_BASE_OFFSET - rect.height - holeSize - position;
+        this.lowerWall.y = Constants.WALL_BASE_OFFSET - rect.height - position;
 
-        lowerHitboxBounds = new Rectangle();
-
+        //this.setAnimationSpeed(0.2f);
         setRectSize(lowerHitboxBounds, hitBoxConfig);
         setHitboxBounds(rect);
         setLowerHitboxBounds(lowerWall);
-
-        this.setAnimationSpeed(0.1f);
+        setWallAsClosingType(isClosingType);
+        this.setAnimationSpeed(0.11f);
     }
 
-    public void draw(SpriteBatch batch) {
-        batch.draw(textureRegions[frame], rect.x, rect.y,rect.width,rect.height);
-        batch.draw(textureRegions[frame], lowerWall.x, lowerWall.y);
+    public void setWallAsClosingType(boolean wallType) {
+        this.isClosingType = wallType;
+        if (isClosingType) {
+            this.rect.y = imageProvider.getScreenHeight() - position;
+            this.lowerWall.y = 0 - height - position;
+        }
     }
 
-    public void drawDebug(ShapeRenderer debugRenderer) {
-        debugRenderer.rect(rect.x, rect.y, rect.width, rect.height);
-        debugRenderer.rect(lowerWall.x, lowerWall.y, lowerWall.width, lowerWall.height);
-    }
-
-    public void drawHitbox(ShapeRenderer debugRenderer) {
-        debugRenderer.rect(hitboxBounds.x, hitboxBounds.y, hitboxBounds.width, hitboxBounds.height);
-        debugRenderer.rect(lowerHitboxBounds.x, lowerHitboxBounds.y, lowerHitboxBounds.width, lowerHitboxBounds.height);
-   }
-
-    public void setLowerHitboxBounds(Rectangle rect){
-        lowerHitboxBounds.x = lowerWall.x + offSetX;
-        lowerHitboxBounds.y = lowerWall.y + offSetY;
-    }
 
     public void moveLeft(float delta, float speedBonus) {
         rect.x -= moveSpeed * delta * speedBonus;
@@ -79,25 +60,20 @@ public class FireWallMovingGameObject extends MovingGameObject {
         setHitboxBounds(rect);
         setLowerHitboxBounds(lowerWall);
 
-        if (isMobile) {
-            switch (isMovingDown) {
-                case 0:
-                    rect.y += Constants.WALL_GAP_SPEED * delta;
-                    lowerWall.y += Constants.WALL_GAP_SPEED * delta;
-                    if (rect.y + 50 > this.imageProvider.getScreenHeight())
-                        isMovingDown = 1;
-                    break;
-                case 1:
-                    rect.y -= Constants.WALL_GAP_SPEED * delta;
-                    lowerWall.y -= Constants.WALL_GAP_SPEED * delta;
-                    if (lowerWall.y + lowerWall.height - 50 < 0)
-                        isMovingDown = 0;
-                    break;
+        if (!isClosingType) {
+            lowerWall.y -= Constants.WALL_GAP_SPEED * delta;
+            rect.y += Constants.WALL_GAP_SPEED * delta;
+            if (rect.y < imageProvider.getScreenHeight()
+                    || lowerWall.y + lowerWall.height > 0) {
+                soundProvider.playBuzzSound();
             }
-            state.setPosX((int) rect.x);
-            state.setPosY((int) rect.y);
+        } else {
+            if (rect.y > lowerWall.y + lowerWall.height) {
+                lowerWall.y += Constants.WALL_GAP_SPEED * delta;
+                rect.y -= Constants.WALL_GAP_SPEED * delta;
+                soundProvider.playBuzzSound();
+            }
         }
-
         // state.setPosY((int) rect.y);
         time += delta;
         if (time > animationPeriod) {
@@ -107,9 +83,5 @@ public class FireWallMovingGameObject extends MovingGameObject {
                 frame = 0;
             }
         }
-    }
-
-    public boolean isOverlapping(Rectangle otherRect) {
-        return hitboxBounds.overlaps(otherRect) || lowerHitboxBounds.overlaps(otherRect);
     }
 }

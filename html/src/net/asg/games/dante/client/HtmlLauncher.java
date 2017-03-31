@@ -16,6 +16,6 @@ public class HtmlLauncher extends GwtApplication {
 
         @Override
         public ApplicationListener getApplicationListener () {
-                return new DantesEscapeGame();
+                return new DantesEscapeGame(Constants.DEBUG);
         }
 }

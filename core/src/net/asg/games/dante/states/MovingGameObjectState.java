@@ -1,9 +1,11 @@
-package net.asg.games.dante.models;
+package net.asg.games.dante.states;
 
 
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.Json.Serializable;
 import com.badlogic.gdx.utils.JsonValue;
+
+import net.asg.games.dante.models.MovingGameObjectType;
 
 
 public class MovingGameObjectState implements Serializable {

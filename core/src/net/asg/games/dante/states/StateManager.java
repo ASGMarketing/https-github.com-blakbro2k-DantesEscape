@@ -1,8 +1,7 @@
-package net.asg.games.dante;
+package net.asg.games.dante.states;
 
 
-import net.asg.games.dante.models.GameLevelState;
-import net.asg.games.dante.screens.GameScreenState;
+import net.asg.games.dante.Constants;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
