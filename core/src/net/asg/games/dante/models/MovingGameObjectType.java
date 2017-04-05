@@ -3,18 +3,21 @@
  */
 package net.asg.games.dante.models;
 
+import net.asg.games.dante.providers.LevelProvider;
+
 /**
  * @author Blakbro2k
  */
 public enum MovingGameObjectType {
-    Fireball(0),
-    RockWall(1),
-    LavaWall(2),
-    GoalWall(3),
-    SlidingRockWall(4),
-    Missle(5),
-    FastRockWall(6),
-    FastLavaWall(7);
+    Fireball(LevelProvider.FIREBALL_LEVEL_VALUE),
+    RockWall(LevelProvider.ROCK_LEVEL_VALUE),
+    LavaWall(LevelProvider.LAVA_LEVEL_VALUE),
+    GoalWall(LevelProvider.GOAL_LEVEL_VALUE),
+    SlidingRockWall(LevelProvider.SLIDE_ROCK_LEVEL_VALUE),
+    Missile(LevelProvider.MISSILE_LEVEL_VALUE),
+    FastRockWall(LevelProvider.FAST_ROCK_LEVEL_VALUE),
+    FastLavaWall(LevelProvider.FAST_LAVA_LEVEL_VALUE),
+    EasyRockWall(LevelProvider.EASY_ROCK_LEVEL_VALUE);
 
     protected final int value;
 
@@ -28,22 +31,24 @@ public enum MovingGameObjectType {
 
     public static MovingGameObjectType fromValue(int value) {
         switch (value) {
-            case 0:
+            case LevelProvider.FIREBALL_LEVEL_VALUE:
                 return Fireball;
-            case 1:
+            case LevelProvider.ROCK_LEVEL_VALUE:
                 return RockWall;
-            case 2:
+            case LevelProvider.LAVA_LEVEL_VALUE:
                 return LavaWall;
-            case 3:
+            case LevelProvider.GOAL_LEVEL_VALUE:
                 return GoalWall;
-            case 4:
+            case LevelProvider.SLIDE_ROCK_LEVEL_VALUE:
                 return SlidingRockWall;
-            case 5:
-                return Missle;
-            case 6:
+            case LevelProvider.MISSILE_LEVEL_VALUE:
+                return Missile;
+            case LevelProvider.FAST_ROCK_LEVEL_VALUE:
                 return FastRockWall;
-            case 7:
+            case LevelProvider.FAST_LAVA_LEVEL_VALUE:
                 return FastLavaWall;
+            case LevelProvider.EASY_ROCK_LEVEL_VALUE:
+                return EasyRockWall;
         }
         throw new ArrayIndexOutOfBoundsException("invalid MovingObjectType in MovingObject class: " + value);
     }

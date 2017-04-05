@@ -1,5 +1,6 @@
 package net.asg.games.dante.providers;
 
+import net.asg.games.dante.models.MovingGameObjectType;
 import net.asg.games.dante.states.GameScreenState;
 
 import java.util.Stack;
@@ -13,15 +14,17 @@ public class PhaseProvider{
     private boolean feedLevels = false;
 
     public PhaseProvider(){
-        phases = new Stack();
+        phases = new Stack<Integer>();
     }
 
     public PhaseProvider(boolean feedLevels){
-        phases = new Stack();
+        phases = new Stack<Integer>();
         this.feedLevels = feedLevels;
     }
 
     public void buildPhase(GameScreenState gameScreenState){
+        gameScreenState.levelGroup++;
+
         //increase LevelGroup since we are building phases
         //build levels backwards base on current level group
         //logic parser
@@ -39,26 +42,42 @@ public class PhaseProvider{
         LG: 6 | 4 Phases   |   rockwall, fireballs, sliding walls, lava walls, missles
         LG: 7 | 4 Phases   |   rockwall, firewalls, sliding walls, lava walls, missles, circular object
          */
-        switch(gameScreenState.levelGroup){
-            case 1:
-                phases.push(1);
-                break;
-            case 2:
-                phases.push(0);
-                phases.push(1);
-                break;
-            case 3:
-                phaseRandomizer(0,1,4);
-                break;
-            case 4:
-                phaseRandomizer(0,1,4,2);
-                break;
-            case 5:
-            case 6:
-            case 7:
-            default:
-                phaseRandomizer(0,1,4,2);
-                break;
+System.out.println(gameScreenState.levelGroup);
+        if(!feedLevels) {
+            switch (gameScreenState.levelGroup) {
+                case 1:
+                    phases.push(MovingGameObjectType.EasyRockWall.getValue());
+                    break;
+                case 2:
+                    phases.push(MovingGameObjectType.RockWall.getValue());
+                    phases.push(MovingGameObjectType.Fireball.getValue());
+                    break;
+                case 3:
+                    phaseRandomizer(-1,
+                            MovingGameObjectType.Fireball.getValue(),
+                            MovingGameObjectType.RockWall.getValue());
+                    phases.push(MovingGameObjectType.SlidingRockWall.getValue());
+                    break;
+                case 4:
+                    phaseRandomizer(-1,
+                            MovingGameObjectType.Fireball.getValue(),
+                            MovingGameObjectType.RockWall.getValue(),
+                            MovingGameObjectType.SlidingRockWall.getValue());
+                    phases.push(MovingGameObjectType.LavaWall.getValue());
+                    break;
+                case 5:
+                case 6:
+                case 7:
+                default:
+                    phaseRandomizer(-1,
+                            MovingGameObjectType.Fireball.getValue(),
+                            MovingGameObjectType.RockWall.getValue(),
+                            MovingGameObjectType.SlidingRockWall.getValue(),
+                            MovingGameObjectType.LavaWall.getValue());
+                    break;
+            }
+        } else {
+            throw new UnsupportedOperationException("Feeding levels is not supported");
         }
     }
 
@@ -77,7 +96,7 @@ public class PhaseProvider{
         phases.removeAllElements();
     }
 
-    public void phaseRandomizer(int... phaseType){
+    public void phaseRandomizer(int max, int... phaseType){
         if(phaseType.length < 0){
             throw new UnsupportedOperationException("PhaseType cannot be less than 0");
         }
@@ -93,6 +112,15 @@ public class PhaseProvider{
             phaseType[randomIndex] = temporaryValue;
         }
 
-        for(int i = 0; i < phaseType.length; i++) phases.push(phaseType[i]);
+        int maxIndex;
+        if(max > 0 && max < phaseType.length){
+            maxIndex = max;
+        } else {
+            maxIndex = phaseType.length;
+        }
+
+        for(int i = 0; i < maxIndex; i++){
+            phases.push(phaseType[i]);
+        }
     }
 }

@@ -30,7 +30,7 @@ public class GameScreenState implements Serializable {
     public int lastStageType;
     public int standardMovingBonus = 1000;
     public int totalDeaths = 0;
-    public int levelGroup = 1;
+    public int levelGroup = 0;
 
     public boolean isPaused;
     public boolean isLevelStarted;
@@ -67,7 +67,6 @@ public class GameScreenState implements Serializable {
         stageType = MovingGameObjectType.GoalWall.getValue();
         spawnTime = Constants.STARTING_SPAWNTIME;
         isLevelStarted = false;
-        levelGroup++;
         //gameState = LevelState.RUNNING;
     }
 
@@ -81,9 +80,13 @@ public class GameScreenState implements Serializable {
         bobX = -1;
         bobY = -1;
         isDead = false;
-        roundEndTime = TimeUtils.millis() + Constants.ROUND_TIME_DURATION;
-        levelGroup = 1;
+        roundEndTime = getRoundEndTime(Constants.ROUND_TIME_DURATION);
+        levelGroup = 0;
         //gameState = LevelState.RUNNING;
+    }
+
+    public long getRoundEndTime(long duration){
+        return TimeUtils.millis() + duration;
     }
 
     @Override
@@ -111,7 +114,6 @@ public class GameScreenState implements Serializable {
             json.writeValue(movingObjectState, MovingGameObjectState.class);
         }
         json.writeArrayEnd();
-
     }
 
     @SuppressWarnings("unchecked")

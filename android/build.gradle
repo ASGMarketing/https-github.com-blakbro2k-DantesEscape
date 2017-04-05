@@ -135,4 +135,6 @@ idea {
     }
 }
 dependencies {
+    compile 'com.google.firebase:firebase-ads:10.0.1'
 }
+apply plugin: 'com.google.gms.google-services'

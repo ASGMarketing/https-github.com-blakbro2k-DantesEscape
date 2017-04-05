@@ -10,7 +10,9 @@ import net.asg.games.dante.models.Button;
 import net.asg.games.dante.models.GameOverMessage;
 import net.asg.games.dante.models.MovingGameObject;
 import net.asg.games.dante.models.MovingGameObjectFactory;
-import net.asg.games.dante.states.*;
+import net.asg.games.dante.states.MovingGameObjectState;
+import net.asg.games.dante.states.GameScreenState;
+
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -61,7 +63,7 @@ public class GameScreen extends AbstractScreen {
 
     private LevelProvider levelProvider;
 
-    private net.asg.games.dante.states.GameScreenState gameScreenState;
+    private GameScreenState gameScreenState;
 
     private String scoreName;
 
@@ -71,17 +73,18 @@ public class GameScreen extends AbstractScreen {
 
     private GameOverMessage gameOverMessage;
 
-    public GameScreen(DantesEscapeGame game, net.asg.games.dante.states.GameScreenState state) {
+    public GameScreen(DantesEscapeGame game, GameScreenState state) {
         if (state != null) {
             gameScreenState = state;
         } else {
-            gameScreenState = new net.asg.games.dante.states.GameScreenState();
+            gameScreenState = new GameScreenState();
         }
         game.startGame(gameScreenState);
         this.game = game;
     }
 
     public void show() {
+        System.out.println("Called show()");
         imageProvider = game.getImageProvider();
         soundProvider = game.getSoundProvider();
         soundProvider.setSound(true);
@@ -98,12 +101,7 @@ public class GameScreen extends AbstractScreen {
 
         batch = new SpriteBatch();
 
-        movingGameObjectFactory = new MovingGameObjectFactory(imageProvider,
-                soundProvider);
-
-        //TextureRegion bobRegion = imageProvider.getBob(1);
-        //Gdx.app.log("Bob", "" + bobRegion);
-        //Gdx.app.log(this.toString(), "" + bobRegion);
+        movingGameObjectFactory = new MovingGameObjectFactory(imageProvider, soundProvider);
 
         TextureRegion bobTexture = imageProvider.getBob(1);
 
@@ -172,11 +170,7 @@ public class GameScreen extends AbstractScreen {
 
         imageProvider.getDefaultFont().draw(batch, scoreName, 10, imageProvider.getScreenHeight() - 15);
 
-        // Draw Bob on screen
-        //Gdx.app.log("isBobNull", "" + bob.getBobFrame(delta));
-       // if(bob.getBobFrame(delta) != null) {
-            batch.draw(bob.getBobFrame(delta,gameScreenState.gameSpeed*80000), bob.getPosition().x, bob.getPosition().y);
-        //}
+        batch.draw(bob.getBobFrame(delta,gameScreenState.gameSpeed), bob.getPosition().x, bob.getPosition().y);
 
         for (MovingGameObject movingObject : movingObjects) {
             movingObject.draw(batch);

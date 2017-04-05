@@ -1,6 +1,5 @@
 package net.asg.games.dante;
 
-import net.asg.games.dante.states.StateManager.StateBundle;
 import net.asg.games.dante.providers.ImageProvider;
 import net.asg.games.dante.screens.GameScreen;
 import net.asg.games.dante.states.GameScreenState;
@@ -8,6 +7,8 @@ import net.asg.games.dante.providers.SoundProvider;
 import net.asg.games.dante.screens.MainMenuScreen;
 import net.asg.games.dante.screens.SettingsScreen;
 import net.asg.games.dante.screens.SplashScreen;
+import net.asg.games.dante.states.StateManager;
+import net.asg.games.dante.states.StateManager.StateBundle;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -26,7 +27,7 @@ public class DantesEscapeGame extends Game {
     //private GameState gameState;
     //private TextResources textResources;
     public boolean isDebugOn = false;
-    private net.asg.games.dante.states.StateManager stateManager;
+    private StateManager stateManager;
     private FPSLogger fpsLog;
 
     public ActionResolver actionResolver;
@@ -49,7 +50,7 @@ public class DantesEscapeGame extends Game {
         fpsLog = new FPSLogger();
         fpsLog.log();
 
-        stateManager = new net.asg.games.dante.states.StateManager();
+        stateManager = new StateManager();
 
         gameScreen = new GameScreen(this, null);
         settingsMenuScreen = new SettingsScreen(this);

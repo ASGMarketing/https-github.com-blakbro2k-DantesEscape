@@ -5,50 +5,67 @@ import com.badlogic.gdx.utils.TimeUtils;
 import net.asg.games.dante.Constants;
 import net.asg.games.dante.models.MovingGameObject;
 import net.asg.games.dante.models.MovingGameObjectFactory;
+import net.asg.games.dante.models.MovingGameObjectType;
+import net.asg.games.dante.models.RockWallMovingGameObject;
 import net.asg.games.dante.states.GameScreenState;
 import net.asg.games.dante.states.GameScreenState.LevelState;
 
 public class LevelProvider {
+    public static final int FIREBALL_LEVEL_VALUE = 0;
+    public static final int ROCK_LEVEL_VALUE = 1;
+    public static final int LAVA_LEVEL_VALUE = 2;
+    public static final int GOAL_LEVEL_VALUE = 3;
+    public static final int SLIDE_ROCK_LEVEL_VALUE = 4;
+    public static final int EASY_ROCK_LEVEL_VALUE = 5;
+    public static final int FAST_ROCK_LEVEL_VALUE = 6;
+    public static final int FAST_LAVA_LEVEL_VALUE = 7;
+    public static final int MISSILE_LEVEL_VALUE = 8;
 
     private PhaseProvider phase;
 
     public MovingGameObject getNextObject(MovingGameObjectFactory movingGameObjectFactory,
                                           GameScreenState st) {
 
-        MovingGameObject mObj = null;
+        MovingGameObject mObj;
 
         if (TimeUtils.millis() > st.roundEndTime && !st.isPaused && !st.isDead) {
             st.levelReset();
         }
 
         switch (st.stageType) {
-            case 3:  //is Goal Level
+            case GOAL_LEVEL_VALUE:
                 st.lastGameObjTime = TimeUtils.millis();
                 mObj = movingGameObjectFactory.getGoal();
                 break;
-            case 0:  //is Fireball Level
+            case FIREBALL_LEVEL_VALUE:
                 st.lastGameObjTime = TimeUtils.millis();
                 mObj = movingGameObjectFactory.getFireball();
                 st.spawnTime = Constants.FIREBALL_SPAWN_TIME;
                 break;
-            case 2:  //is Lava wall Level
+            case LAVA_LEVEL_VALUE:
                 st.lastGameObjTime = TimeUtils.millis();
                 mObj = movingGameObjectFactory.getFireWall();
                 st.spawnTime = Constants.DYNAMIC_FIREWALL_SPAWN_TIME;
                 // mObj.setMoveSpeed(100);
                 break;
-            case 1:  //is Rock wall Level
+            case ROCK_LEVEL_VALUE:  //is Rock wall Level
                 st.lastGameObjTime = TimeUtils.millis();
                 st.spawnTime = Constants.FIREWALL_SPAWN_TIME;
-                mObj = movingGameObjectFactory.getRockWall();
+                mObj = movingGameObjectFactory.getRandomNormalRockWall();
                 break;
-            case 4:  //is Sliding Rock Level
+            case SLIDE_ROCK_LEVEL_VALUE:  //is Sliding Rock Level
                 st.lastGameObjTime = TimeUtils.millis();
                 st.spawnTime = Constants.FIREWALL_SPAWN_TIME;
-                mObj = movingGameObjectFactory.getSlidingRockWall();
+                mObj = movingGameObjectFactory.getRandomEasyMediumSlidingWall();
                 break;
+            case EASY_ROCK_LEVEL_VALUE:  //is Easy Rock Level
+                st.lastGameObjTime = TimeUtils.millis();
+                st.spawnTime = Constants.FIREWALL_SPAWN_TIME;
+                mObj = movingGameObjectFactory.getRandomEasyRockWall();
+                break;
+            default:
+                throw new RuntimeException("This level type does not exist " + st.stageType);
         }
-
         return mObj;
     }
 
@@ -74,7 +91,8 @@ public class LevelProvider {
                     }
 
                     st.stageType = phase.nextStage();
-                    st.roundEndTime = TimeUtils.millis() + Constants.ROUND_TIME_DURATION;
+
+                    st.roundEndTime = st.getRoundEndTime(Constants.ROUND_TIME_DURATION);
                     st.roundCount++;
                     st.isLevelStarted = true;
                 }
@@ -85,4 +103,11 @@ public class LevelProvider {
                 break;
         }
     }
+
+    //private long getRoundEndTime(int stageType){
+        //int[] easyStages = {8,9};
+        //MovingGameObjectType.EasyRockWall.getValue()
+        //if(easyStages.)
+        //st.setRoundEndTime(Constants.ROUND_TIME_DURATION);
+    //}
 }

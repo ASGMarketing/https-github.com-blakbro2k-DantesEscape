@@ -14,9 +14,9 @@ public class FireWallMovingGameObject extends RockWallMovingGameObject {
     public FireWallMovingGameObject(ImageProvider imageProvider,
                                     TextureRegion[] textureRegions, SoundProvider soundProvider,
                                     int width, int height, boolean isHitboxActive, net.asg.games.dante.states.MovingGameObjectState state,
-                                    int[] hitBoxConfig) {
+                                    int[] hitBoxConfig, int position, int holeSize) {
         super(imageProvider, textureRegions, soundProvider, width, height,
-                isHitboxActive, state, hitBoxConfig);
+                isHitboxActive, state, hitBoxConfig, position, holeSize);
 
         isClosingType = MathUtils.random(0, 1) == 0;
 
@@ -32,10 +32,10 @@ public class FireWallMovingGameObject extends RockWallMovingGameObject {
         this.lowerWall.height = height;
 
         this.rect.x = this.imageProvider.getScreenWidth();
-        this.rect.y = Constants.WALL_BASE_OFFSET - position;
+        this.rect.y = WALL_BASE_OFFSET - position;
 
         this.lowerWall.x = this.imageProvider.getScreenWidth();
-        this.lowerWall.y = Constants.WALL_BASE_OFFSET - rect.height - position;
+        this.lowerWall.y = WALL_BASE_OFFSET - rect.height - position;
 
         //this.setAnimationSpeed(0.2f);
         setRectSize(lowerHitboxBounds, hitBoxConfig);
