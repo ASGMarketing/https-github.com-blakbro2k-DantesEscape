@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import net.asg.games.dante.Constants;
 import net.asg.games.dante.DantesEscapeGame;
+import net.asg.games.dante.models.GameWorld;
 import net.asg.games.dante.providers.LevelProvider;
 import net.asg.games.dante.models.Bob;
 import net.asg.games.dante.models.Button;
@@ -72,6 +73,7 @@ public class GameScreen extends AbstractScreen {
     private Texture pauseScreen;
 
     private GameOverMessage gameOverMessage;
+    private GameWorld world;
 
     public GameScreen(DantesEscapeGame game, GameScreenState state) {
         if (state != null) {
@@ -84,7 +86,8 @@ public class GameScreen extends AbstractScreen {
     }
 
     public void show() {
-        System.out.println("Called show()");
+        //Create our Game world
+        world = new GameWorld(game);
         imageProvider = game.getImageProvider();
         soundProvider = game.getSoundProvider();
         soundProvider.setSound(true);
@@ -225,6 +228,11 @@ public class GameScreen extends AbstractScreen {
                 movingObject.drawHitbox(debugRenderer);
             }
             debugRenderer.end();
+
+            for (MovingGameObject movingObject : movingObjects) {
+                movingObject.drawDebug(debugRenderer);
+            }
+
         }
 
         processInput(delta);
@@ -233,8 +241,21 @@ public class GameScreen extends AbstractScreen {
             return;
         }
 
+        //world.updateWorld(TimeUtils.millis(), delta, gameScreenState);
+
+        /*
+        new render:
+
+        update World
+        render World
+         process input
+
+         */
+
         //This is where the world would be updated
         //world.update(delta);
+        //world.updateWorld(delta, TimeUtils.millis(), gameScreenState);
+
         bgScrollTimer += delta * gameScreenState.getBackgroundSpeed();
         mgScrollTimer += delta * gameScreenState.getMiddlegroundSpeed();
         fgScrollTimer += delta * gameScreenState.getForegroundSpeed();

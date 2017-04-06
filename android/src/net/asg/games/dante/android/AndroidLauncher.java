@@ -13,15 +13,15 @@ import net.asg.games.dante.HighScoreManager;
 
 import java.util.List;
 
-public class AndroidLauncher extends AndroidApplication implements GameEventListener {
-	//ActionResolverAndroid actionResolverAndroid;
+public class AndroidLauncher extends AndroidApplication {
+	ActionResolverAndroid actionResolverAndroid;
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// set context of action
-		//actionResolverAndroid = new ActionResolverAndroid(this);
+		actionResolverAndroid = new ActionResolverAndroid(this);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-		initialize(new DantesEscapeGame(Constants.DEBUG), config);
+		initialize(new DantesEscapeGame(actionResolverAndroid), config);
 
 		/*
 
@@ -57,20 +57,5 @@ public class AndroidLauncher extends AndroidApplication implements GameEventList
         // Hook it all up
         setContentView(layout);
 		 */
-	}
-
-	@Override
-	public void showAds(boolean show) {
-
-	}
-
-	@Override
-	public void getHighScoreName() {
-
-	}
-
-	@Override
-	public void showScores(List<HighScoreManager.HighScore> highScores) {
-
 	}
 }

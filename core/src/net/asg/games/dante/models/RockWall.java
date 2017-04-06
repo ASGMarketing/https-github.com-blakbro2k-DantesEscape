@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 
-public class RockWallMovingGameObject extends MovingGameObject {
+public class RockWall extends MovingGameObject {
     public static final int HARD_GAP_SIZE = 100;
     public static final int NORMAL_GAP_SIZE = 150;
     public static final int EASY_GAP_SIZE = 200;
@@ -29,10 +29,10 @@ public class RockWallMovingGameObject extends MovingGameObject {
     protected int holeSize;
     protected int moveSpeed = Constants.WALL_OBJECT_MOVE_SPEED;
 
-    public RockWallMovingGameObject(ImageProvider imageProvider,
-                                    TextureRegion[] textureRegions, SoundProvider soundProvider,
-                                    int width, int height, boolean isHitboxActive, net.asg.games.dante.states.MovingGameObjectState state,
-                                    int[] hitBoxConfig, int position, int holeSize) {
+    public RockWall(ImageProvider imageProvider,
+                    TextureRegion[] textureRegions, SoundProvider soundProvider,
+                    int width, int height, boolean isHitboxActive, net.asg.games.dante.states.MovingGameObjectState state,
+                    int[] hitBoxConfig, int position, int holeSize) {
         super(imageProvider, textureRegions, soundProvider, width, height,
                 isHitboxActive, state, hitBoxConfig);
 

@@ -21,7 +21,7 @@ public class MovingGameObjectFactory {
         //System.out.println(SoundProvider);
     }
 
-    public FireBallMovingGameObject getFireball() {
+    public FireBall getFireball() {
         TextureRegion[] textureRegions = new TextureRegion[Constants.FIREBALL_TOTAL_ANIMATION_FRAMES];
 
         imageProvider.setAnimations(textureRegions, imageProvider, ImageProvider.ObjectType.FIREBALL);
@@ -30,12 +30,12 @@ public class MovingGameObjectFactory {
         MovingGameObjectState model = new MovingGameObjectState();
         model.setType(MovingGameObjectType.Fireball);
 
-        return new FireBallMovingGameObject(imageProvider, textureRegions, soundProvider,
+        return new FireBall(imageProvider, textureRegions, soundProvider,
                 textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight(),
                 isHitboxActive, model, Constants.FIREBALL_HITBOX);
     }
 
-    public RockWallMovingGameObject getRockWall(int position, int holeSize) {
+    public RockWall getRockWall(int position, int holeSize) {
         TextureRegion[] textureRegions = new TextureRegion[Constants.FIREWALL_TOTAL_ANIMATION_FRAMES];
 
         imageProvider.setAnimations(textureRegions, imageProvider, ImageProvider.ObjectType.FIREWALL);
@@ -44,12 +44,12 @@ public class MovingGameObjectFactory {
         MovingGameObjectState model = new MovingGameObjectState();
         model.setType(MovingGameObjectType.RockWall);
 
-        return new RockWallMovingGameObject(imageProvider, textureRegions, soundProvider,
+        return new RockWall(imageProvider, textureRegions, soundProvider,
                 textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight(),
                 isHitboxActive, model, Constants.ROCKWALL_HITBOX, position, holeSize);
     }
 
-    public FireWallMovingGameObject getFireWall() {
+    public FireWall getFireWall() {
         TextureRegion[] textureRegions = new TextureRegion[Constants.DYNAMIC_FIREWALL_TOTAL_ANIMATION_FRAMES];
 
         imageProvider.setAnimations(textureRegions, imageProvider, ImageProvider.ObjectType.FIREWALL);
@@ -58,24 +58,24 @@ public class MovingGameObjectFactory {
         MovingGameObjectState model = new MovingGameObjectState();
         model.setType(MovingGameObjectType.LavaWall);
 
-        return new FireWallMovingGameObject(imageProvider, textureRegions, soundProvider,
+        return new FireWall(imageProvider, textureRegions, soundProvider,
                 textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight(),
                 isHitboxActive, model, Constants.ROCKWALL_HITBOX, -1, -1);
     }
 
-    public GoalMovingGameObject getGoal() {
+    public Goal getGoal() {
         TextureRegion[] textureRegions = new TextureRegion[1];
         textureRegions[0] = imageProvider.getGoal();
 
         MovingGameObjectState model = new MovingGameObjectState();
         model.setType(MovingGameObjectType.GoalWall);
 
-        return new GoalMovingGameObject(imageProvider, textureRegions, soundProvider,
+        return new Goal(imageProvider, textureRegions, soundProvider,
                 textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight(),
                 isHitboxActive, model, Constants.GOAL_HITBOX);
     }
 
-    public SlidingRockWallMovingGameObject getSlidingRockWall(int position, int holeSize, int gapDepth) {
+    public SlidingRockWall getSlidingRockWall(int position, int holeSize, int gapDepth) {
         TextureRegion[] textureRegions = new TextureRegion[Constants.FIREWALL_TOTAL_ANIMATION_FRAMES];
 
         imageProvider.setAnimations(textureRegions, imageProvider, ImageProvider.ObjectType.FIREWALL);
@@ -84,35 +84,35 @@ public class MovingGameObjectFactory {
         MovingGameObjectState model = new MovingGameObjectState();
         model.setType(MovingGameObjectType.SlidingRockWall);
 
-        return new SlidingRockWallMovingGameObject(imageProvider, textureRegions, soundProvider,
+        return new SlidingRockWall(imageProvider, textureRegions, soundProvider,
                 textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight(),
                 isHitboxActive, model, Constants.ROCKWALL_HITBOX, position, holeSize, gapDepth);
     }
 
-    public RockWallMovingGameObject getRandomEasyMediumSlidingWall(){
-        return getSlidingRockWall(getRandomWallPosition(2,3), RockWallMovingGameObject.EASY_GAP_SIZE,
-                SlidingRockWallMovingGameObject.MEDIUM_GAP_DEPTH);
+    public RockWall getRandomEasyMediumSlidingWall(){
+        return getSlidingRockWall(getRandomWallPosition(2,3), RockWall.EASY_GAP_SIZE,
+                SlidingRockWall.MEDIUM_GAP_DEPTH);
     }
 
-    public RockWallMovingGameObject getRandomEasyLongSlidingWall(){
-        return getSlidingRockWall(getRandomWallPosition(2,3), RockWallMovingGameObject.EASY_GAP_SIZE,
-                SlidingRockWallMovingGameObject.LONG_GAP_DEPTH);
+    public RockWall getRandomEasyLongSlidingWall(){
+        return getSlidingRockWall(getRandomWallPosition(2,3), RockWall.EASY_GAP_SIZE,
+                SlidingRockWall.LONG_GAP_DEPTH);
     }
 
-    public RockWallMovingGameObject getRandomEasyShortSlidingWall(){
-        return getSlidingRockWall(getRandomWallPosition(2,3), RockWallMovingGameObject.EASY_GAP_SIZE,
-                SlidingRockWallMovingGameObject.SHORT_GAP_DEPTH);
+    public RockWall getRandomEasyShortSlidingWall(){
+        return getSlidingRockWall(getRandomWallPosition(2,3), RockWall.EASY_GAP_SIZE,
+                SlidingRockWall.SHORT_GAP_DEPTH);
     }
-    public RockWallMovingGameObject getRandomEasyRockWall(){
-        return getRockWall(getRandomWallPosition(1,4), RockWallMovingGameObject.EASY_GAP_SIZE);
-    }
-
-    public RockWallMovingGameObject getRandomNormalRockWall(){
-        return getRockWall(getRandomWallPosition(1,5), RockWallMovingGameObject.NORMAL_GAP_SIZE);
+    public RockWall getRandomEasyRockWall(){
+        return getRockWall(getRandomWallPosition(1,4), RockWall.EASY_GAP_SIZE);
     }
 
-    public RockWallMovingGameObject getRandomHardRockWall(){
-        return getRockWall(getRandomWallPosition(1,5), RockWallMovingGameObject.HARD_GAP_SIZE);
+    public RockWall getRandomNormalRockWall(){
+        return getRockWall(getRandomWallPosition(1,5), RockWall.NORMAL_GAP_SIZE);
+    }
+
+    public RockWall getRandomHardRockWall(){
+        return getRockWall(getRandomWallPosition(1,5), RockWall.HARD_GAP_SIZE);
     }
 
     private int getRandomWallPosition(int min, int max){
@@ -120,22 +120,22 @@ public class MovingGameObjectFactory {
 
         switch (MathUtils.random(min, max)){
             case 1:
-                wallPosition = RockWallMovingGameObject.WALL_POSITION_ONE;
+                wallPosition = RockWall.WALL_POSITION_ONE;
                 break;
             case 2:
-                wallPosition = RockWallMovingGameObject.WALL_POSITION_TWO;
+                wallPosition = RockWall.WALL_POSITION_TWO;
                 break;
             case 3:
-                wallPosition = RockWallMovingGameObject.WALL_POSITION_THREE;
+                wallPosition = RockWall.WALL_POSITION_THREE;
                 break;
             case 4:
-                wallPosition = RockWallMovingGameObject.WALL_POSITION_FOUR;
+                wallPosition = RockWall.WALL_POSITION_FOUR;
                 break;
             case 5:
-                wallPosition = RockWallMovingGameObject.WALL_POSITION_FIVE;
+                wallPosition = RockWall.WALL_POSITION_FIVE;
                 break;
             case 6:
-                wallPosition = RockWallMovingGameObject.WALL_POSITION_SIX;
+                wallPosition = RockWall.WALL_POSITION_SIX;
                 break;
             default:
                 throw new IllegalArgumentException("Bad wall position was entered");

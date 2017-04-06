@@ -5,8 +5,6 @@ import com.badlogic.gdx.utils.TimeUtils;
 import net.asg.games.dante.Constants;
 import net.asg.games.dante.models.MovingGameObject;
 import net.asg.games.dante.models.MovingGameObjectFactory;
-import net.asg.games.dante.models.MovingGameObjectType;
-import net.asg.games.dante.models.RockWallMovingGameObject;
 import net.asg.games.dante.states.GameScreenState;
 import net.asg.games.dante.states.GameScreenState.LevelState;
 

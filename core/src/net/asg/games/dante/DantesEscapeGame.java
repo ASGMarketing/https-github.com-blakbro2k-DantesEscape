@@ -1,6 +1,7 @@
 package net.asg.games.dante;
 
 import net.asg.games.dante.providers.ImageProvider;
+import net.asg.games.dante.providers.LevelProvider;
 import net.asg.games.dante.screens.GameScreen;
 import net.asg.games.dante.states.GameScreenState;
 import net.asg.games.dante.providers.SoundProvider;
@@ -19,6 +20,7 @@ import com.badlogic.gdx.utils.Timer;
 public class DantesEscapeGame extends Game {
     private ImageProvider imageProvider;
     private SoundProvider soundProvider;
+    private LevelProvider levelProvider;
 
     private GameScreen gameScreen;
     private MainMenuScreen mainMenuScreen;
@@ -46,6 +48,7 @@ public class DantesEscapeGame extends Game {
         imageProvider.load();
         soundProvider = new SoundProvider();
         soundProvider.load();
+        levelProvider = new LevelProvider();
 
         fpsLog = new FPSLogger();
         fpsLog.log();
@@ -105,6 +108,10 @@ public class DantesEscapeGame extends Game {
 
     public SoundProvider getSoundProvider() {
         return soundProvider;
+    }
+
+    public LevelProvider getLevelProvider() {
+        return levelProvider;
     }
 
     //public void showHelp() {

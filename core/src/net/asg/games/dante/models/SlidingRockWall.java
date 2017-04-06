@@ -14,7 +14,7 @@ import net.asg.games.dante.states.MovingGameObjectState;
  * Created by eboateng on 3/31/2017.
  */
 
-public class SlidingRockWallMovingGameObject extends RockWallMovingGameObject {
+public class SlidingRockWall extends RockWall {
     public static final int LONG_GAP_DEPTH = 25;
     public static final int MEDIUM_GAP_DEPTH = 55;
     public static final int SHORT_GAP_DEPTH = 7;
@@ -25,10 +25,10 @@ public class SlidingRockWallMovingGameObject extends RockWallMovingGameObject {
     private long lastShookTime = 0;
     private int gapDepth;
 
-    public SlidingRockWallMovingGameObject(ImageProvider imageProvider, TextureRegion[] textureRegions,
-                                           SoundProvider soundProvider, int width, int height, boolean isHitboxActive,
-                                           MovingGameObjectState state, int[] hitBoxConfig, int position, int holeSize,
-                                            int gapDepth) {
+    public SlidingRockWall(ImageProvider imageProvider, TextureRegion[] textureRegions,
+                           SoundProvider soundProvider, int width, int height, boolean isHitboxActive,
+                           MovingGameObjectState state, int[] hitBoxConfig, int position, int holeSize,
+                           int gapDepth) {
         super(imageProvider, textureRegions, soundProvider, width, height, isHitboxActive, state, hitBoxConfig, position, holeSize);
         this.gapDepth = gapDepth;
     }

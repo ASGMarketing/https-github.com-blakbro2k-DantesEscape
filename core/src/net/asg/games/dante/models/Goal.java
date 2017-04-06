@@ -13,13 +13,13 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 /**
  * @author Blakbro2k
  */
-public class GoalMovingGameObject extends MovingGameObject {
+public class Goal extends MovingGameObject {
     private int velocityX = Constants.GOAL_OBJECT_X_VELOCITY;
     // private int animationPattern[];
 
-    public GoalMovingGameObject(ImageProvider imageProvider, TextureRegion[] textureRegions,
-                                SoundProvider soundProvider, int width, int height, boolean isHitboxActive,
-                                net.asg.games.dante.states.MovingGameObjectState state, int[] hitBoxConfig) {
+    public Goal(ImageProvider imageProvider, TextureRegion[] textureRegions,
+                SoundProvider soundProvider, int width, int height, boolean isHitboxActive,
+                net.asg.games.dante.states.MovingGameObjectState state, int[] hitBoxConfig) {
         super(imageProvider, textureRegions, soundProvider, width, height,
                 isHitboxActive, state, hitBoxConfig);
     }

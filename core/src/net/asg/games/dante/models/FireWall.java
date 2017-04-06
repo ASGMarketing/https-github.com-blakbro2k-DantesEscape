@@ -8,13 +8,13 @@ import net.asg.games.dante.Constants;
 import net.asg.games.dante.providers.ImageProvider;
 import net.asg.games.dante.providers.SoundProvider;
 
-public class FireWallMovingGameObject extends RockWallMovingGameObject {
+public class FireWall extends RockWall {
     private boolean isClosingType;
 
-    public FireWallMovingGameObject(ImageProvider imageProvider,
-                                    TextureRegion[] textureRegions, SoundProvider soundProvider,
-                                    int width, int height, boolean isHitboxActive, net.asg.games.dante.states.MovingGameObjectState state,
-                                    int[] hitBoxConfig, int position, int holeSize) {
+    public FireWall(ImageProvider imageProvider,
+                    TextureRegion[] textureRegions, SoundProvider soundProvider,
+                    int width, int height, boolean isHitboxActive, net.asg.games.dante.states.MovingGameObjectState state,
+                    int[] hitBoxConfig, int position, int holeSize) {
         super(imageProvider, textureRegions, soundProvider, width, height,
                 isHitboxActive, state, hitBoxConfig, position, holeSize);
 

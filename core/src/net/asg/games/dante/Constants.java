@@ -52,6 +52,7 @@ public class Constants {
     public static final String SCORES_DATA_FILE = "data/scores-v1.json";
     public static final String BUTTONS_IMAGES_FOLDER_NAME = "buttons";
     public static final String BUTTONS_IMAGES_ATLAS_NAME = "buttons";
+    public static final String STARTING_SCORE_LABEL = "SCORE: 0";
 
     public static final long SPLASH_MINIMUM_MILLISECONDS = 2500L;
 
