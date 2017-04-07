@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -16,41 +17,23 @@ import net.asg.games.dante.Constants;
 public class ImageProvider {
 
     private TextureAtlas atlas;
-
     private TextureAtlas textAtlas;
-
     private TextureAtlas buttonsAtlas;
-
     private Texture background;
-
     private Texture middleground;
-
     private Texture foreground;
-
 	private Texture splashScreen;
-
 	private Skin defaultUISkin;
-
     private Skin defaultButtonSkin;
-
     private Texture animatedBackground;
-
     private Texture animatedForeground;
-
     private Texture animatedMiddleground;
-
     private Texture pauseScreen;
-
     private Sprite backGroundSprite;
-
     private Sprite foreGroundSprite;
-
     private Sprite middleGroundSprite;
-
     private Texture gameover;
-
     private BitmapFont defaultFont;
-
     private BitmapFont ravieFont;
 
     public enum ObjectType{
@@ -181,8 +164,8 @@ public class ImageProvider {
         return atlas.findRegion("Fireball", frame);
     }
 
-    public TextureRegion getRock() {
-        return atlas.findRegion("rock");
+    public TextureRegion getRockWall() {
+        return atlas.findRegion("rockwall");
     }
 
     public TextureRegion getFireWall(int frame) {

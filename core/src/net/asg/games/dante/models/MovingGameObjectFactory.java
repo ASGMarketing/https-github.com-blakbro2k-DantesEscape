@@ -36,9 +36,8 @@ public class MovingGameObjectFactory {
     }
 
     public RockWall getRockWall(int position, int holeSize) {
-        TextureRegion[] textureRegions = new TextureRegion[Constants.FIREWALL_TOTAL_ANIMATION_FRAMES];
-
-        imageProvider.setAnimations(textureRegions, imageProvider, ImageProvider.ObjectType.FIREWALL);
+        TextureRegion[] textureRegions = new TextureRegion[1];
+        textureRegions[0] = imageProvider.getRockWall();
 
         soundProvider.playfirewooshSound();
         MovingGameObjectState model = new MovingGameObjectState();
@@ -76,9 +75,8 @@ public class MovingGameObjectFactory {
     }
 
     public SlidingRockWall getSlidingRockWall(int position, int holeSize, int gapDepth) {
-        TextureRegion[] textureRegions = new TextureRegion[Constants.FIREWALL_TOTAL_ANIMATION_FRAMES];
-
-        imageProvider.setAnimations(textureRegions, imageProvider, ImageProvider.ObjectType.FIREWALL);
+        TextureRegion[] textureRegions = new TextureRegion[1];
+        textureRegions[0] = imageProvider.getRockWall();
 
         soundProvider.playfirewooshSound();
         MovingGameObjectState model = new MovingGameObjectState();

@@ -4,36 +4,25 @@ import net.asg.games.dante.Constants;
 import net.asg.games.dante.providers.ImageProvider;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 
 public class Bob {
     private int width;
-
     private int height;
-
     private int screenWidth;
-
     private int screenHeight;
-
     private int frame = 0;
-
     private float time = 0;
-
     private TextureRegion[] textureRegions;
-
     private Rectangle bounds;
-
     private Rectangle hitBounds;
-    // TODO: 3/2/2016 Make an array of hitboxes
-
     private int offSetX;
-
     private int offSetY;
 
     public Bob(int posX, int posY, int width, int height, int[] hitboxConfig) {
-        // TODO: 3/2/2016 pass in an array of hitboxes
         bounds = new Rectangle();
         hitBounds = new Rectangle();
 
@@ -63,6 +52,7 @@ public class Bob {
         hitBounds.height = hitboxConfig[3];
         hitBounds.x = bounds.x + offSetX;
         hitBounds.y = bounds.y + offSetY;
+
     }
 
     public void setPositionX(float x) {

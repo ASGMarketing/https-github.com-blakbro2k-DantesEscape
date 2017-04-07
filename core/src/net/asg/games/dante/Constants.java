@@ -1,7 +1,5 @@
 package net.asg.games.dante;
 
-import net.asg.games.dante.models.HitboxConfiguration;
-
 public class Constants {
     public static final boolean DEBUG = false;
     public static final boolean NO_CLIP_MODE_OFF = true;
@@ -56,9 +54,14 @@ public class Constants {
 
     public static final long SPLASH_MINIMUM_MILLISECONDS = 2500L;
 
-    public static final int BOB_TOTAL_ANIMATION_FRAMES = 30;
+    public static final int BOB_TOTAL_ANIMATION_FRAMES = 3;
     public static final int FIREBALL_TOTAL_ANIMATION_FRAMES = 9;
     public static final int FIREWALL_TOTAL_ANIMATION_FRAMES = 5;
     public static final int DYNAMIC_FIREWALL_TOTAL_ANIMATION_FRAMES = 3;
     public static final int GOAL_HIT_SPEED = 1300;
+
+    private static final String AD_UNIT_ID_BANNER = "";
+    private static final String AD_UNIT_ID_INTERSTITIAL = "";
+    private static final String GOOGLE_PLAY_URL = "";
+    private static final String GITHUB_URL = "https://github.com/TheInvader360";
 }

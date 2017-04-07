@@ -21,6 +21,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -41,39 +42,25 @@ import com.badlogic.gdx.utils.TimeUtils;
 public class GameScreen extends AbstractScreen {
 
     private Sprite backgroundSprite;
-
     private Sprite foregroundSprite;
-
     private Sprite middleGroundSprite;
-
     private Bob bob;
-
     private Button levelResetButton;
-
     private Button homeButton;
-
     private float bgScrollTimer;
-
     private float mgScrollTimer;
-
     private float fgScrollTimer;
-
     private MovingGameObjectFactory movingGameObjectFactory;
-
     private Array<MovingGameObject> movingObjects;
-
     private LevelProvider levelProvider;
-
     private GameScreenState gameScreenState;
-
     private String scoreName;
-
     private BitmapFont bitmapFontName;
-
     private Texture pauseScreen;
-
     private GameOverMessage gameOverMessage;
     private GameWorld world;
+    private ParticleEffect effect;
+
 
     public GameScreen(DantesEscapeGame game, GameScreenState state) {
         if (state != null) {
@@ -109,9 +96,12 @@ public class GameScreen extends AbstractScreen {
         TextureRegion bobTexture = imageProvider.getBob(1);
 
         bob = new Bob(-1, -1, bobTexture.getRegionWidth(), bobTexture.getRegionHeight(), Constants.BOB_HITBOX);
-        //TODO: 3/2/2016 make hitbox helper class to parse and return an array of hitboxes
-
         bob.setBobAnimation(imageProvider);
+
+        //effect = new ParticleEffect();
+        //effect.load(Gdx.files.internal("jetfuel.p"), Gdx.files.internal(""));
+        //effect.getEmitters().first().setPosition(bob.getPosition().x, bob.getPosition().y - 40);
+        //effect.start();
 
         movingObjects = new Array<MovingGameObject>();
         scoreName = "score: 0";
@@ -160,7 +150,12 @@ public class GameScreen extends AbstractScreen {
         camera.update();
         batch.setProjectionMatrix(camera.combined);
 
+
+        //System.out.println(effect);
+
+        //effect.update(delta);
         batch.begin();
+
         // Draw the Background
         backgroundSprite.draw(batch);
         // Draw the middleground
@@ -173,7 +168,9 @@ public class GameScreen extends AbstractScreen {
 
         imageProvider.getDefaultFont().draw(batch, scoreName, 10, imageProvider.getScreenHeight() - 15);
 
-        batch.draw(bob.getBobFrame(delta,gameScreenState.gameSpeed), bob.getPosition().x, bob.getPosition().y);
+        //effect.setPosition(bob.getPosition().x, bob.getPosition().y);
+        //effect.draw(batch);
+        batch.draw(bob.getBobFrame(delta,gameScreenState.gameSpeed), bob.getPosition().x, bob.getPosition().y - 40);
 
         for (MovingGameObject movingObject : movingObjects) {
             movingObject.draw(batch);
@@ -198,6 +195,10 @@ public class GameScreen extends AbstractScreen {
         }
 
         batch.end();
+
+        //if(effect.isComplete()){
+        //    effect.reset();
+       // }
 
         //Draw Debug Hitboxes and sprite boxes
         if (game.isDebugOn) {
