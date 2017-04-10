@@ -3,6 +3,7 @@ package net.asg.games.dante.providers;
 import com.badlogic.gdx.utils.TimeUtils;
 
 import net.asg.games.dante.Constants;
+import net.asg.games.dante.models.Missile;
 import net.asg.games.dante.models.MovingGameObject;
 import net.asg.games.dante.models.MovingGameObjectFactory;
 import net.asg.games.dante.states.GameScreenState;
@@ -20,6 +21,8 @@ public class LevelProvider {
     public static final int MISSILE_LEVEL_VALUE = 8;
 
     private PhaseProvider phase;
+    private int counter;
+    private boolean missleFlip = false;
 
     public MovingGameObject getNextObject(MovingGameObjectFactory movingGameObjectFactory,
                                           GameScreenState st) {
@@ -34,6 +37,7 @@ public class LevelProvider {
             case GOAL_LEVEL_VALUE:
                 st.lastGameObjTime = TimeUtils.millis();
                 mObj = movingGameObjectFactory.getGoal();
+                clearFlags();
                 break;
             case FIREBALL_LEVEL_VALUE:
                 st.lastGameObjTime = TimeUtils.millis();
@@ -46,20 +50,32 @@ public class LevelProvider {
                 st.spawnTime = Constants.DYNAMIC_FIREWALL_SPAWN_TIME;
                 // mObj.setMoveSpeed(100);
                 break;
-            case ROCK_LEVEL_VALUE:  //is Rock wall Level
+            case ROCK_LEVEL_VALUE:
                 st.lastGameObjTime = TimeUtils.millis();
                 st.spawnTime = Constants.FIREWALL_SPAWN_TIME;
                 mObj = movingGameObjectFactory.getRandomNormalRockWall();
                 break;
-            case SLIDE_ROCK_LEVEL_VALUE:  //is Sliding Rock Level
+            case SLIDE_ROCK_LEVEL_VALUE:
                 st.lastGameObjTime = TimeUtils.millis();
                 st.spawnTime = Constants.FIREWALL_SPAWN_TIME;
                 mObj = movingGameObjectFactory.getRandomEasyMediumSlidingWall();
                 break;
-            case EASY_ROCK_LEVEL_VALUE:  //is Easy Rock Level
+            case EASY_ROCK_LEVEL_VALUE:
                 st.lastGameObjTime = TimeUtils.millis();
                 st.spawnTime = Constants.FIREWALL_SPAWN_TIME;
                 mObj = movingGameObjectFactory.getRandomEasyRockWall();
+                break;
+            case MISSILE_LEVEL_VALUE:
+                st.lastGameObjTime = TimeUtils.millis();
+                st.spawnTime = Constants.MISSLE_SPAWN_TIME;
+                if(counter > 10){
+                    mObj = movingGameObjectFactory.getEasyActiveMissle();
+                } else {
+                    mObj = movingGameObjectFactory.getEasyLaunchMissle();
+                }
+                counter++;
+
+                mObj.setMoveSpeed(Constants.MISSLE_MOVESPEED);
                 break;
             default:
                 throw new RuntimeException("This level type does not exist " + st.stageType);
@@ -69,6 +85,11 @@ public class LevelProvider {
 
     public void flushPhases(){
         phase.flush();
+    }
+
+    public void clearFlags(){
+        counter = 0;
+        missleFlip = false;
     }
 
     public void doLevelTransition(LevelState state, GameScreenState st) {

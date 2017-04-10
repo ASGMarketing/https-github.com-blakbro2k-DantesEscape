@@ -21,10 +21,11 @@ public class MovingGameObjectFactory {
         //System.out.println(SoundProvider);
     }
 
+
     public FireBall getFireball() {
         TextureRegion[] textureRegions = new TextureRegion[Constants.FIREBALL_TOTAL_ANIMATION_FRAMES];
 
-        imageProvider.setAnimations(textureRegions, imageProvider, ImageProvider.ObjectType.FIREBALL);
+        imageProvider.setAnimations(textureRegions, ImageProvider.FIREBALL_ID);
 
         soundProvider.playflameBurstSound();
         MovingGameObjectState model = new MovingGameObjectState();
@@ -51,7 +52,7 @@ public class MovingGameObjectFactory {
     public FireWall getFireWall() {
         TextureRegion[] textureRegions = new TextureRegion[Constants.DYNAMIC_FIREWALL_TOTAL_ANIMATION_FRAMES];
 
-        imageProvider.setAnimations(textureRegions, imageProvider, ImageProvider.ObjectType.FIREWALL);
+        imageProvider.setAnimations(textureRegions, ImageProvider.FIREWALL_ID);
 
         soundProvider.playfirewooshSound();
         MovingGameObjectState model = new MovingGameObjectState();
@@ -72,6 +73,32 @@ public class MovingGameObjectFactory {
         return new Goal(imageProvider, textureRegions, soundProvider,
                 textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight(),
                 isHitboxActive, model, Constants.GOAL_HITBOX);
+    }
+
+    public Missile getEasyLaunchMissle() {
+        Missile temp = getMissle(ImageProvider.EASY_MISSILE_ID);
+        temp.setInactive();
+        return temp;
+    }
+
+    public Missile getEasyActiveMissle() {
+        Missile temp = getMissle(ImageProvider.EASY_MISSILE_FLIPPED_ID);
+        temp.setActive();
+        temp.setFalling();
+        return temp;
+    }
+
+    public Missile getMissle(int missleId) {
+        TextureRegion[] textureRegions = new TextureRegion[Constants.MISSLE_TOTAL_ANIMATION_FRAMES];
+
+        imageProvider.setAnimations(textureRegions, missleId);
+
+        MovingGameObjectState model = new MovingGameObjectState();
+        model.setType(MovingGameObjectType.Missile);
+
+        return new Missile(imageProvider, textureRegions, soundProvider,
+                textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight(),
+                isHitboxActive, model, Constants.MISSLE_HITBOX);
     }
 
     public SlidingRockWall getSlidingRockWall(int position, int holeSize, int gapDepth) {

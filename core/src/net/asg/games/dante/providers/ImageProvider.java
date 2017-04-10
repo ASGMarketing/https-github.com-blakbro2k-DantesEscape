@@ -4,17 +4,23 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 import net.asg.games.dante.Constants;
 
 public class ImageProvider {
+    public static final int BOB_ID = 17;
+    public static final int FIREBALL_ID = 18;
+    public static final int FIREWALL_ID = 19;
+    public static final int GOAL_ID = 20;
+    public static final int ROCKWALL_ID = 21;
+    public static final int SLIDING_ROCKWALL_ID = 22;
+    public static final int EASY_MISSILE_ID = 23;
+    public static final int EASY_MISSILE_FLIPPED_ID = 24;
 
     private TextureAtlas atlas;
     private TextureAtlas textAtlas;
@@ -22,8 +28,8 @@ public class ImageProvider {
     private Texture background;
     private Texture middleground;
     private Texture foreground;
-	private Texture splashScreen;
-	private Skin defaultUISkin;
+    private Texture splashScreen;
+    private Skin defaultUISkin;
     private Skin defaultButtonSkin;
     private Texture animatedBackground;
     private Texture animatedForeground;
@@ -36,33 +42,29 @@ public class ImageProvider {
     private BitmapFont defaultFont;
     private BitmapFont ravieFont;
 
-    public enum ObjectType{
-        FIREBALL, BOB, DFIREWALL, FIREWALL, GOVER, GOAL
-    }
-
     public ImageProvider() {
     }
 
-    public void setAnimations(TextureRegion[] textureRegions, ImageProvider imageProvider, ObjectType objectType){
-        for(int f = 0; f < textureRegions.length; f++){
-            switch(objectType){
-                case BOB:
-                    textureRegions[f] = imageProvider.getBob(f + 1);
+    public void setAnimations(TextureRegion[] textureRegions, int objectId) {
+        for (int f = 0; f < textureRegions.length; f++) {
+            switch (objectId) {
+                case BOB_ID:
+                    textureRegions[f] = getBob(f + 1);
                     break;
-                case FIREBALL:
-                    textureRegions[f] = imageProvider.getFireBall(f + 1);
+                case FIREWALL_ID:
+                    textureRegions[f] = getFireWall(f + 1);
                     break;
-                case DFIREWALL:
-                    textureRegions[f] = imageProvider.getFireWall(f + 1);
+                case FIREBALL_ID:
+                    textureRegions[f] = getFireBall(f + 1);
                     break;
-                case FIREWALL:
-                    textureRegions[f] = imageProvider.getFireWall(f + 1);
+                case EASY_MISSILE_ID:
+                    textureRegions[f] = getEasyMissle(f + 1);
                     break;
-                case GOVER:
-                    textureRegions[f] = imageProvider.getFireBall(f + 1);
+                case EASY_MISSILE_FLIPPED_ID:
+                    textureRegions[f] = getEasyMissleFlipped(f + 1);
                     break;
                 default:
-                    break;
+                    throw new RuntimeException("This Game Object has no animation to set. OBJECT_ID: " + objectId);
             }
         }
     }
@@ -76,7 +78,7 @@ public class ImageProvider {
         background = new Texture(Gdx.files.internal("cave_bg.png"));
         middleground = new Texture(Gdx.files.internal("cave_mg.png"));
         foreground = new Texture(Gdx.files.internal("cave_fg.png"));
-		splashScreen = new Texture(Gdx.files.internal("splash-screen.png"));
+        splashScreen = new Texture(Gdx.files.internal("splash-screen.png"));
         pauseScreen = new Texture(Gdx.files.internal("paused.png"));
         gameover = new Texture(Gdx.files.internal("gameover.png"));
         animatedBackground = new Texture(Gdx.files.internal("cave_bg.png"));
@@ -86,12 +88,12 @@ public class ImageProvider {
         animatedForeground = new Texture(Gdx.files.internal("cave_fg.png"));
         animatedForeground.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
 
-		//Sprites
+        //Sprites
         backGroundSprite = new Sprite(animatedBackground, 0, 0, this.getScreenWidth(), this.getScreenHeight());
         foreGroundSprite = new Sprite(animatedForeground, 0, 0, this.getScreenWidth(), this.getScreenHeight());
         middleGroundSprite = new Sprite(animatedMiddleground, 0, 0, this.getScreenWidth(), this.getScreenHeight());
 
-		//Skins
+        //Skins
         defaultUISkin = new Skin(Gdx.files.internal("data/uiskin.json"));
         buildButtonSkins();
 
@@ -113,7 +115,7 @@ public class ImageProvider {
         foreground.dispose();
         gameover.dispose();
         pauseScreen.dispose();
-		splashScreen.dispose();
+        splashScreen.dispose();
         defaultUISkin.dispose();
         defaultButtonSkin.dispose();
         defaultFont.dispose();
@@ -152,9 +154,9 @@ public class ImageProvider {
         return foreground;
     }
 
-	public Texture getSplashScreen() {
-		return splashScreen;
-	}
+    public Texture getSplashScreen() {
+        return splashScreen;
+    }
 
     public Texture getPauseScreen() {
         return pauseScreen;
@@ -173,11 +175,19 @@ public class ImageProvider {
     }
 
     public TextureRegion getBob(int frame) {
-        return atlas.findRegion("bob",frame);
+        return atlas.findRegion("bob", frame);
     }
 
     public TextureRegion getGoal() {
         return atlas.findRegion("goalpole");
+    }
+
+    public TextureRegion getEasyMissle(int frame) {
+        return atlas.findRegion("missles", frame);
+    }
+
+    public TextureRegion getEasyMissleFlipped(int frame) {
+        return atlas.findRegion("missles", frame);
     }
 
     public TextureRegion getHomeButton() {
@@ -188,15 +198,23 @@ public class ImageProvider {
         return buttonsAtlas.findRegion("reset");
     }
 
-    public BitmapFont getDefaultFont() { return defaultFont;}
+    public BitmapFont getDefaultFont() {
+        return defaultFont;
+    }
 
-    public BitmapFont getRavieFont() { return ravieFont;}
+    public BitmapFont getRavieFont() {
+        return ravieFont;
+    }
 
-    public Skin getDefaultUIskin() { return defaultUISkin; }
+    public Skin getDefaultUIskin() {
+        return defaultUISkin;
+    }
 
-    public Skin getDefaultButtonSkin() { return defaultButtonSkin; }
+    public Skin getDefaultButtonSkin() {
+        return defaultButtonSkin;
+    }
 
-    private void buildButtonSkins (){
+    private void buildButtonSkins() {
         defaultButtonSkin = new Skin();
         defaultButtonSkin.addRegions(buttonsAtlas);
     }
@@ -242,52 +260,52 @@ public class ImageProvider {
     }
 
     public TextureRegion getHelp() {
-		return atlas.findRegion("Help");
-	}
-	
-	public TextureRegion getButton() {
-		return atlas.findRegion("button");
-	}
-	
-	public TextureRegion getBack() {
-		return atlas.findRegion("back");
-	}
-	
-	public TextureRegion getGrey2() {
-		return atlas.findRegion("number_two_grey");
-	}
-	
-	public TextureRegion getGrey3() {
-		return atlas.findRegion("number_three_grey");
-	}
-	
-	public TextureRegion getNumber(int number) {
-		return atlas.findRegion("number", number);
-	}
+        return atlas.findRegion("Help");
+    }
 
-	public TextureRegion getClockBase() {
-		return atlas.findRegion("base");
-	}
+    public TextureRegion getButton() {
+        return atlas.findRegion("button");
+    }
 
-	public TextureRegion getSecond(int second) {
-		return atlas.findRegion("second", second);
-	}
-	
-	public TextureRegion getSecondRed(int second) {
-		return atlas.findRegion("second_red", second);
-	}
+    public TextureRegion getBack() {
+        return atlas.findRegion("back");
+    }
 
-	public TextureRegion getPause() {
-		return atlas.findRegion("player_pause");
-	}
-	
-	public TextureRegion getSoundImage(boolean on) {
-		if (on) {
-			return atlas.findRegion("sound_on");
-		}
-		return atlas.findRegion("sound_off");
-	}
-	
+    public TextureRegion getGrey2() {
+        return atlas.findRegion("number_two_grey");
+    }
+
+    public TextureRegion getGrey3() {
+        return atlas.findRegion("number_three_grey");
+    }
+
+    public TextureRegion getNumber(int number) {
+        return atlas.findRegion("number", number);
+    }
+
+    public TextureRegion getClockBase() {
+        return atlas.findRegion("base");
+    }
+
+    public TextureRegion getSecond(int second) {
+        return atlas.findRegion("second", second);
+    }
+
+    public TextureRegion getSecondRed(int second) {
+        return atlas.findRegion("second_red", second);
+    }
+
+    public TextureRegion getPause() {
+        return atlas.findRegion("player_pause");
+    }
+
+    public TextureRegion getSoundImage(boolean on) {
+        if (on) {
+            return atlas.findRegion("sound_on");
+        }
+        return atlas.findRegion("sound_off");
+    }
+
 
 	
 	/*public int getFruitsCount() {

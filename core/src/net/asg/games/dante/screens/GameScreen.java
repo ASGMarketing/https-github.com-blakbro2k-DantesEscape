@@ -170,9 +170,10 @@ public class GameScreen extends AbstractScreen {
 
         //effect.setPosition(bob.getPosition().x, bob.getPosition().y);
         //effect.draw(batch);
-        batch.draw(bob.getBobFrame(delta,gameScreenState.gameSpeed), bob.getPosition().x, bob.getPosition().y - 40);
+        batch.draw(bob.getBobFrame(delta,gameScreenState.gameSpeed), bob.getPosition().x, bob.getPosition().y);
 
         for (MovingGameObject movingObject : movingObjects) {
+            System.out.println(movingObjects.size);
             movingObject.draw(batch);
 
             if (movingObject.isCollided) {
@@ -229,11 +230,6 @@ public class GameScreen extends AbstractScreen {
                 movingObject.drawHitbox(debugRenderer);
             }
             debugRenderer.end();
-
-            for (MovingGameObject movingObject : movingObjects) {
-                movingObject.drawDebug(debugRenderer);
-            }
-
         }
 
         processInput(delta);

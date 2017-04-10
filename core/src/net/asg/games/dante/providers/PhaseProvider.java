@@ -42,11 +42,11 @@ public class PhaseProvider{
         LG: 6 | 4 Phases   |   rockwall, fireballs, sliding walls, lava walls, missles
         LG: 7 | 4 Phases   |   rockwall, firewalls, sliding walls, lava walls, missles, circular object
          */
-System.out.println(gameScreenState.levelGroup);
+//System.out.println(gameScreenState.levelGroup);
         if(!feedLevels) {
             switch (gameScreenState.levelGroup) {
                 case 1:
-                    phases.push(MovingGameObjectType.EasyRockWall.getValue());
+                    phases.push(MovingGameObjectType.Missile.getValue());
                     break;
                 case 2:
                     phases.push(MovingGameObjectType.RockWall.getValue());
@@ -66,14 +66,21 @@ System.out.println(gameScreenState.levelGroup);
                     phases.push(MovingGameObjectType.LavaWall.getValue());
                     break;
                 case 5:
+                    phaseRandomizer(-1,
+                            MovingGameObjectType.SlidingRockWall.getValue(),
+                            MovingGameObjectType.RockWall.getValue(),
+                            MovingGameObjectType.LavaWall.getValue());
+                    phases.push(MovingGameObjectType.Missile.getValue());
+
                 case 6:
                 case 7:
                 default:
-                    phaseRandomizer(-1,
+                    phaseRandomizer(4,
                             MovingGameObjectType.Fireball.getValue(),
                             MovingGameObjectType.RockWall.getValue(),
                             MovingGameObjectType.SlidingRockWall.getValue(),
-                            MovingGameObjectType.LavaWall.getValue());
+                            MovingGameObjectType.LavaWall.getValue(),
+                            MovingGameObjectType.Missile.getValue());
                     break;
             }
         } else {

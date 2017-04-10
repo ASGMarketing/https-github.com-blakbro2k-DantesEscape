@@ -3,6 +3,7 @@ package net.asg.games.dante.models;
 import net.asg.games.dante.Constants;
 import net.asg.games.dante.providers.ImageProvider;
 import net.asg.games.dante.providers.SoundProvider;
+import net.asg.games.dante.states.MovingGameObjectState;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
@@ -14,7 +15,7 @@ public class FireBall extends MovingGameObject {
 
     public FireBall(ImageProvider imageProvider,
                     TextureRegion[] textureRegions, SoundProvider soundProvider, int width, int height,
-                    boolean isHitboxActive, net.asg.games.dante.states.MovingGameObjectState state, int[] hitBoxConfig) {
+                    boolean isHitboxActive, MovingGameObjectState state, int[] hitBoxConfig) {
         super(imageProvider, textureRegions, soundProvider, width, height, isHitboxActive, state, hitBoxConfig);
         this.setMoveSpeed(Constants.FIREBALL_SPEED);
 

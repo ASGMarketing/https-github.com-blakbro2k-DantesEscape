@@ -20,6 +20,7 @@ import net.asg.games.dante.Constants;
 import net.asg.games.dante.providers.ImageProvider;
 import net.asg.games.dante.states.GameScreenState.LevelState;
 import net.asg.games.dante.providers.SoundProvider;
+import net.asg.games.dante.states.MovingGameObjectState;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -34,40 +35,24 @@ import com.badlogic.gdx.math.Rectangle;
  *         array of texture regions if the object has animations
  */
 public class MovingGameObject {
-
     protected int moveSpeed = Constants.OBJECT_MOVE_SPEED;
-
     protected float animationPeriod = Constants.DEFAULT_ANIMATION_PERIOD;
-
     protected int width;
-
     protected int height;
-
     protected Rectangle rect;
-
     protected Rectangle hitboxBounds;
-
     protected int frame = 0;
-
     protected float time = 0;
-
     protected boolean isHitboxActive;
-
     protected TextureRegion[] textureRegions;
-
     protected ImageProvider imageProvider;
-
     protected SoundProvider soundProvider;
-
     public boolean isCollided = false;
-
     protected boolean isSoundTriggered = false;
-
-    protected net.asg.games.dante.states.MovingGameObjectState state;
-
+    protected MovingGameObjectState state;
     protected int offSetX;
-
     protected int offSetY;
+
 
     public MovingGameObject(ImageProvider imageProvider,
                             TextureRegion[] textureRegions, SoundProvider soundProvider,
@@ -85,7 +70,7 @@ public class MovingGameObject {
         rect.width = width;
         rect.height = height;
 
-        this.rect.x = Constants.MAX_WIDTH;
+        this.rect.x = imageProvider.getScreenWidth();
         this.rect.y = 0;
 
         this.state = state;
@@ -111,7 +96,6 @@ public class MovingGameObject {
         rect.x -= moveSpeed * delta * speedBonus;
         setHitboxBounds(rect);
 
-        state.setPosY((int) rect.y);
         time += delta;
         if (time > animationPeriod) {
             time -= animationPeriod;
@@ -120,6 +104,12 @@ public class MovingGameObject {
                 frame = 0;
             }
         }
+        setStatefulPosition();
+    }
+
+    public void setStatefulPosition(){
+        state.setPosY((int) rect.y);
+        state.setPosX((int) rect.x);
     }
 
     public boolean isLeftOfScreen() {
@@ -185,7 +175,7 @@ public class MovingGameObject {
             rect.height = this.height;
         }
     }
-    public net.asg.games.dante.states.MovingGameObjectState getState() {
+    public MovingGameObjectState getState() {
         return state;
     }
 }

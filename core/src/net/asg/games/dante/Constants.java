@@ -13,19 +13,24 @@ public class Constants {
     //view constants
     public static final int BOB_MOVE_SPEED = 510;
 
-    public static final int[] BOB_HITBOX = {0, 12, 70, 48};
+    public static final int[] BOB_HITBOX = {16, 12, 80, 58};
     public static final int[] FIREBALL_HITBOX = {0,8, 50, 45};
-    public static final int[] ROCKWALL_HITBOX = {0, 0, 16, -1};
+    public static final int[] ROCKWALL_HITBOX = {0, 0, 26, -1};
+    public static final int[] DEFAULT_HITBOX = {0, 0, -1, -1};
+    public static final int[] MISSLE_HITBOX = {12, 26, 32, 64};
     public static final int[] GOAL_HITBOX = {0, 0, 16, 800};
 
     public static final int OBJECT_MOVE_SPEED = 550;
     public static final int GOAL_OBJECT_MOVE_SPEED = 800;
     public static final int WALL_OBJECT_MOVE_SPEED = 750;
+    public static final int MISSLE_MOVESPEED = 910;
     public static final int GOAL_OBJECT_X_VELOCITY = 1500;
     public static final int ROUND_TIME_DURATION = 16000;
     public static final int FIREBALL_SPAWN_TIME = 360;
     public static final int DYNAMIC_FIREWALL_SPAWN_TIME = 1360;
     public static final int FIREWALL_SPAWN_TIME = 1100;
+    public static final int MISSLE_SPAWN_TIME = 510;
+
 
     public static final int WALL_GAP_SPEED = 280;
 
@@ -57,6 +62,7 @@ public class Constants {
     public static final int BOB_TOTAL_ANIMATION_FRAMES = 3;
     public static final int FIREBALL_TOTAL_ANIMATION_FRAMES = 9;
     public static final int FIREWALL_TOTAL_ANIMATION_FRAMES = 5;
+    public static final int MISSLE_TOTAL_ANIMATION_FRAMES = 4;
     public static final int DYNAMIC_FIREWALL_TOTAL_ANIMATION_FRAMES = 3;
     public static final int GOAL_HIT_SPEED = 1300;
 

@@ -99,6 +99,7 @@ public class Bob {
             bounds.x = screenWidth - width;
             hitBounds.x = bounds.x + offSetX;
         }
+
     }
 
     public void moveX(float pixels, float delta) {
@@ -126,6 +127,6 @@ public class Bob {
     }
 
     public void setBobAnimation(ImageProvider imageProvider) {
-        imageProvider.setAnimations(textureRegions, imageProvider, ImageProvider.ObjectType.BOB);
+        imageProvider.setAnimations(textureRegions, ImageProvider.BOB_ID);
     }
 }

@@ -7,7 +7,7 @@ import net.asg.games.dante.Constants;
 import net.asg.games.dante.providers.ImageProvider;
 import net.asg.games.dante.states.GameScreenState.LevelState;
 import net.asg.games.dante.providers.SoundProvider;
-
+import net.asg.games.dante.states.MovingGameObjectState;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
@@ -19,7 +19,7 @@ public class Goal extends MovingGameObject {
 
     public Goal(ImageProvider imageProvider, TextureRegion[] textureRegions,
                 SoundProvider soundProvider, int width, int height, boolean isHitboxActive,
-                net.asg.games.dante.states.MovingGameObjectState state, int[] hitBoxConfig) {
+                MovingGameObjectState state, int[] hitBoxConfig) {
         super(imageProvider, textureRegions, soundProvider, width, height,
                 isHitboxActive, state, hitBoxConfig);
     }
@@ -29,7 +29,6 @@ public class Goal extends MovingGameObject {
         rect.x -= moveSpeed * delta;
         setHitboxBounds(rect);
 
-        state.setPosX((int) rect.x);
         time += delta;
         if (time > animationPeriod) {
             time -= animationPeriod;
@@ -38,6 +37,8 @@ public class Goal extends MovingGameObject {
                 frame = 0;
             }
         }
+
+        setStatefulPosition();
     }
 
     public LevelState doCollision(float delta) {
