@@ -23,6 +23,7 @@ public class Missile extends MovingGameObject {
         setLaunching();
         this.isDefunct = false;
         targetX = MathUtils.random(0, imageProvider.getScreenWidth());
+        flippedTextures(false);
     }
 
     public void setActive(){
@@ -35,7 +36,7 @@ public class Missile extends MovingGameObject {
 
     public void setFalling(){
         isFalling = true;
-        updateTextures();
+        flippedTextures(true);
         setTopOfScreen();
     }
 
@@ -47,11 +48,17 @@ public class Missile extends MovingGameObject {
         rect.setY(imageProvider.getScreenHeight()-rect.height);
     }
 
-    private void updateTextures(){
+    private void flippedTextures(boolean isFlipped){
         for(int i  = 0; i < textureRegions.length; i++){
-            //if(flipped) {
-                textureRegions[i].flip(false, true);
-            //}
+            if(isFlipped){
+                if(!textureRegions[i].isFlipY()) {
+                  textureRegions[i].flip(false, true);
+                }
+            } else  {
+                if(textureRegions[i].isFlipY()) {
+                    textureRegions[i].flip(false, true);
+                }
+            }
         }
     }
 
