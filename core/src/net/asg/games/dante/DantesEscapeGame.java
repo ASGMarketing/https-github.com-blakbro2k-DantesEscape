@@ -1,5 +1,6 @@
 package net.asg.games.dante;
 
+import net.asg.games.dante.models.MovingGameObjectPool;
 import net.asg.games.dante.providers.ImageProvider;
 import net.asg.games.dante.providers.LevelProvider;
 import net.asg.games.dante.screens.GameScreen;
@@ -21,6 +22,7 @@ public class DantesEscapeGame extends Game {
     private ImageProvider imageProvider;
     private SoundProvider soundProvider;
     private LevelProvider levelProvider;
+    private MovingGameObjectPool gameObjectsPool;
 
     private GameScreen gameScreen;
     private MainMenuScreen mainMenuScreen;
@@ -49,6 +51,7 @@ public class DantesEscapeGame extends Game {
         soundProvider = new SoundProvider();
         soundProvider.load();
         levelProvider = new LevelProvider();
+        gameObjectsPool = new MovingGameObjectPool(this);
 
         fpsLog = new FPSLogger();
         fpsLog.log();
@@ -112,6 +115,10 @@ public class DantesEscapeGame extends Game {
 
     public LevelProvider getLevelProvider() {
         return levelProvider;
+    }
+
+    public MovingGameObjectPool getObjectsPool() {
+        return gameObjectsPool;
     }
 
     //public void showHelp() {

@@ -26,6 +26,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Pool;
 
 /**
  * @author Blakbro2k This class defines the moving object on the screen of the
@@ -34,7 +35,7 @@ import com.badlogic.gdx.math.Rectangle;
  *         It requires an image provider to handle the textures. It returns an
  *         array of texture regions if the object has animations
  */
-public class MovingGameObject {
+public class MovingGameObject implements Pool.Poolable{
     protected int moveSpeed = Constants.OBJECT_MOVE_SPEED;
     protected float animationPeriod = Constants.DEFAULT_ANIMATION_PERIOD;
     protected int width;
@@ -177,5 +178,10 @@ public class MovingGameObject {
     }
     public MovingGameObjectState getState() {
         return state;
+    }
+
+    @Override
+    public void reset() {
+
     }
 }

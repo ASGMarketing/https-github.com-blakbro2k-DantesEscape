@@ -5,6 +5,7 @@ import java.util.Iterator;
 import net.asg.games.dante.Constants;
 import net.asg.games.dante.DantesEscapeGame;
 import net.asg.games.dante.models.GameWorld;
+import net.asg.games.dante.models.MovingGameObjectPool;
 import net.asg.games.dante.providers.LevelProvider;
 import net.asg.games.dante.models.Bob;
 import net.asg.games.dante.models.Button;

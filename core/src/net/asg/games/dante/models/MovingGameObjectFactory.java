@@ -88,7 +88,7 @@ public class MovingGameObjectFactory {
         return temp;
     }
 
-    public Missile getMissle(int missleId) {
+    private Missile getMissle(int missleId) {
         TextureRegion[] textureRegions = new TextureRegion[Constants.MISSLE_TOTAL_ANIMATION_FRAMES];
 
         imageProvider.setAnimations(textureRegions, missleId);
@@ -101,7 +101,7 @@ public class MovingGameObjectFactory {
                 isHitboxActive, model, Constants.MISSLE_HITBOX);
     }
 
-    public SlidingRockWall getSlidingRockWall(int position, int holeSize, int gapDepth) {
+    private SlidingRockWall getSlidingRockWall(int position, int holeSize, int gapDepth) {
         TextureRegion[] textureRegions = new TextureRegion[1];
         textureRegions[0] = imageProvider.getRockWall();
 

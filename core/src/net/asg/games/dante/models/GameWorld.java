@@ -28,6 +28,7 @@ public class GameWorld {
     private ImageProvider imageProvider;
     private SoundProvider soundProvider;
     private LevelProvider levelProvider;
+    private MovingGameObjectPool gameObjectsPool;
 
     private Texture pauseScreen;
 
@@ -62,7 +63,7 @@ public class GameWorld {
         imageProvider = game.getImageProvider();
         soundProvider = game.getSoundProvider();
         levelProvider = game.getLevelProvider();
-
+        gameObjectsPool=  game.getObjectsPool();
         initialize();
     }
 
