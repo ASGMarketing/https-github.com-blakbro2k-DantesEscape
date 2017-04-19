@@ -158,4 +158,8 @@ public class DantesEscapeGame extends Game {
         soundProvider.stopAllSounds();
         soundProvider.resetSoundBoard();
     }
+
+    public void exitApp(int errorCode) {
+        Gdx.app.exit();
+    }
 }

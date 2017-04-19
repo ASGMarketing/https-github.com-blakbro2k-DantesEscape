@@ -9,7 +9,6 @@ import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.Toast;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.google.android.gms.ads.AdListener;
@@ -22,11 +21,6 @@ import net.asg.games.dante.ActionResolver;
 import net.asg.games.dante.DantesEscapeGame;
 
 public class AndroidLauncher extends AndroidApplication implements ActionResolver{
-	private static final String AD_UNIT_ID_BANNER = "pub-2759645736293529";
-	private static final String AD_UNIT_ID_INTERSTITIAL = "INVALID";
-	private static final String GOOGLE_PLAY_URL = "https://play.google.com/store/apps/developer?id=TheInvader360";
-	private static final String GITHUB_URL = "https://github.com/TheInvader360";
-
 	protected AdView adView;
 	protected View gameView;
 	private InterstitialAd interstitialAd;
@@ -70,14 +64,12 @@ public class AndroidLauncher extends AndroidApplication implements ActionResolve
 				Toast.makeText(getApplicationContext(), "Closed Interstitial", Toast.LENGTH_SHORT).show();
 			}
 		});
-
-
 	}
 
 	private AdView createAdView() {
 		adView = new AdView(this);
 		adView.setAdSize(AdSize.SMART_BANNER);
-		adView.setAdUnitId(AD_UNIT_ID_BANNER);
+		adView.setAdUnitId(getAdMobUnitId());
 		adView.setId(12345); // this is an arbitrary id, allows for relative positioning in createGameView()
 		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		params.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
@@ -106,7 +98,7 @@ public class AndroidLauncher extends AndroidApplication implements ActionResolve
 
 	@Override
 	public void backButton(DantesEscapeGame game) {
-		Gdx.app.exit();
+		game.exitApp(0);
 	}
 
 	@Override
@@ -120,8 +112,23 @@ public class AndroidLauncher extends AndroidApplication implements ActionResolve
 	}
 
 	@Override
-	public void showOrLoadInterstital(boolean show) {
-
+	public void showOrLoadInterstital() {
+		try {
+			runOnUiThread(new Runnable() {
+				public void run() {
+					if (interstitialAd.isLoaded()) {
+						interstitialAd.show();
+						Toast.makeText(getApplicationContext(), "Showing Interstitial", Toast.LENGTH_SHORT).show();
+					}
+					else {
+						AdRequest interstitialRequest = new AdRequest.Builder().build();
+						interstitialAd.loadAd(interstitialRequest);
+						Toast.makeText(getApplicationContext(), "Loading Interstitial", Toast.LENGTH_SHORT).show();
+					}
+				}
+			});
+		} catch (Exception e) {
+		}
 	}
 
 	@Override
@@ -143,4 +150,78 @@ public class AndroidLauncher extends AndroidApplication implements ActionResolve
 	public void getDebugSetting() {
 
 	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (adView != null) adView.resume();
+	}
+
+	@Override
+	public void onPause() {
+		if (adView != null) adView.pause();
+		super.onPause();
+	}
+
+	@Override
+	public void onDestroy() {
+		if (adView != null) adView.destroy();
+		super.onDestroy();
+	}
+
+	private String getAdMobUnitId() {
+		return getString(R.string.ad_unit_id);
+	}
+
+	/*
+	@Override
+	public void onBackPressed() {
+		final Dialog dialog = new Dialog(this);
+		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+		LinearLayout ll = new LinearLayout(this);
+		ll.setOrientation(LinearLayout.VERTICAL);
+
+		Button b1 = new Button(this);
+		b1.setText("Quit");
+		b1.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				finish();
+			}
+		});
+		ll.addView(b1);
+
+		Button b2 = new Button(this);
+		b2.setText("Games");
+		b2.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(GOOGLE_PLAY_URL)));
+				dialog.dismiss();
+			}
+		});
+		ll.addView(b2);
+
+		Button b3 = new Button(this);
+		b3.setText("GitHub");
+		b3.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(GITHUB_URL)));
+				dialog.dismiss();
+			}
+		});
+		ll.addView(b3);
+
+		Button b4 = new Button(this);
+		b4.setText("Blog");
+		b4.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(BLOG_URL)));
+				dialog.dismiss();
+			}
+		});
+		ll.addView(b4);
+
+		dialog.setContentView(ll);
+		dialog.show();
+	}*/
 }

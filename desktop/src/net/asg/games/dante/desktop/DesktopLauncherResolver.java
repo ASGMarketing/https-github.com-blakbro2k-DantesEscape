@@ -11,6 +11,7 @@ public class DesktopLauncherResolver implements ActionResolver {
     @Override
     public void backButton(DantesEscapeGame game) {
         System.out.println("backButton Resolver called.");
+        game.exitApp(0);
     }
 
     @Override

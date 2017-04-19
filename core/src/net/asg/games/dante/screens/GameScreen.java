@@ -344,7 +344,7 @@ public class GameScreen extends AbstractScreen {
     @Override
     public boolean keyDown(int keycode) {
         if (keycode == Keys.BACK || keycode == Keys.BACKSPACE) {
-            Gdx.app.exit();
+            game.getActionResolver().backButton(game);
         }
 
         if (keycode == Keys.P) {

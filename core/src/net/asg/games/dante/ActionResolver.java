@@ -18,7 +18,7 @@ public interface ActionResolver {
 
     void hideBannerAd();
 
-    void showOrLoadInterstital(boolean show);
+    void showOrLoadInterstital();
 
     void share();
 
