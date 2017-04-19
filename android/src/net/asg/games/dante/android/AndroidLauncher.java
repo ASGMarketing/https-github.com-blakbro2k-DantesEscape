@@ -1,61 +1,146 @@
 package net.asg.games.dante.android;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
+import android.widget.Toast;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 import net.asg.games.dante.ActionResolver;
-import net.asg.games.dante.Constants;
 import net.asg.games.dante.DantesEscapeGame;
-import net.asg.games.dante.GameEventListener;
-import net.asg.games.dante.HighScoreManager;
 
-import java.util.List;
+public class AndroidLauncher extends AndroidApplication implements ActionResolver{
+	private static final String AD_UNIT_ID_BANNER = "pub-2759645736293529";
+	private static final String AD_UNIT_ID_INTERSTITIAL = "INVALID";
+	private static final String GOOGLE_PLAY_URL = "https://play.google.com/store/apps/developer?id=TheInvader360";
+	private static final String GITHUB_URL = "https://github.com/TheInvader360";
 
-public class AndroidLauncher extends AndroidApplication {
-	ActionResolverAndroid actionResolverAndroid;
+	protected AdView adView;
+	protected View gameView;
+	private InterstitialAd interstitialAd;
+
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// set context of action
-		actionResolverAndroid = new ActionResolverAndroid(this);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-		initialize(new DantesEscapeGame(actionResolverAndroid), config);
 
-		/*
+		//config. = false;
+		config.useAccelerometer = false;
+		config.useCompass = false;
+
+		// Do the stuff that initialize() would do for you
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+
+		RelativeLayout layout = new RelativeLayout(this);
+		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+		layout.setLayoutParams(params);
+
+		AdView admobView = createAdView();
+		layout.addView(admobView);
+		View gameView = createGameView(config);
+		layout.addView(gameView);
+
+		setContentView(layout);
+		startAdvertising(admobView);
+
+		interstitialAd = new InterstitialAd(this);
+		interstitialAd.setAdUnitId(AD_UNIT_ID_INTERSTITIAL);
+		interstitialAd.setAdListener(new AdListener() {
+			@Override
+			public void onAdLoaded() {
+				Toast.makeText(getApplicationContext(), "Finished Loading Interstitial", Toast.LENGTH_SHORT).show();
+			}
+			@Override
+			public void onAdClosed() {
+				Toast.makeText(getApplicationContext(), "Closed Interstitial", Toast.LENGTH_SHORT).show();
+			}
+		});
 
 
-		        // Create the layout
-        RelativeLayout layout = new RelativeLayout(this);
+	}
 
-        // Do the stuff that initialize() would do for you
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-        		WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+	private AdView createAdView() {
+		adView = new AdView(this);
+		adView.setAdSize(AdSize.SMART_BANNER);
+		adView.setAdUnitId(AD_UNIT_ID_BANNER);
+		adView.setId(12345); // this is an arbitrary id, allows for relative positioning in createGameView()
+		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		params.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+		params.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+		adView.setLayoutParams(params);
+		adView.setBackgroundColor(Color.BLACK);
+		return adView;
+	}
 
-        // Create the libgdx View
-        View gameView = initializeForView(new DantesEscapeGame(Constants.DEBUG), false);
+	private View createGameView(AndroidApplicationConfiguration config) {
+		//initialize(new DantesEscapeGame(Constants.DEBUG), config);
 
-        // Create and setup the AdMob view
-        AdView adView = new AdView(this, AdSize.BANNER, "xxxxxxxx"); // Put in your secret key here
-        adView.loadAd(new AdRequest());
+		gameView = initializeForView(new DantesEscapeGame(this), config);
+		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+		params.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+		params.addRule(RelativeLayout.BELOW, adView.getId());
+		gameView.setLayoutParams(params);
+		return gameView;
+	}
 
-        // Add the libgdx view
-        layout.addView(gameView);
+	private void startAdvertising(AdView adView) {
+		AdRequest adRequest = new AdRequest.Builder().build();
+		adView.loadAd(adRequest);
+	}
 
-        // Add the AdMob view
-        RelativeLayout.LayoutParams adParams =
-        	new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
-        			RelativeLayout.LayoutParams.WRAP_CONTENT);
-        adParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        adParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+	@Override
+	public void backButton(DantesEscapeGame game) {
+		Gdx.app.exit();
+	}
 
-        layout.addView(adView, adParams);
+	@Override
+	public void showBannerAd() {
 
-        // Hook it all up
-        setContentView(layout);
-		 */
+	}
+
+	@Override
+	public void hideBannerAd() {
+
+	}
+
+	@Override
+	public void showOrLoadInterstital(boolean show) {
+
+	}
+
+	@Override
+	public void share() {
+
+	}
+
+	@Override
+	public void showScores() {
+
+	}
+
+	@Override
+	public void getHighScoreName() {
+
+	}
+
+	@Override
+	public void getDebugSetting() {
+
 	}
 }

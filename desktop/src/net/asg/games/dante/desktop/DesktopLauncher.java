@@ -42,6 +42,7 @@ public class DesktopLauncher {
 		cfg.width = Constants.GAME_WIDTH;
 		cfg.height = Constants.GAME_HEIGHT;
 
-		new LwjglApplication(new DantesEscapeGame(Constants.DEBUG), cfg);
+		DesktopLauncherResolver resolver = new DesktopLauncherResolver();
+		new LwjglApplication(new DantesEscapeGame(resolver), cfg);
 	}
 }

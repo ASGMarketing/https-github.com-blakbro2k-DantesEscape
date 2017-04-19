@@ -9,7 +9,7 @@ import net.asg.games.dante.DantesEscapeGame;
  */
 
 public class MovingGameObjectPool {
-    MovingGameObjectFactory movingGameObjectFactory;
+    private MovingGameObjectFactory movingGameObjectFactory;
 
     public MovingGameObjectPool(DantesEscapeGame game){
         movingGameObjectFactory = new MovingGameObjectFactory(game.getImageProvider(), game.getSoundProvider());

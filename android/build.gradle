@@ -22,7 +22,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
     buildTypes {
         debug {
             debuggable true
@@ -37,7 +36,12 @@ android {
         debug {
         }
     }
-
+    defaultConfig {
+        minSdkVersion 18
+        targetSdkVersion 23
+    }
+    productFlavors {
+    }
 }
 // called every time gradle gets executed, takes the native dependencies of
 // the natives configuration, and extracts them to the proper libs/ folders
@@ -135,6 +139,8 @@ idea {
     }
 }
 dependencies {
+
     compile 'com.google.firebase:firebase-ads:10.0.1'
 }
+
 apply plugin: 'com.google.gms.google-services'

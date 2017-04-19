@@ -4,21 +4,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
-import net.asg.games.dante.DantesEscapeGame;
 
-import javafx.scene.control.ToggleButton;
+import net.asg.games.dante.DantesEscapeGame;
 
 /**
  * Created by Blakbro2k on 3/1/2016.
@@ -43,7 +37,7 @@ public class SettingsScreen extends AbstractScreen {
 
         Table table = new Table();
         table.debug();
-        table.setPosition(200f, 440f);
+        table.setPosition(0, 0);
 
         Label.LabelStyle headingStyle = new Label.LabelStyle(imageProvider.getRavieFont(), Color.RED);
         Label headingLabel = new Label("DANTE'S ESCAPE",headingStyle);
@@ -75,9 +69,11 @@ public class SettingsScreen extends AbstractScreen {
 //        intercepts and handles platform specific back keys
         Gdx.input.setInputProcessor(this);
         Gdx.input.setCatchBackKey(true);
+
         if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
-            this.game.actionResolver.backButton(game);
+            this.game.getActionResolver().backButton(game);
         }
+
         super.render(delta);
         Gdx.gl.glClearColor(0, 0, 1, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);

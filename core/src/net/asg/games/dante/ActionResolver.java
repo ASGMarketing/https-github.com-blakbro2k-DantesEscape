@@ -14,11 +14,15 @@ public interface ActionResolver {
      */
     void backButton(DantesEscapeGame game);
 
-    void showAds(boolean show);
+    void showBannerAd();
 
-    void showOrLoadInterstital();
+    void hideBannerAd();
 
-    void showScores(List<HighScoreManager.HighScore> highScores);
+    void showOrLoadInterstital(boolean show);
+
+    void share();
+
+    void showScores();
 
     void getHighScoreName();
 

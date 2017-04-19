@@ -23,6 +23,7 @@ public class DantesEscapeGame extends Game {
     private SoundProvider soundProvider;
     private LevelProvider levelProvider;
     private MovingGameObjectPool gameObjectsPool;
+    private ActionResolver actionResolver;
 
     private GameScreen gameScreen;
     private MainMenuScreen mainMenuScreen;
@@ -34,14 +35,9 @@ public class DantesEscapeGame extends Game {
     private StateManager stateManager;
     private FPSLogger fpsLog;
 
-    public ActionResolver actionResolver;
 
     public DantesEscapeGame(ActionResolver actionResolver) {
         this.actionResolver = actionResolver;
-    }
-
-    public DantesEscapeGame(boolean isDebugOn) {
-        this.isDebugOn = isDebugOn;
     }
 
     @Override
@@ -121,10 +117,13 @@ public class DantesEscapeGame extends Game {
         return gameObjectsPool;
     }
 
+    public ActionResolver getActionResolver() {
+        return actionResolver;
+    }
+
     //public void showHelp() {
         //setScreen(new HelpScreen(this));
     //}
-
 
     //public GameState getGameState() {
     //    return gameState;

@@ -61,6 +61,7 @@ public class GameScreen extends AbstractScreen {
     private GameOverMessage gameOverMessage;
     private GameWorld world;
     private ParticleEffect effect;
+    private boolean isAdShown = false;
 
 
     public GameScreen(DantesEscapeGame game, GameScreenState state) {
@@ -174,7 +175,6 @@ public class GameScreen extends AbstractScreen {
         batch.draw(bob.getBobFrame(delta,gameScreenState.gameSpeed), bob.getPosition().x, bob.getPosition().y);
 
         for (MovingGameObject movingObject : movingObjects) {
-            System.out.println(movingObjects.size);
             movingObject.draw(batch);
 
             if (movingObject.isCollided) {
@@ -185,6 +185,7 @@ public class GameScreen extends AbstractScreen {
         if (gameScreenState.isDead) {
             if (gameOverMessage == null) {
                 gameOverMessage = new GameOverMessage(imageProvider, gameScreenState.score);
+                game.getActionResolver().showBannerAd();
             }
 
             gameOverMessage.draw(batch);
@@ -210,11 +211,18 @@ public class GameScreen extends AbstractScreen {
             debugRenderer.begin(ShapeType.Line);
             debugRenderer.setColor(Color.GREEN);
 
+            //ShapeRenderer hitBoxRenderer = new ShapeRenderer();
+            //hitBoxRenderer.begin(ShapeType.Filled);
+           // hitBoxRenderer.setColor(1, 0, 0, Color.alpha(0.5f));
+
+            //bob.draw
+
             debugRenderer.rect(bob.getPosition().x, bob.getPosition().y,
                     bob.getPosition().width, bob.getPosition().height);
 
             for (MovingGameObject movingObject : movingObjects) {
                 movingObject.drawDebug(debugRenderer);
+               // movingObject.drawHitbox(hitBoxRenderer);
             }
             debugRenderer.end();
 
