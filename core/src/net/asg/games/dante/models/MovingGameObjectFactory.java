@@ -1,78 +1,39 @@
 package net.asg.games.dante.models;
 
-import net.asg.games.dante.Constants;
+import net.asg.games.dante.DantesEscapeGame;
 import net.asg.games.dante.providers.ImageProvider;
-import net.asg.games.dante.providers.SoundProvider;
-import net.asg.games.dante.states.MovingGameObjectState;
-
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 
 
 public class MovingGameObjectFactory {
+    private MovingGameObjectPool gameObjectPool;
 
-    private ImageProvider imageProvider;
-    private SoundProvider soundProvider;
-    private boolean isHitboxActive = Constants.NO_CLIP_MODE_OFF;
-
-    public MovingGameObjectFactory(ImageProvider imageProvider, SoundProvider soundProvider) {
-        this.imageProvider = imageProvider;
-        this.soundProvider = soundProvider;
-        //System.out.println(SoundProvider);
+    public MovingGameObjectFactory(DantesEscapeGame game) {
+        this.gameObjectPool = new MovingGameObjectPool(game.getImageProvider(), game.getSoundProvider());
     }
 
-
-    public FireBall getFireball() {
-        TextureRegion[] textureRegions = new TextureRegion[Constants.FIREBALL_TOTAL_ANIMATION_FRAMES];
-
-        imageProvider.setAnimations(textureRegions, ImageProvider.FIREBALL_ID);
-
-        soundProvider.playflameBurstSound();
-        MovingGameObjectState model = new MovingGameObjectState();
-        model.setType(MovingGameObjectType.Fireball);
-
-        return new FireBall(imageProvider, textureRegions, soundProvider,
-                textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight(),
-                isHitboxActive, model, Constants.FIREBALL_HITBOX);
+    public FireBall getFireBall() {
+        return gameObjectPool.FireBallPool.obtain();
     }
 
-    public RockWall getRockWall(int position, int holeSize) {
-        TextureRegion[] textureRegions = new TextureRegion[1];
-        textureRegions[0] = imageProvider.getRockWall();
-
-        soundProvider.playfirewooshSound();
-        MovingGameObjectState model = new MovingGameObjectState();
-        model.setType(MovingGameObjectType.RockWall);
-
-        return new RockWall(imageProvider, textureRegions, soundProvider,
-                textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight(),
-                isHitboxActive, model, Constants.ROCKWALL_HITBOX, position, holeSize);
+    private RockWall getRockWall() {
+        return gameObjectPool.RockWallPool.obtain();
     }
 
     public FireWall getFireWall() {
-        TextureRegion[] textureRegions = new TextureRegion[Constants.DYNAMIC_FIREWALL_TOTAL_ANIMATION_FRAMES];
+        return gameObjectPool.FireWallPool.obtain();
+    }
 
-        imageProvider.setAnimations(textureRegions, ImageProvider.FIREWALL_ID);
-
-        soundProvider.playfirewooshSound();
-        MovingGameObjectState model = new MovingGameObjectState();
-        model.setType(MovingGameObjectType.LavaWall);
-
-        return new FireWall(imageProvider, textureRegions, soundProvider,
-                textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight(),
-                isHitboxActive, model, Constants.ROCKWALL_HITBOX, -1, -1);
+    private Missile getMissle() {
+        return gameObjectPool.MissilePool.obtain();
     }
 
     public Goal getGoal() {
-        TextureRegion[] textureRegions = new TextureRegion[1];
-        textureRegions[0] = imageProvider.getGoal();
+        return gameObjectPool.GoalPool.obtain();
+    }
 
-        MovingGameObjectState model = new MovingGameObjectState();
-        model.setType(MovingGameObjectType.GoalWall);
-
-        return new Goal(imageProvider, textureRegions, soundProvider,
-                textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight(),
-                isHitboxActive, model, Constants.GOAL_HITBOX);
+    private SlidingRockWall getSlidingRockWall() {
+        return gameObjectPool.SlidingRockWallPool.obtain();
     }
 
     public Missile getEasyLaunchMissle() {
@@ -88,30 +49,16 @@ public class MovingGameObjectFactory {
         return temp;
     }
 
-    private Missile getMissle(int missleId) {
-        TextureRegion[] textureRegions = new TextureRegion[Constants.MISSLE_TOTAL_ANIMATION_FRAMES];
-
-        imageProvider.setAnimations(textureRegions, missleId);
-
-        MovingGameObjectState model = new MovingGameObjectState();
-        model.setType(MovingGameObjectType.Missile);
-
-        return new Missile(imageProvider, textureRegions, soundProvider,
-                textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight(),
-                isHitboxActive, model, Constants.MISSLE_HITBOX);
-    }
-
-    private SlidingRockWall getSlidingRockWall(int position, int holeSize, int gapDepth) {
-        TextureRegion[] textureRegions = new TextureRegion[1];
-        textureRegions[0] = imageProvider.getRockWall();
-
-        soundProvider.playfirewooshSound();
-        MovingGameObjectState model = new MovingGameObjectState();
-        model.setType(MovingGameObjectType.SlidingRockWall);
-
-        return new SlidingRockWall(imageProvider, textureRegions, soundProvider,
-                textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight(),
-                isHitboxActive, model, Constants.ROCKWALL_HITBOX, position, holeSize, gapDepth);
+    private MovingGameObjectType getMissleType(int missleType) {
+        switch (missleType){
+            case ImageProvider.HARD_MISSILE_ID:
+            case ImageProvider.HARD_MISSILE_FLIPPED_ID:
+                return MovingGameObjectType.HardMissile;
+            case ImageProvider.EASY_MISSILE_ID:
+            case ImageProvider.EASY_MISSILE_FLIPPED_ID:
+            default:
+                return MovingGameObjectType.EasyMissile;
+        }
     }
 
     public RockWall getRandomEasyMediumSlidingWall(){

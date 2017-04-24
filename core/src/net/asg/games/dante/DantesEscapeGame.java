@@ -22,7 +22,6 @@ public class DantesEscapeGame extends Game {
     private ImageProvider imageProvider;
     private SoundProvider soundProvider;
     private LevelProvider levelProvider;
-    private MovingGameObjectPool gameObjectsPool;
     private ActionResolver actionResolver;
 
     private GameScreen gameScreen;
@@ -47,7 +46,6 @@ public class DantesEscapeGame extends Game {
         soundProvider = new SoundProvider();
         soundProvider.load();
         levelProvider = new LevelProvider();
-        gameObjectsPool = new MovingGameObjectPool(this);
 
         fpsLog = new FPSLogger();
         fpsLog.log();
@@ -111,10 +109,6 @@ public class DantesEscapeGame extends Game {
 
     public LevelProvider getLevelProvider() {
         return levelProvider;
-    }
-
-    public MovingGameObjectPool getObjectsPool() {
-        return gameObjectsPool;
     }
 
     public ActionResolver getActionResolver() {

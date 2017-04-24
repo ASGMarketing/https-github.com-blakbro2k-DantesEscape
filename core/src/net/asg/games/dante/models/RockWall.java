@@ -1,14 +1,16 @@
 package net.asg.games.dante.models;
 
-import net.asg.games.dante.Constants;
-import net.asg.games.dante.providers.ImageProvider;
-import net.asg.games.dante.providers.SoundProvider;
-
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
+
+import net.asg.games.dante.Constants;
+import net.asg.games.dante.providers.ImageProvider;
+import net.asg.games.dante.providers.SoundProvider;
+import net.asg.games.dante.states.MovingGameObjectState;
 
 public class RockWall extends MovingGameObject {
     public static final int HARD_GAP_SIZE = 100;
@@ -30,55 +32,49 @@ public class RockWall extends MovingGameObject {
     protected int moveSpeed = Constants.WALL_OBJECT_MOVE_SPEED;
 
     public RockWall(ImageProvider imageProvider,
-                    TextureRegion[] textureRegions, SoundProvider soundProvider,
-                    int width, int height, boolean isHitboxActive, net.asg.games.dante.states.MovingGameObjectState state,
-                    int[] hitBoxConfig, int position, int holeSize) {
-        super(imageProvider, textureRegions, soundProvider, width, height,
-                isHitboxActive, state, hitBoxConfig);
+                    TextureRegion[] textureRegions,
+                    SoundProvider soundProvider,
+                    MovingGameObjectState state,
+                    int[] hitBoxConfig) {
+        super(imageProvider, textureRegions, soundProvider, state, hitBoxConfig);
 
-        //this.rect = new Rectangle();
-        this.rect.width = width;
-        this.rect.height = height;
-
-        this.position = position;
-        this.holeSize = holeSize;
-
-
-        this.lowerWall = new Rectangle();
-        this.lowerWall.width = width;
-        this.lowerWall.height = height;
-
-        this.rect.x = this.imageProvider.getScreenWidth();
-        this.rect.y = WALL_BASE_OFFSET - position;
-
-        this.lowerWall.x = this.imageProvider.getScreenWidth();
-        this.lowerWall.y = WALL_BASE_OFFSET - rect.height - holeSize - position;
-
+        lowerWall = new Rectangle();
         lowerHitboxBounds = new Rectangle();
 
+        int rectConfig[] = {0,0,textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight()};
+
+        setRectSize(rect, rectConfig);
+        setRectSize(lowerWall, rectConfig);
+        setRectSize(hitboxBounds, hitBoxConfig);
         setRectSize(lowerHitboxBounds, hitBoxConfig);
-        setHitboxBounds(rect);
-        setLowerHitboxBounds(lowerWall);
+        setHitboxBounds();
 
         this.setAnimationSpeed(0.1f);
     }
 
     public void draw(SpriteBatch batch) {
-        batch.draw(textureRegions[frame], rect.x, rect.y,rect.width,rect.height);
+        batch.draw(textureRegions[frame], rect.x, rect.y, rect.width, rect.height);
         batch.draw(textureRegions[frame], lowerWall.x, lowerWall.y);
     }
 
     public void drawDebug(ShapeRenderer debugRenderer) {
+        debugRenderer.set(ShapeType.Line);
+        debugRenderer.setColor(Color.GREEN);
         debugRenderer.rect(rect.x, rect.y, rect.width, rect.height);
         debugRenderer.rect(lowerWall.x, lowerWall.y, lowerWall.width, lowerWall.height);
+        drawHitbox(debugRenderer);
     }
 
     public void drawHitbox(ShapeRenderer debugRenderer) {
+        debugRenderer.set(ShapeType.Filled);
+        debugRenderer.setColor(Color.RED);
         debugRenderer.rect(hitboxBounds.x, hitboxBounds.y, hitboxBounds.width, hitboxBounds.height);
         debugRenderer.rect(lowerHitboxBounds.x, lowerHitboxBounds.y, lowerHitboxBounds.width, lowerHitboxBounds.height);
-   }
+    }
 
-    public void setLowerHitboxBounds(Rectangle rect){
+    public void setHitboxBounds() {
+        hitboxBounds.x = rect.x + offSetX;
+        hitboxBounds.y = rect.y + offSetY;
         lowerHitboxBounds.x = lowerWall.x + offSetX;
         lowerHitboxBounds.y = lowerWall.y + offSetY;
     }
@@ -86,10 +82,8 @@ public class RockWall extends MovingGameObject {
     public void moveLeft(float delta, float speedBonus) {
         rect.x -= moveSpeed * delta * speedBonus;
         lowerWall.x -= moveSpeed * delta * speedBonus;
-        setHitboxBounds(rect);
-        setLowerHitboxBounds(lowerWall);
+        setHitboxBounds();
 
-        // state.setPosY((int) rect.y);
         time += delta;
         if (time > animationPeriod) {
             time -= animationPeriod;
@@ -98,14 +92,36 @@ public class RockWall extends MovingGameObject {
                 frame = 0;
             }
         }
+        setStatefulPosition();
     }
 
     public boolean isOverlapping(Rectangle otherRect) {
         return hitboxBounds.overlaps(otherRect) || lowerHitboxBounds.overlaps(otherRect);
     }
 
-    public String toString(){
-        return "Upper Wall: " + rect + "\n" +
+    public void setObjectPosition(int x, int y){
+        this.rect.x = this.imageProvider.getScreenWidth();
+        this.rect.y = WALL_BASE_OFFSET - position;
+
+        this.lowerWall.x = this.imageProvider.getScreenWidth();
+        this.lowerWall.y = WALL_BASE_OFFSET - rect.height - holeSize - position;
+
+        rect.x = lowerWall.x = x;
+        rect.y = g;
+        lowerWall.y = y;
+        setHitboxBounds();
+    }
+
+    public void setHolePosition(int position){
+        this.position = position;
+    }
+
+    public void setHoleSize(int holeSize){
+        this.holeSize = holeSize;
+    }
+    public String toString() {
+        return "RockWall: \n" +
+                "Upper Wall: " + rect + "\n" +
                 "Lower Wall: " + lowerWall + "\n" +
                 "position: " + position + "\n" +
                 "holeSize: " + holeSize + "\n" +

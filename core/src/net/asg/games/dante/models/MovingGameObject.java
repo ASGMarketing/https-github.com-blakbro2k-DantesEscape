@@ -22,9 +22,11 @@ import net.asg.games.dante.states.GameScreenState.LevelState;
 import net.asg.games.dante.providers.SoundProvider;
 import net.asg.games.dante.states.MovingGameObjectState;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Pool;
 
@@ -35,67 +37,59 @@ import com.badlogic.gdx.utils.Pool;
  *         It requires an image provider to handle the textures. It returns an
  *         array of texture regions if the object has animations
  */
-public class MovingGameObject implements Pool.Poolable{
-    protected int moveSpeed = Constants.OBJECT_MOVE_SPEED;
+public class MovingGameObject implements Pool.Poolable {
+    public static final int GAME_OBJECT_X = 0;
+    public static final int GAME_OBJECT_Y = 1;
+    public static final int GAME_OBJECT_WIDTH = 2;
+    public static final int GAME_OBJECT_HEIGHT = 3;
+
     protected float animationPeriod = Constants.DEFAULT_ANIMATION_PERIOD;
-    protected int width;
-    protected int height;
+    protected float time = 0;
+
     protected Rectangle rect;
     protected Rectangle hitboxBounds;
-    protected int frame = 0;
-    protected float time = 0;
-    protected boolean isHitboxActive;
     protected TextureRegion[] textureRegions;
     protected ImageProvider imageProvider;
     protected SoundProvider soundProvider;
-    public boolean isCollided = false;
-    protected boolean isSoundTriggered = false;
     protected MovingGameObjectState state;
+
+    protected boolean isCollided = false;
+    protected boolean isSoundTriggered = false;
+    protected boolean isHitboxActive = true;
     protected int offSetX;
     protected int offSetY;
+    protected int frame = 0;
+    protected int width;
+    protected int height;
+    protected int moveSpeed = Constants.OBJECT_MOVE_SPEED;
 
-
-    public MovingGameObject(ImageProvider imageProvider,
-                            TextureRegion[] textureRegions, SoundProvider soundProvider,
-                            int width, int height, boolean isHitboxActive, net.asg.games.dante.states.MovingGameObjectState state,
-                            int[] hitBoxConfig) {
+    protected MovingGameObject(ImageProvider imageProvider,
+                             TextureRegion[] textureRegions,
+                             SoundProvider soundProvider,
+                             MovingGameObjectState state,
+                             int[] hitBoxConfig) {
 
         this.imageProvider = imageProvider;
         this.soundProvider = soundProvider;
         this.textureRegions = textureRegions;
-        this.isHitboxActive = isHitboxActive;
-        this.height = height;
-        this.width = width;
+        this.state = state;
+        this.offSetX = hitBoxConfig[GAME_OBJECT_X];
+        this.offSetY = hitBoxConfig[GAME_OBJECT_Y];
 
         rect = new Rectangle();
-        rect.width = width;
-        rect.height = height;
-
-        this.rect.x = imageProvider.getScreenWidth();
-        this.rect.y = 0;
-
-        this.state = state;
-
         hitboxBounds = new Rectangle();
 
-        this.offSetX = hitBoxConfig[0];
-        this.offSetY = hitBoxConfig[1];
+        int rectConfig[] = {0,0,textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight()};
 
+        setRectSize(rect, rectConfig);
         setRectSize(hitboxBounds, hitBoxConfig);
-        setHitboxBounds(rect);
-
-        state.setPosX((int) rect.x);
-        state.setPosY((int) rect.y);
-        state.setHitPosX((int) hitboxBounds.x);
-        state.setHitPosY((int) hitboxBounds.y);
-        state.setCollided(isCollided);
-        state.setHitboxActive(isHitboxActive);
-        state.setSoundTriggered(isSoundTriggered);
+        reset();
+        setStatefulPosition();
     }
 
     public void moveLeft(float delta, float speedBonus) {
         rect.x -= moveSpeed * delta * speedBonus;
-        setHitboxBounds(rect);
+        setHitboxBounds();
 
         time += delta;
         if (time > animationPeriod) {
@@ -109,8 +103,13 @@ public class MovingGameObject implements Pool.Poolable{
     }
 
     public void setStatefulPosition(){
-        state.setPosY((int) rect.y);
         state.setPosX((int) rect.x);
+        state.setPosY((int) rect.y);
+        state.setHitPosX((int) hitboxBounds.x);
+        state.setHitPosY((int) hitboxBounds.y);
+        state.setCollided(isCollided);
+        state.setHitboxActive(isHitboxActive);
+        state.setSoundTriggered(isSoundTriggered);
     }
 
     public boolean isLeftOfScreen() {
@@ -122,20 +121,21 @@ public class MovingGameObject implements Pool.Poolable{
     }
 
     public void drawDebug(ShapeRenderer debugRenderer) {
+        debugRenderer.set(ShapeType.Line);
+        debugRenderer.setColor(Color.GREEN);
         debugRenderer.rect(rect.x, rect.y, rect.width, rect.height);
+        drawHitbox(debugRenderer);
     }
 
     public void drawHitbox(ShapeRenderer debugRenderer) {
+        debugRenderer.set(ShapeType.Filled);
+        debugRenderer.setColor(Color.RED);
         debugRenderer.rect(hitboxBounds.x, hitboxBounds.y, hitboxBounds.width, hitboxBounds.height);
     }
 
-    public void setHitboxBounds(Rectangle rect){
+    public void setHitboxBounds(){
         hitboxBounds.x = rect.x + offSetX;
         hitboxBounds.y = rect.y + offSetY;
-    }
-
-    public boolean isOverlapping(Rectangle otherRect) {
-        return hitboxBounds.overlaps(otherRect);
     }
 
     public void setHitboxActive(boolean bool) {
@@ -143,6 +143,9 @@ public class MovingGameObject implements Pool.Poolable{
         state.setHitboxActive(bool);
     }
 
+    public boolean isOverlapping(Rectangle otherRect) {
+        return hitboxBounds.overlaps(otherRect);
+    }
     public void setMoveSpeed(int moveSpeed) {
         this.moveSpeed = moveSpeed;
     }
@@ -163,15 +166,20 @@ public class MovingGameObject implements Pool.Poolable{
         return LevelState.NOLCLIP;
     }
 
+    /**
+     * Given a {@code Rectangle} sets the width in accordance with the
+     * @param rect
+     * @param size
+     */
     public void setRectSize(Rectangle rect, int[] size){
-        if(size[2] != -1){
-            rect.width = size[2];
+        if(size[GAME_OBJECT_WIDTH] != -1){
+            rect.width = size[GAME_OBJECT_WIDTH];
         } else {
             rect.width = this.width;
         }
 
-        if(size[3] != -1){
-            rect.height = size[3];
+        if(size[GAME_OBJECT_HEIGHT] != -1){
+            rect.height = size[GAME_OBJECT_HEIGHT];
         } else {
             rect.height = this.height;
         }
@@ -180,8 +188,33 @@ public class MovingGameObject implements Pool.Poolable{
         return state;
     }
 
+    public boolean isCollided(){
+        return isCollided;
+    }
+
+    public void setCollided(boolean isCollided){
+        this.isCollided = isCollided;
+    }
+
     @Override
     public void reset() {
+        time = 0;
+        isCollided = false;
+        isSoundTriggered = false;
+        isHitboxActive = true;
+        frame = 0;
+        moveSpeed = Constants.OBJECT_MOVE_SPEED;
+        setHitboxActive(false);
+        setObjectPosition(imageProvider.getScreenWidth(), 0);
+    }
 
+    public void fireSound(){
+        throw new RuntimeException("fireSound Unsupported for Generic MovingGameObject");
+    }
+
+    public void setObjectPosition(int x, int y){
+        rect.x = x;
+        rect.y = y;
+        setHitboxBounds();
     }
 }

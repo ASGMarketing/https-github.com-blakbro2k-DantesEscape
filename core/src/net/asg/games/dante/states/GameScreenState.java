@@ -31,6 +31,7 @@ public class GameScreenState implements Serializable {
     public int standardMovingBonus = 1000;
     public int totalDeaths = 0;
     public int levelGroup = 0;
+    public int missileCounter = 10;
 
     public boolean isPaused;
     public boolean isLevelStarted;
@@ -108,6 +109,7 @@ public class GameScreenState implements Serializable {
         json.writeValue("roundEndTime", roundEndTime);
         json.writeValue("totalDeaths", totalDeaths);
         json.writeValue("levelGroup", levelGroup);
+        json.writeValue("missileCounter", missileCounter);
 
         json.writeArrayStart("movingObjects");
         for (MovingGameObjectState movingObjectState : movingObjectStates) {
@@ -136,6 +138,7 @@ public class GameScreenState implements Serializable {
         roundEndTime = json.readValue("roundEndTime", Long.class, jsonData);
         totalDeaths = json.readValue("totalDeaths", Integer.class, jsonData);
         levelGroup = json.readValue("levelGroup", Integer.class, jsonData);
+        missileCounter = json.readValue("missileCounter", Integer.class, jsonData);
 
         movingObjectStates = json.readValue("movingObjects", Array.class,
                 MovingGameObjectState.class, jsonData);

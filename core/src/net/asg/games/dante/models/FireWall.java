@@ -1,7 +1,6 @@
 package net.asg.games.dante.models;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 
 import net.asg.games.dante.Constants;
@@ -14,17 +13,12 @@ public class FireWall extends RockWall {
 
     public FireWall(ImageProvider imageProvider,
                     TextureRegion[] textureRegions, SoundProvider soundProvider,
-                    int width, int height, boolean isHitboxActive, MovingGameObjectState state,
+                    int width, int height, MovingGameObjectState state,
                     int[] hitBoxConfig, int position, int holeSize) {
         super(imageProvider, textureRegions, soundProvider, width, height,
-                isHitboxActive, state, hitBoxConfig, position, holeSize);
+                state, hitBoxConfig, position, holeSize);
 
-        isClosingType = MathUtils.random(0, 1) == 0;
-
-        //isClosingType = true;
-        position = MathUtils.random(1, 4) * 50;
-
-        //this.rect = new Rectangle();
+        this.position = position;
         this.rect.width = width;
         this.rect.height = height;
 
@@ -54,7 +48,17 @@ public class FireWall extends RockWall {
         }
     }
 
+    public void setClosingType() {
+        isClosingType = true;
+    }
 
+    public void setOpeningType() {
+        isClosingType = false;
+    }
+
+    public void setOpeningPosition(int position) {
+
+    }
     public void moveLeft(float delta, float speedBonus) {
         rect.x -= moveSpeed * delta * speedBonus;
         lowerWall.x -= moveSpeed * delta * speedBonus;
@@ -85,5 +89,9 @@ public class FireWall extends RockWall {
             }
         }
         setStatefulPosition();
+    }
+
+    public void fireSound(){
+        soundProvider.playfirewooshSound();
     }
 }

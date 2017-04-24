@@ -3,7 +3,6 @@ package net.asg.games.dante.providers;
 import com.badlogic.gdx.utils.TimeUtils;
 
 import net.asg.games.dante.Constants;
-import net.asg.games.dante.models.Missile;
 import net.asg.games.dante.models.MovingGameObject;
 import net.asg.games.dante.models.MovingGameObjectFactory;
 import net.asg.games.dante.states.GameScreenState;
@@ -18,7 +17,9 @@ public class LevelProvider {
     public static final int EASY_ROCK_LEVEL_VALUE = 5;
     public static final int FAST_ROCK_LEVEL_VALUE = 6;
     public static final int FAST_LAVA_LEVEL_VALUE = 7;
-    public static final int MISSILE_LEVEL_VALUE = 8;
+    public static final int EASY_MISSILE_LEVEL_VALUE = 8;
+    public static final int HARD_MISSILE_LEVEL_VALUE = 9;
+    public static final int EASY_MISSLE_FLIPPED_LEVEL_VALUE = 10;
 
     private PhaseProvider phase;
     private int counter;
@@ -41,7 +42,7 @@ public class LevelProvider {
                 break;
             case FIREBALL_LEVEL_VALUE:
                 st.lastGameObjTime = TimeUtils.millis();
-                mObj = movingGameObjectFactory.getFireball();
+                mObj = movingGameObjectFactory.getFireBall();
                 st.spawnTime = Constants.FIREBALL_SPAWN_TIME;
                 break;
             case LAVA_LEVEL_VALUE:
@@ -65,10 +66,10 @@ public class LevelProvider {
                 st.spawnTime = Constants.FIREWALL_SPAWN_TIME;
                 mObj = movingGameObjectFactory.getRandomEasyRockWall();
                 break;
-            case MISSILE_LEVEL_VALUE:
+            case EASY_MISSILE_LEVEL_VALUE:
                 st.lastGameObjTime = TimeUtils.millis();
                 st.spawnTime = Constants.MISSLE_SPAWN_TIME;
-                if(counter > 10){
+                if(counter > st.missileCounter){
                     mObj = movingGameObjectFactory.getEasyActiveMissle();
                 } else {
                     mObj = movingGameObjectFactory.getEasyLaunchMissle();

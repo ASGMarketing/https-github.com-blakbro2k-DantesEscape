@@ -5,7 +5,6 @@ import java.util.Iterator;
 import net.asg.games.dante.Constants;
 import net.asg.games.dante.DantesEscapeGame;
 import net.asg.games.dante.models.GameWorld;
-import net.asg.games.dante.models.MovingGameObjectPool;
 import net.asg.games.dante.providers.LevelProvider;
 import net.asg.games.dante.models.Bob;
 import net.asg.games.dante.models.Button;
@@ -93,7 +92,7 @@ public class GameScreen extends AbstractScreen {
 
         batch = new SpriteBatch();
 
-        movingGameObjectFactory = new MovingGameObjectFactory(imageProvider, soundProvider);
+        movingGameObjectFactory = new MovingGameObjectFactory(game);
 
         TextureRegion bobTexture = imageProvider.getBob(1);
 
@@ -151,12 +150,12 @@ public class GameScreen extends AbstractScreen {
 
         camera.update();
         batch.setProjectionMatrix(camera.combined);
-
+        //effect.update(delta);
+        batch.begin();
 
         //System.out.println(effect);
 
-        //effect.update(delta);
-        batch.begin();
+
 
         // Draw the Background
         backgroundSprite.draw(batch);
@@ -177,7 +176,7 @@ public class GameScreen extends AbstractScreen {
         for (MovingGameObject movingObject : movingObjects) {
             movingObject.draw(batch);
 
-            if (movingObject.isCollided) {
+            if (movingObject.isCollided()) {
                 levelProvider.doLevelTransition(movingObject.doCollision(delta), gameScreenState);
             }
         }
@@ -201,7 +200,7 @@ public class GameScreen extends AbstractScreen {
 
         //if(effect.isComplete()){
         //    effect.reset();
-       // }
+        //}
 
         //Draw Debug Hitboxes and sprite boxes
         if (game.isDebugOn) {
@@ -211,9 +210,9 @@ public class GameScreen extends AbstractScreen {
             debugRenderer.begin(ShapeType.Line);
             debugRenderer.setColor(Color.GREEN);
 
-            //ShapeRenderer hitBoxRenderer = new ShapeRenderer();
-            //hitBoxRenderer.begin(ShapeType.Filled);
-           // hitBoxRenderer.setColor(1, 0, 0, Color.alpha(0.5f));
+            // ShapeRenderer hitBoxRenderer = new ShapeRenderer();
+            // hitBoxRenderer.begin(ShapeType.Filled);
+            // hitBoxRenderer.setColor(1, 0, 0, Color.alpha(0.5f));
 
             //bob.draw
 
@@ -248,16 +247,6 @@ public class GameScreen extends AbstractScreen {
         }
 
         //world.updateWorld(TimeUtils.millis(), delta, gameScreenState);
-
-        /*
-        new render:
-
-        update World
-        render World
-         process input
-
-         */
-
         //This is where the world would be updated
         //world.update(delta);
         //world.updateWorld(delta, TimeUtils.millis(), gameScreenState);
@@ -269,7 +258,9 @@ public class GameScreen extends AbstractScreen {
         gameScreenState.score += gameScreenState.standardMovingBonus * delta;
 
         if (TimeUtils.millis() - gameScreenState.lastGameObjTime > gameScreenState.spawnTime) {
-            movingObjects.add(levelProvider.getNextObject(movingGameObjectFactory, gameScreenState));
+            MovingGameObject gameObj = levelProvider.getNextObject(movingGameObjectFactory, gameScreenState);
+            gameObj.fireSound();
+            movingObjects.add(gameObj);
         }
 
         /*
@@ -282,12 +273,13 @@ public class GameScreen extends AbstractScreen {
 
             fo.moveLeft(delta, gameScreenState.gameSpeed);
 
-            if (fo.isLeftOfScreen()) {
-                iter.remove();
+            if (fo.isOverlapping(bob.getHitboxes())) {
+                fo.setCollided(true);
             }
 
-            if (fo.isOverlapping(bob.getHitboxes())) {
-                fo.isCollided = true;
+            if (fo.isLeftOfScreen()) {
+                fo.reset();
+                iter.remove();
             }
         }
     }

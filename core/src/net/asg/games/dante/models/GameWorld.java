@@ -63,8 +63,12 @@ public class GameWorld {
         imageProvider = game.getImageProvider();
         soundProvider = game.getSoundProvider();
         levelProvider = game.getLevelProvider();
-        gameObjectsPool=  game.getObjectsPool();
+        gameObjectsPool =  game.getObjectsPool();
         initialize();
+    }
+
+    private void setUpBackground(){
+
     }
 
     public void initialize() {
@@ -111,6 +115,33 @@ public class GameWorld {
     }
 
     public void updateWorld(long runTime, float delta, GameScreenState gameScreenState){
+        updateBackground(gameScreenState, delta);
+
+        updateScore(gameScreenState, delta);
+
+        spawnNextObject(runTime, gameScreenState);
+
+        /*
+         * Using Iterator, we update all objects on screen to move, and discard
+	     * all objects off screen All hit detection happens here also
+		 */
+        Iterator<MovingGameObject> iter = movingObjects.iterator();
+        while (iter.hasNext()) {
+            MovingGameObject fo = iter.next();
+
+            fo.moveLeft(delta, gameScreenState.gameSpeed);
+
+            if (fo.isLeftOfScreen()) {
+                iter.remove();
+            }
+
+            if (fo.isOverlapping(bob.getHitboxes())) {
+                fo.isCollided = true;
+            }
+        }
+    }
+
+    private void updateBackground(GameScreenState gameScreenState, float delta){
         //Move background
         if (bgScrollTimer > 1.0f)
             bgScrollTimer = 0.0f;
@@ -133,30 +164,15 @@ public class GameWorld {
         bgScrollTimer += delta * gameScreenState.getBackgroundSpeed();
         mgScrollTimer += delta * gameScreenState.getMiddlegroundSpeed();
         fgScrollTimer += delta * gameScreenState.getForegroundSpeed();
+    }
 
+    private void updateScore(GameScreenState gameScreenState, float delta) {
         gameScreenState.score += gameScreenState.standardMovingBonus * delta;
+    }
 
+    private void spawnNextObject(long runTime, GameScreenState gameScreenState){
         if (runTime - gameScreenState.lastGameObjTime > gameScreenState.spawnTime) {
             movingObjects.add(levelProvider.getNextObject(movingGameObjectFactory, gameScreenState));
-        }
-
-        /*
-         * Using Iterator, we update all objects on screen to move, and discard
-	     * all objects off screen All hit detection happens here also
-		 */
-        Iterator<MovingGameObject> iter = movingObjects.iterator();
-        while (iter.hasNext()) {
-            MovingGameObject fo = iter.next();
-
-            fo.moveLeft(delta, gameScreenState.gameSpeed);
-
-            if (fo.isLeftOfScreen()) {
-                iter.remove();
-            }
-
-            if (fo.isOverlapping(bob.getHitboxes())) {
-                fo.isCollided = true;
-            }
         }
     }
 }

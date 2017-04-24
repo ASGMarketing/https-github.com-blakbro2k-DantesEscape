@@ -26,10 +26,10 @@ public class SlidingRockWall extends RockWall {
     private int gapDepth;
 
     public SlidingRockWall(ImageProvider imageProvider, TextureRegion[] textureRegions,
-                           SoundProvider soundProvider, int width, int height, boolean isHitboxActive,
+                           SoundProvider soundProvider, int width, int height,
                            MovingGameObjectState state, int[] hitBoxConfig, int position, int holeSize,
                            int gapDepth) {
-        super(imageProvider, textureRegions, soundProvider, width, height, isHitboxActive, state, hitBoxConfig, position, holeSize);
+        super(imageProvider, textureRegions, soundProvider, width, height, state, hitBoxConfig, position, holeSize);
         this.gapDepth = gapDepth;
     }
 
@@ -53,9 +53,6 @@ public class SlidingRockWall extends RockWall {
                     isMovingDown = 0;
                 break;
         }
-        state.setPosX((int) rect.x);
-        state.setPosY((int) rect.y);
-
 
         // state.setPosY((int) rect.y);
         time += delta;
@@ -66,6 +63,7 @@ public class SlidingRockWall extends RockWall {
                 frame = 0;
             }
         }
+        setStatefulPosition();
     }
 
     public void draw(SpriteBatch batch) {

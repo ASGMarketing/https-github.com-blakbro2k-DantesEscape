@@ -25,7 +25,7 @@ public class DesktopLauncherResolver implements ActionResolver {
     }
 
     @Override
-    public void showOrLoadInterstital(boolean show) {
+    public void showOrLoadInterstital() {
         System.out.println("showOrLoadInterstital Resolver called.");
     }
 

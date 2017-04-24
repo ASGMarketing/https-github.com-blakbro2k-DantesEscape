@@ -27,57 +27,20 @@ public class MovingGameObjectState implements Serializable {
         this.type = type;
     }
 
-    public int getPosX() {
-        return posX;
-    }
-
     public void setPosX(int posX) {
         this.posX = posX;
+    }
+
+    public void setPosY(int posY) {
+        this.posY = posY;
     }
 
     public void setHitPosX(int posX) {
         this.hitPosX = posX;
     }
 
-    public int getPosY() {
-        return posY;
-    }
-
     public void setHitPosY(int posY) {
         this.hitPosY = posY;
-    }
-    public void setPosY(int posY) {
-        this.posY = posY;
-    }
-
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
-    }
-
-    @Override
-    public void write(Json json) {
-        json.writeValue("posX", posX);
-        json.writeValue("posY", posY);
-        json.writeValue("type", type.getValue());
-        json.writeValue("index", index);
-        json.writeValue("isCollided", isCollided);
-        json.writeValue("isHitboxActive", isHitboxActive);
-        json.writeValue("isSoundTriggered", isSoundTriggered);
-    }
-
-    public void read(Json json, JsonValue jsonData) {
-        posX = json.readValue("posX", Integer.class, jsonData);
-        posY = json.readValue("posY", Integer.class, jsonData);
-        index = json.readValue("index", Integer.class, jsonData);
-        int val = json.readValue("type", Integer.class, jsonData);
-        type = MovingGameObjectType.fromValue(val);
-        isCollided = json.readValue("isCollided", Boolean.class, jsonData);
-        isHitboxActive = json.readValue("isHitboxActive", Boolean.class, jsonData);
-        isSoundTriggered = json.readValue("isSoundTriggered", Boolean.class, jsonData);
     }
 
     public void setCollided(boolean isCollided) {
@@ -92,4 +55,29 @@ public class MovingGameObjectState implements Serializable {
         this.isSoundTriggered = isSoundTriggered;
     }
 
+    @Override
+    public void write(Json json) {
+        json.writeValue("posX", posX);
+        json.writeValue("posY", posY);
+        json.writeValue("hitPosX", hitPosX);
+        json.writeValue("hitPosY", hitPosY);
+        json.writeValue("type", type.getValue());
+        //json.writeValue("index", index);
+        json.writeValue("isCollided", isCollided);
+        json.writeValue("isHitboxActive", isHitboxActive);
+        json.writeValue("isSoundTriggered", isSoundTriggered);
+    }
+
+    public void read(Json json, JsonValue jsonData) {
+        posX = json.readValue("posX", Integer.class, jsonData);
+        posY = json.readValue("posY", Integer.class, jsonData);
+        hitPosX = json.readValue("hitPosX", Integer.class, jsonData);
+        hitPosY = json.readValue("hitPosY", Integer.class, jsonData);
+        //index = json.readValue("index", Integer.class, jsonData);
+        int val = json.readValue("type", Integer.class, jsonData);
+        type = MovingGameObjectType.fromValue(val);
+        isCollided = json.readValue("isCollided", Boolean.class, jsonData);
+        isHitboxActive = json.readValue("isHitboxActive", Boolean.class, jsonData);
+        isSoundTriggered = json.readValue("isSoundTriggered", Boolean.class, jsonData);
+    }
 }

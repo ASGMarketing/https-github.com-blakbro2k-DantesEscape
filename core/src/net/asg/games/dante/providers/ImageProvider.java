@@ -19,8 +19,10 @@ public class ImageProvider {
     public static final int GOAL_ID = 20;
     public static final int ROCKWALL_ID = 21;
     public static final int SLIDING_ROCKWALL_ID = 22;
-    public static final int EASY_MISSILE_ID = 23;
+    public static final int MISSILE_ID = 23;
     public static final int EASY_MISSILE_FLIPPED_ID = 24;
+    public static final int HARD_MISSILE_ID = 25;
+    public static final int HARD_MISSILE_FLIPPED_ID = 26;
 
     private TextureAtlas atlas;
     private TextureAtlas textAtlas;
@@ -57,11 +59,8 @@ public class ImageProvider {
                 case FIREBALL_ID:
                     textureRegions[f] = getFireBall(f + 1);
                     break;
-                case EASY_MISSILE_ID:
-                    textureRegions[f] = getEasyMissle(f + 1);
-                    break;
-                case EASY_MISSILE_FLIPPED_ID:
-                    textureRegions[f] = getEasyMissleFlipped(f + 1);
+                case MISSILE_ID:
+                    textureRegions[f] = getMissile(f + 1);
                     break;
                 default:
                     throw new RuntimeException("This Game Object has no animation to set. OBJECT_ID: " + objectId);
@@ -182,12 +181,8 @@ public class ImageProvider {
         return atlas.findRegion("goalpole");
     }
 
-    public TextureRegion getEasyMissle(int frame) {
-        return atlas.findRegion("missles", frame);
-    }
-
-    public TextureRegion getEasyMissleFlipped(int frame) {
-        return atlas.findRegion("missles", frame);
+    public TextureRegion getMissile(int frame) {
+        return atlas.findRegion("missiles", frame);
     }
 
     public TextureRegion getHomeButton() {

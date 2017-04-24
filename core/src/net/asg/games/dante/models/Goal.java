@@ -15,19 +15,19 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  */
 public class Goal extends MovingGameObject {
     private int velocityX = Constants.GOAL_OBJECT_X_VELOCITY;
-    // private int animationPattern[];
 
-    public Goal(ImageProvider imageProvider, TextureRegion[] textureRegions,
-                SoundProvider soundProvider, int width, int height, boolean isHitboxActive,
-                MovingGameObjectState state, int[] hitBoxConfig) {
-        super(imageProvider, textureRegions, soundProvider, width, height,
-                isHitboxActive, state, hitBoxConfig);
+    public Goal(ImageProvider imageProvider,
+                TextureRegion[] textureRegions,
+                SoundProvider soundProvider,
+                MovingGameObjectState state,
+                int[] hitBoxConfig) {
+        super(imageProvider, textureRegions, soundProvider, state, hitBoxConfig);
     }
 
     public void moveLeft(float delta, float speedBonus) {
         int moveSpeed = Constants.GOAL_OBJECT_MOVE_SPEED;
         rect.x -= moveSpeed * delta;
-        setHitboxBounds(rect);
+        setHitboxBounds();
 
         time += delta;
         if (time > animationPeriod) {
@@ -37,7 +37,6 @@ public class Goal extends MovingGameObject {
                 frame = 0;
             }
         }
-
         setStatefulPosition();
     }
 
@@ -49,11 +48,14 @@ public class Goal extends MovingGameObject {
 
         rect.y -= Constants.GOAL_HIT_SPEED * delta;
         rect.x += velocityX * delta;
-        setHitboxBounds(rect);
+        setHitboxBounds();
 
-        state.setPosX((int) rect.x);
-        state.setPosX((int) rect.y);
+        setStatefulPosition();
         velocityX -= 1;
         return LevelState.GOALHIT;
+    }
+
+    public void fireSound(){
+        soundProvider.playflameBurstSound();
     }
 }

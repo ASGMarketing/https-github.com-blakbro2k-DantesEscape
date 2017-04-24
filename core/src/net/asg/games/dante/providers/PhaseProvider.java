@@ -46,7 +46,7 @@ public class PhaseProvider{
         if(!feedLevels) {
             switch (gameScreenState.levelGroup) {
                 case 1:
-                    phases.push(MovingGameObjectType.Missile.getValue());
+                    phases.push(MovingGameObjectType.EasyMissile.getValue());
                     break;
                 case 2:
                     phases.push(MovingGameObjectType.RockWall.getValue());
@@ -70,7 +70,7 @@ public class PhaseProvider{
                             MovingGameObjectType.SlidingRockWall.getValue(),
                             MovingGameObjectType.RockWall.getValue(),
                             MovingGameObjectType.LavaWall.getValue());
-                    phases.push(MovingGameObjectType.Missile.getValue());
+                    phases.push(MovingGameObjectType.EasyMissile.getValue());
 
                 case 6:
                 case 7:
@@ -80,7 +80,7 @@ public class PhaseProvider{
                             MovingGameObjectType.RockWall.getValue(),
                             MovingGameObjectType.SlidingRockWall.getValue(),
                             MovingGameObjectType.LavaWall.getValue(),
-                            MovingGameObjectType.Missile.getValue());
+                            MovingGameObjectType.EasyMissile.getValue());
                     break;
             }
         } else {

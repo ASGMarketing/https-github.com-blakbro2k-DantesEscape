@@ -30,8 +30,8 @@ public class Bob {
         this.screenHeight = Constants.GAME_HEIGHT;
         this.width = width;
         this.height = height;
-        this.offSetX = hitboxConfig[0];
-        this.offSetY = hitboxConfig[1];
+        this.offSetX = hitboxConfig[MovingGameObject.GAME_OBJECT_X];
+        this.offSetY = hitboxConfig[MovingGameObject.GAME_OBJECT_Y];
         bounds.width = width;
         bounds.height = height;
         textureRegions = new TextureRegion[Constants.BOB_TOTAL_ANIMATION_FRAMES];
@@ -48,8 +48,8 @@ public class Bob {
             bounds.y = posY;
         }
 
-        hitBounds.width = hitboxConfig[2];
-        hitBounds.height = hitboxConfig[3];
+        hitBounds.width = hitboxConfig[MovingGameObject.GAME_OBJECT_WIDTH];
+        hitBounds.height = hitboxConfig[MovingGameObject.GAME_OBJECT_HEIGHT];
         hitBounds.x = bounds.x + offSetX;
         hitBounds.y = bounds.y + offSetY;
 

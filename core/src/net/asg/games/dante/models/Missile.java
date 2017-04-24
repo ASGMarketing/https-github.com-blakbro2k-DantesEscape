@@ -17,9 +17,13 @@ public class Missile extends MovingGameObject {
     private boolean isDefunct;
     private boolean isFalling;
 
-    public Missile(ImageProvider imageProvider, TextureRegion[] textureRegions, SoundProvider soundProvider, int width, int height,
-                   boolean isHitboxActive, MovingGameObjectState state, int[] hitBoxConfig) {
-        super(imageProvider, textureRegions, soundProvider, width, height, isHitboxActive, state, hitBoxConfig);
+    public Missile(ImageProvider imageProvider,
+                   TextureRegion[] textureRegions,
+                   SoundProvider soundProvider,
+                   MovingGameObjectState state,
+                   int[] hitBoxConfig) {
+        super(imageProvider, textureRegions, soundProvider, state, hitBoxConfig);
+
         setLaunching();
         this.isDefunct = false;
         targetX = MathUtils.random(0, imageProvider.getScreenWidth());
@@ -65,7 +69,7 @@ public class Missile extends MovingGameObject {
     public void moveLeft(float delta, float speedBonus) {
         if(rect.x > targetX || isDefunct) {
             rect.x -= moveSpeed * delta * speedBonus;
-            setHitboxBounds(rect);
+            setHitboxBounds();
         }
 
         if(rect.x <= targetX){
@@ -73,7 +77,7 @@ public class Missile extends MovingGameObject {
                 if (!isFalling) {
                     if (rect.y < imageProvider.getScreenHeight()) {
                         rect.y += moveSpeed * delta * speedBonus;
-                        setHitboxBounds(rect);
+                        setHitboxBounds();
                     }
 
                     if (rect.y >= imageProvider.getScreenHeight()) {
@@ -82,7 +86,7 @@ public class Missile extends MovingGameObject {
                 } else {
                     if (rect.y > 0 - rect.height) {
                         rect.y -= moveSpeed * delta * speedBonus;
-                        setHitboxBounds(rect);
+                        setHitboxBounds();
                     }
 
                     if (rect.y <= 0 - rect.height) {

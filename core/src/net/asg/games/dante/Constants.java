@@ -23,7 +23,7 @@ public class Constants {
     public static final int OBJECT_MOVE_SPEED = 550;
     public static final int GOAL_OBJECT_MOVE_SPEED = 800;
     public static final int WALL_OBJECT_MOVE_SPEED = 750;
-    public static final int MISSLE_MOVESPEED = 910;
+    public static final int MISSLE_MOVESPEED = 1010;
     public static final int GOAL_OBJECT_X_VELOCITY = 1500;
     public static final int ROUND_TIME_DURATION = 16000;
     public static final int FIREBALL_SPAWN_TIME = 360;
