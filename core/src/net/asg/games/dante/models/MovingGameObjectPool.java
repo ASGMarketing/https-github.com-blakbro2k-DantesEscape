@@ -24,6 +24,7 @@ public class MovingGameObjectPool {
     public final Pool<Goal> GoalPool = new Pool<Goal>() {
         @Override
         protected Goal newObject() {
+            System.out.println("!!!!!New Goal!!!!");
             TextureRegion[] textureRegions = new TextureRegion[1];
             textureRegions[0] = imageProvider.getGoal();
 
@@ -37,7 +38,11 @@ public class MovingGameObjectPool {
     public final Pool<FireBall> FireBallPool = new Pool<FireBall>() {
         @Override
         protected FireBall newObject() {
+            System.out.println("!!!!!New FireBall!!!!");
+
             TextureRegion[] textureRegions = new TextureRegion[Constants.FIREBALL_TOTAL_ANIMATION_FRAMES];
+
+            imageProvider.setAnimations(textureRegions, ImageProvider.FIREBALL_ID);
 
             MovingGameObjectState model = new MovingGameObjectState();
             model.setType(MovingGameObjectType.Fireball);
@@ -56,9 +61,7 @@ public class MovingGameObjectPool {
             MovingGameObjectState model = new MovingGameObjectState();
             model.setType(MovingGameObjectType.LavaWall);
 
-            return new FireWall(imageProvider, textureRegions, soundProvider,
-                    textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight(),
-                    model, Constants.ROCKWALL_HITBOX, FireWall.WALL_POSITION_ONE, FireWall.EASY_GAP_SIZE);
+            return new FireWall(imageProvider, textureRegions, soundProvider, model, Constants.ROCKWALL_HITBOX);
         }
     };
 
@@ -72,9 +75,7 @@ public class MovingGameObjectPool {
             MovingGameObjectState model = new MovingGameObjectState();
             model.setType(MovingGameObjectType.EasyMissile);
 
-            return new Missile(imageProvider, textureRegions, soundProvider,
-                    textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight(),
-                    model, Constants.MISSLE_HITBOX);
+            return new Missile(imageProvider, textureRegions, soundProvider, model, Constants.MISSLE_HITBOX);
         }
     };
 
@@ -87,9 +88,7 @@ public class MovingGameObjectPool {
             MovingGameObjectState model = new MovingGameObjectState();
             model.setType(MovingGameObjectType.RockWall);
 
-            return new RockWall(imageProvider, textureRegions, soundProvider,
-                    textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight(),
-                    model, Constants.ROCKWALL_HITBOX, RockWall.WALL_POSITION_ONE, RockWall.EASY_GAP_SIZE);
+            return new RockWall(imageProvider, textureRegions, soundProvider, model, Constants.ROCKWALL_HITBOX);
         }
     };
 
@@ -102,9 +101,18 @@ public class MovingGameObjectPool {
             MovingGameObjectState model = new MovingGameObjectState();
             model.setType(MovingGameObjectType.SlidingRockWall);
 
-            return new SlidingRockWall(imageProvider, textureRegions, soundProvider,
-                    textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight(),
-                    model, Constants.ROCKWALL_HITBOX, SlidingRockWall.WALL_POSITION_ONE, SlidingRockWall.EASY_GAP_SIZE, SlidingRockWall.LONG_GAP_DEPTH);
+            return new SlidingRockWall(imageProvider, textureRegions, soundProvider, model, Constants.ROCKWALL_HITBOX);
         }
     };
+
+    @Override
+    public String toString(){
+        return "Goal free: " + GoalPool.peak + " max: " + GoalPool.getFree() + "\n"
+                + "FireBall free: " + FireBallPool.peak + " max: " + FireBallPool.getFree() + "\n"
+                + "RockWall free: " + RockWallPool.peak + " max: " + RockWallPool.getFree() + "\n"
+                + "FireWall free: " + FireWallPool.peak + " max: " + FireWallPool.getFree() + "\n"
+                + "Missile free: " + MissilePool.peak + " max: " + MissilePool.getFree() + "\n"
+                + "Sliding free: " + SlidingRockWallPool.peak + " max: " + SlidingRockWallPool.getFree() + "\n"
+                ;
+    }
 }

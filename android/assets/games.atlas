@@ -228,28 +228,28 @@ lbubble
   orig: 49, 49
   offset: 0, 0
   index: 11
-missles
+missiles
   rotate: false
   xy: 20, 57
   size: 56, 86
   orig: 56, 86
   offset: 0, 0
   index: 1
-missles
+missiles
   rotate: false
   xy: 442, 767
   size: 56, 86
   orig: 56, 86
   offset: 0, 0
   index: 2
-missles
+missiles
   rotate: false
   xy: 78, 57
   size: 56, 86
   orig: 56, 86
   offset: 0, 0
   index: 3
-missles
+missiles
   rotate: false
   xy: 273, 253
   size: 56, 86

@@ -46,7 +46,7 @@ public class PhaseProvider{
         if(!feedLevels) {
             switch (gameScreenState.levelGroup) {
                 case 1:
-                    phases.push(MovingGameObjectType.EasyMissile.getValue());
+                    phases.push(MovingGameObjectType.Fireball.getValue());
                     break;
                 case 2:
                     phases.push(MovingGameObjectType.RockWall.getValue());

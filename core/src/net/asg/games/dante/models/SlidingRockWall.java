@@ -1,7 +1,9 @@
 package net.asg.games.dante.models;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.TimeUtils;
 
@@ -25,19 +27,18 @@ public class SlidingRockWall extends RockWall {
     private long lastShookTime = 0;
     private int gapDepth;
 
-    public SlidingRockWall(ImageProvider imageProvider, TextureRegion[] textureRegions,
-                           SoundProvider soundProvider, int width, int height,
-                           MovingGameObjectState state, int[] hitBoxConfig, int position, int holeSize,
-                           int gapDepth) {
-        super(imageProvider, textureRegions, soundProvider, width, height, state, hitBoxConfig, position, holeSize);
-        this.gapDepth = gapDepth;
+    public SlidingRockWall(ImageProvider imageProvider,
+                           TextureRegion[] textureRegions,
+                           SoundProvider soundProvider,
+                           MovingGameObjectState state,
+                           int[] hitBoxConfig) {
+        super(imageProvider, textureRegions, soundProvider, state, hitBoxConfig);
     }
 
     public void moveLeft(float delta, float speedBonus) {
         rect.x -= moveSpeed * delta * speedBonus;
         lowerWall.x -= moveSpeed * delta * speedBonus;
-        setHitboxBounds(rect);
-        setLowerHitboxBounds(lowerWall);
+        setHitboxBounds();
 
         switch (isMovingDown) {
             case 0:
@@ -68,8 +69,7 @@ public class SlidingRockWall extends RockWall {
 
     public void draw(SpriteBatch batch) {
         shakeSprite(shook);
-        batch.draw(textureRegions[frame], rect.x, rect.y,rect.width,rect.height);
-        batch.draw(textureRegions[frame], lowerWall.x, lowerWall.y);
+        super.draw(batch);
     }
 
     public void shakeSprite(boolean shook){
@@ -92,8 +92,7 @@ public class SlidingRockWall extends RockWall {
 
             rect.x += shakeValue;
             lowerWall.x += shakeValue;
-            setHitboxBounds(rect);
-            setLowerHitboxBounds(lowerWall);
+            setHitboxBounds();
         }
     }
 

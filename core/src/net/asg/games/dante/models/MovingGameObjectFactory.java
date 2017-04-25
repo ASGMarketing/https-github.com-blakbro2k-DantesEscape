@@ -7,12 +7,14 @@ import com.badlogic.gdx.math.MathUtils;
 
 public class MovingGameObjectFactory {
     private MovingGameObjectPool gameObjectPool;
+    private ImageProvider imageProvider;
 
     public MovingGameObjectFactory(DantesEscapeGame game) {
-        this.gameObjectPool = new MovingGameObjectPool(game.getImageProvider(), game.getSoundProvider());
+        imageProvider = game.getImageProvider();
+        this.gameObjectPool = new MovingGameObjectPool(imageProvider, game.getSoundProvider());
     }
 
-    public FireBall getFireBall() {
+    private FireBall getFireBall() {
         return gameObjectPool.FireBallPool.obtain();
     }
 
@@ -36,20 +38,36 @@ public class MovingGameObjectFactory {
         return gameObjectPool.SlidingRockWallPool.obtain();
     }
 
+    public FireBall getRandomFireBall(){
+        FireBall obj = getFireBall();
+        obj.setHitboxActive(true);
+        obj.setObjectPosition(imageProvider.getScreenWidth(),
+                MathUtils.random(0, imageProvider.getScreenHeight() - ((int)obj.getPosition().height))
+        );
+        return obj;
+    }
+
+    /*public FireBall getFireBall(int x, int y){
+        FireBall obj = getFireBall();
+        obj.setHitboxActive(true);
+        obj.setObjectPosition(x,y);
+        return obj;
+    }*/
+
     public Missile getEasyLaunchMissle() {
-        Missile temp = getMissle(ImageProvider.EASY_MISSILE_ID);
-        temp.setInactive();
-        return temp;
+        Missile obj = getMissle();
+        obj.setInactive();
+        return obj;
     }
 
     public Missile getEasyActiveMissle() {
-        Missile temp = getMissle(ImageProvider.EASY_MISSILE_FLIPPED_ID);
-        temp.setActive();
-        temp.setFalling();
-        return temp;
+        Missile obj = getMissle();
+        obj.setActive();
+        obj.setFalling();
+        return obj;
     }
 
-    private MovingGameObjectType getMissleType(int missleType) {
+    /*private MovingGameObjectType getMissleType(int missleType) {
         switch (missleType){
             case ImageProvider.HARD_MISSILE_ID:
             case ImageProvider.HARD_MISSILE_FLIPPED_ID:
@@ -59,32 +77,35 @@ public class MovingGameObjectFactory {
             default:
                 return MovingGameObjectType.EasyMissile;
         }
+    }*/
+
+    public SlidingRockWall getRandomEasyMediumSlidingWall(){
+        SlidingRockWall obj = getSlidingRockWall();
+        return obj;
     }
 
-    public RockWall getRandomEasyMediumSlidingWall(){
-        return getSlidingRockWall(getRandomWallPosition(2,3), RockWall.EASY_GAP_SIZE,
-                SlidingRockWall.MEDIUM_GAP_DEPTH);
+    public SlidingRockWall getRandomEasyLongSlidingWall(){
+        SlidingRockWall obj = getSlidingRockWall();
+        return obj;
     }
 
-    public RockWall getRandomEasyLongSlidingWall(){
-        return getSlidingRockWall(getRandomWallPosition(2,3), RockWall.EASY_GAP_SIZE,
-                SlidingRockWall.LONG_GAP_DEPTH);
-    }
-
-    public RockWall getRandomEasyShortSlidingWall(){
-        return getSlidingRockWall(getRandomWallPosition(2,3), RockWall.EASY_GAP_SIZE,
-                SlidingRockWall.SHORT_GAP_DEPTH);
+    public SlidingRockWall getRandomEasyShortSlidingWall(){
+        SlidingRockWall obj = getSlidingRockWall();
+        return obj;
     }
     public RockWall getRandomEasyRockWall(){
-        return getRockWall(getRandomWallPosition(1,4), RockWall.EASY_GAP_SIZE);
+        SlidingRockWall obj = getSlidingRockWall();
+        return obj;
     }
 
     public RockWall getRandomNormalRockWall(){
-        return getRockWall(getRandomWallPosition(1,5), RockWall.NORMAL_GAP_SIZE);
+        SlidingRockWall obj = getSlidingRockWall();
+        return obj;
     }
 
     public RockWall getRandomHardRockWall(){
-        return getRockWall(getRandomWallPosition(1,5), RockWall.HARD_GAP_SIZE);
+        SlidingRockWall obj = getSlidingRockWall();
+        return obj;
     }
 
     private int getRandomWallPosition(int min, int max){
@@ -113,5 +134,10 @@ public class MovingGameObjectFactory {
                 throw new IllegalArgumentException("Bad wall position was entered");
         }
         return  wallPosition;
+    }
+
+    @Override
+    public String toString() {
+        return "ObjectFactory Pool: \n" + gameObjectPool;
     }
 }

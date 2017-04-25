@@ -63,7 +63,8 @@ public class GameWorld {
         imageProvider = game.getImageProvider();
         soundProvider = game.getSoundProvider();
         levelProvider = game.getLevelProvider();
-        gameObjectsPool =  game.getObjectsPool();
+        movingGameObjectFactory = new MovingGameObjectFactory(game);
+
         initialize();
     }
 
@@ -75,8 +76,6 @@ public class GameWorld {
         backgroundSprite = imageProvider.getBackgroundSprite();
         foregroundSprite = imageProvider.getForegroundSprite();
         middleGroundSprite = imageProvider.getMiddlegroundSprite();
-
-        movingGameObjectFactory = new MovingGameObjectFactory(imageProvider, soundProvider);
 
         //Our Hero's Sprite
         TextureRegion bobTexture = imageProvider.getBob(1);

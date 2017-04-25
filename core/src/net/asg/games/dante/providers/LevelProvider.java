@@ -42,7 +42,7 @@ public class LevelProvider {
                 break;
             case FIREBALL_LEVEL_VALUE:
                 st.lastGameObjTime = TimeUtils.millis();
-                mObj = movingGameObjectFactory.getFireBall();
+                mObj = movingGameObjectFactory.getRandomFireBall();
                 st.spawnTime = Constants.FIREBALL_SPAWN_TIME;
                 break;
             case LAVA_LEVEL_VALUE:

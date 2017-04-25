@@ -12,39 +12,24 @@ public class FireWall extends RockWall {
     private boolean isClosingType;
 
     public FireWall(ImageProvider imageProvider,
-                    TextureRegion[] textureRegions, SoundProvider soundProvider,
-                    int width, int height, MovingGameObjectState state,
-                    int[] hitBoxConfig, int position, int holeSize) {
-        super(imageProvider, textureRegions, soundProvider, width, height,
-                state, hitBoxConfig, position, holeSize);
+                    TextureRegion[] textureRegions,
+                    SoundProvider soundProvider,
+                    MovingGameObjectState state,
+                    int[] hitBoxConfig) {
+        super(imageProvider, textureRegions, soundProvider, state, hitBoxConfig);
 
-        this.position = position;
-        this.rect.width = width;
-        this.rect.height = height;
-
-        this.lowerWall = new Rectangle();
-        this.lowerWall.width = width;
-        this.lowerWall.height = height;
-
-        this.rect.x = this.imageProvider.getScreenWidth();
-        this.rect.y = WALL_BASE_OFFSET - position;
-
-        this.lowerWall.x = this.imageProvider.getScreenWidth();
-        this.lowerWall.y = WALL_BASE_OFFSET - rect.height - position;
-
-        //this.setAnimationSpeed(0.2f);
-        setRectSize(lowerHitboxBounds, hitBoxConfig);
-        setHitboxBounds(rect);
-        setLowerHitboxBounds(lowerWall);
         setWallAsClosingType(isClosingType);
         this.setAnimationSpeed(0.11f);
     }
 
     public void setWallAsClosingType(boolean wallType) {
-        this.isClosingType = wallType;
+        isClosingType = wallType;
         if (isClosingType) {
-            this.rect.y = imageProvider.getScreenHeight() - position;
-            this.lowerWall.y = 0 - height - position;
+            rect.y = imageProvider.getScreenHeight() - position;
+            lowerWall.y = 0 - height - position;
+        } else {
+            rect.y = imageProvider.getScreenHeight() / 2;
+            lowerWall.y = rect.y;
         }
     }
 
@@ -62,8 +47,7 @@ public class FireWall extends RockWall {
     public void moveLeft(float delta, float speedBonus) {
         rect.x -= moveSpeed * delta * speedBonus;
         lowerWall.x -= moveSpeed * delta * speedBonus;
-        setHitboxBounds(rect);
-        setLowerHitboxBounds(lowerWall);
+        setHitboxBounds();
 
         if (!isClosingType) {
             lowerWall.y -= Constants.WALL_GAP_SPEED * delta;

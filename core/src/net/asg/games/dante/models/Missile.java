@@ -46,10 +46,16 @@ public class Missile extends MovingGameObject {
 
     public void setLaunching(){
         isFalling = false;
+        flippedTextures(false);
+        setBottomOfScreen();
     }
 
     public void setTopOfScreen(){
         rect.setY(imageProvider.getScreenHeight()-rect.height);
+    }
+
+    public void setBottomOfScreen(){
+        rect.setY(0);
     }
 
     private void flippedTextures(boolean isFlipped){

@@ -33,6 +33,10 @@ public class FireBall extends MovingGameObject {
     public String toString() {
         return "FireBall: \n" +
                 "Bounds: " + rect + "\n" +
-                "moveSpeed: " + moveSpeed + "\n";
+                "moveSpeed: " + moveSpeed + "\n" +
+                "isCollided: " + isCollided + "\n" +
+                "isSoundTriggered: " + isSoundTriggered + "\n" +
+                "isHitboxActive: " + isHitboxActive + "\n" +
+                "frame: " + frame + "\n";
     }
 }

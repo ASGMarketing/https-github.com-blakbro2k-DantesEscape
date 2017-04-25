@@ -4,9 +4,12 @@ import net.asg.games.dante.Constants;
 import net.asg.games.dante.providers.ImageProvider;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
 
 public class Bob {
@@ -128,5 +131,14 @@ public class Bob {
 
     public void setBobAnimation(ImageProvider imageProvider) {
         imageProvider.setAnimations(textureRegions, ImageProvider.BOB_ID);
+    }
+
+    public void drawDebug(ShapeRenderer debugRenderer) {
+        debugRenderer.set(ShapeType.Line);
+        debugRenderer.setColor(Color.GREEN);
+        debugRenderer.rect(bounds.x, bounds.y, bounds.width, bounds.height);
+        debugRenderer.set(ShapeType.Filled);
+        debugRenderer.setColor(Color.RED);
+        debugRenderer.rect(hitBounds.x, hitBounds.y, hitBounds.width, hitBounds.height);
     }
 }

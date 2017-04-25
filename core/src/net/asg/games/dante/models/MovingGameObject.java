@@ -55,7 +55,7 @@ public class MovingGameObject implements Pool.Poolable {
 
     protected boolean isCollided = false;
     protected boolean isSoundTriggered = false;
-    protected boolean isHitboxActive = true;
+    protected boolean isHitboxActive;
     protected int offSetX;
     protected int offSetY;
     protected int frame = 0;
@@ -113,7 +113,7 @@ public class MovingGameObject implements Pool.Poolable {
     }
 
     public boolean isLeftOfScreen() {
-        return rect.x + width < 0;
+        return rect.x + rect.width < 0;
     }
 
     public void draw(SpriteBatch batch) {
@@ -124,10 +124,6 @@ public class MovingGameObject implements Pool.Poolable {
         debugRenderer.set(ShapeType.Line);
         debugRenderer.setColor(Color.GREEN);
         debugRenderer.rect(rect.x, rect.y, rect.width, rect.height);
-        drawHitbox(debugRenderer);
-    }
-
-    public void drawHitbox(ShapeRenderer debugRenderer) {
         debugRenderer.set(ShapeType.Filled);
         debugRenderer.setColor(Color.RED);
         debugRenderer.rect(hitboxBounds.x, hitboxBounds.y, hitboxBounds.width, hitboxBounds.height);
@@ -186,6 +182,10 @@ public class MovingGameObject implements Pool.Poolable {
     }
     public MovingGameObjectState getState() {
         return state;
+    }
+
+    public Rectangle getPosition() {
+        return rect;
     }
 
     public boolean isCollided(){

@@ -156,7 +156,6 @@ public class GameScreen extends AbstractScreen {
         //System.out.println(effect);
 
 
-
         // Draw the Background
         backgroundSprite.draw(batch);
         // Draw the middleground
@@ -198,45 +197,20 @@ public class GameScreen extends AbstractScreen {
 
         batch.end();
 
-        //if(effect.isComplete()){
-        //    effect.reset();
-        //}
 
         //Draw Debug Hitboxes and sprite boxes
         if (game.isDebugOn) {
 
             debugRenderer.setProjectionMatrix(camera.combined);
+            debugRenderer.setAutoShapeType(true);
+            debugRenderer.begin();
 
-            debugRenderer.begin(ShapeType.Line);
-            debugRenderer.setColor(Color.GREEN);
-
-            // ShapeRenderer hitBoxRenderer = new ShapeRenderer();
-            // hitBoxRenderer.begin(ShapeType.Filled);
-            // hitBoxRenderer.setColor(1, 0, 0, Color.alpha(0.5f));
-
-            //bob.draw
-
-            debugRenderer.rect(bob.getPosition().x, bob.getPosition().y,
-                    bob.getPosition().width, bob.getPosition().height);
+            bob.drawDebug(debugRenderer);
 
             for (MovingGameObject movingObject : movingObjects) {
                 movingObject.drawDebug(debugRenderer);
-               // movingObject.drawHitbox(hitBoxRenderer);
             }
-            debugRenderer.end();
 
-            //Gdx.gl.glEnable(GL30.GL_BLEND);
-            //Gdx.gl.glBlendFunc(GL30.GL_SRC_ALPHA, GL30.GL_ONE_MINUS_SRC_ALPHA);
-            //hitBoxRenderer.setProjectionMatrix(camera.combined);
-            debugRenderer.begin(ShapeType.Filled);
-            debugRenderer.setColor(1, 0, 0, Color.alpha(0.5f));
-
-            debugRenderer.rect(bob.getHitboxes().x, bob.getHitboxes().y,
-                    bob.getHitboxes().width, bob.getHitboxes().height);
-
-            for (MovingGameObject movingObject : movingObjects) {
-                movingObject.drawHitbox(debugRenderer);
-            }
             debugRenderer.end();
         }
 
@@ -259,8 +233,11 @@ public class GameScreen extends AbstractScreen {
 
         if (TimeUtils.millis() - gameScreenState.lastGameObjTime > gameScreenState.spawnTime) {
             MovingGameObject gameObj = levelProvider.getNextObject(movingGameObjectFactory, gameScreenState);
+
             gameObj.fireSound();
             movingObjects.add(gameObj);
+            System.out.println(movingGameObjectFactory);
+
         }
 
         /*
@@ -390,7 +367,6 @@ public class GameScreen extends AbstractScreen {
             if (homeButton.isPressed(touchPos)) {
                 movingObjects.clear();
                 game.endGame(gameScreenState);
-                //Gdx.app.exit();
                 game.gotoMainMenuScreen();
             }
 
