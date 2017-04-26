@@ -94,7 +94,11 @@ public class MovingGameObjectFactory {
         return obj;
     }
     public RockWall getRandomEasyRockWall(){
-        SlidingRockWall obj = getSlidingRockWall();
+        RockWall obj = getRockWall();
+        System.out.println("!!!!!here now!!!!");
+
+        obj.setHoleSize(RockWall.EASY_GAP_SIZE);
+        obj.setHolePosition(getRandomWallPosition(2,4));
         return obj;
     }
 
@@ -134,6 +138,24 @@ public class MovingGameObjectFactory {
                 throw new IllegalArgumentException("Bad wall position was entered");
         }
         return  wallPosition;
+    }
+
+    public void freeObject(MovingGameObject mObj){
+        if(mObj instanceof FireBall){
+            gameObjectPool.FireBallPool.free((FireBall) mObj);
+        } else if(mObj instanceof SlidingRockWall){
+            gameObjectPool.SlidingRockWallPool.free((SlidingRockWall) mObj);
+        } else if(mObj instanceof Goal){
+            gameObjectPool.GoalPool.free((Goal) mObj);
+        } else if(mObj instanceof Missile){
+            gameObjectPool.MissilePool.free((Missile) mObj);
+        } else if(mObj instanceof FireWall){
+            gameObjectPool.FireWallPool.free((FireWall) mObj);
+        } else if(mObj instanceof RockWall){
+            gameObjectPool.RockWallPool.free((RockWall) mObj);
+        } else {
+            throw new IllegalArgumentException("Cannot free object: " + mObj);
+        }
     }
 
     @Override

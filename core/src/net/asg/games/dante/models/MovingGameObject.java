@@ -28,7 +28,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.utils.Pool;
+import com.badlogic.gdx.utils.Pool.Poolable;
 
 /**
  * @author Blakbro2k This class defines the moving object on the screen of the
@@ -37,7 +37,7 @@ import com.badlogic.gdx.utils.Pool;
  *         It requires an image provider to handle the textures. It returns an
  *         array of texture regions if the object has animations
  */
-public class MovingGameObject implements Pool.Poolable {
+public class MovingGameObject implements Poolable {
     public static final int GAME_OBJECT_X = 0;
     public static final int GAME_OBJECT_Y = 1;
     public static final int GAME_OBJECT_WIDTH = 2;
@@ -68,11 +68,14 @@ public class MovingGameObject implements Pool.Poolable {
                              SoundProvider soundProvider,
                              MovingGameObjectState state,
                              int[] hitBoxConfig) {
-
         this.imageProvider = imageProvider;
         this.soundProvider = soundProvider;
         this.textureRegions = textureRegions;
         this.state = state;
+        initialize(hitBoxConfig);
+    }
+
+    public void initialize(int[] hitBoxConfig){
         this.offSetX = hitBoxConfig[GAME_OBJECT_X];
         this.offSetY = hitBoxConfig[GAME_OBJECT_Y];
 
@@ -83,7 +86,7 @@ public class MovingGameObject implements Pool.Poolable {
 
         setRectSize(rect, rectConfig);
         setRectSize(hitboxBounds, hitBoxConfig);
-        reset();
+        setHitboxActive(true);
         setStatefulPosition();
     }
 
@@ -124,9 +127,11 @@ public class MovingGameObject implements Pool.Poolable {
         debugRenderer.set(ShapeType.Line);
         debugRenderer.setColor(Color.GREEN);
         debugRenderer.rect(rect.x, rect.y, rect.width, rect.height);
-        debugRenderer.set(ShapeType.Filled);
-        debugRenderer.setColor(Color.RED);
-        debugRenderer.rect(hitboxBounds.x, hitboxBounds.y, hitboxBounds.width, hitboxBounds.height);
+        if(isHitboxActive) {
+            debugRenderer.set(ShapeType.Filled);
+            debugRenderer.setColor(Color.RED);
+            debugRenderer.rect(hitboxBounds.x, hitboxBounds.y, hitboxBounds.width, hitboxBounds.height);
+        }
     }
 
     public void setHitboxBounds(){
@@ -201,15 +206,12 @@ public class MovingGameObject implements Pool.Poolable {
         time = 0;
         isCollided = false;
         isSoundTriggered = false;
-        isHitboxActive = true;
         frame = 0;
-        moveSpeed = Constants.OBJECT_MOVE_SPEED;
         setHitboxActive(false);
         setObjectPosition(imageProvider.getScreenWidth(), 0);
     }
 
     public void fireSound(){
-        throw new RuntimeException("fireSound Unsupported for Generic MovingGameObject");
     }
 
     public void setObjectPosition(int x, int y){

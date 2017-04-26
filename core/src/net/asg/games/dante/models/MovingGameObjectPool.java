@@ -21,7 +21,7 @@ public class MovingGameObjectPool {
         this.soundProvider = soundProvider;
     }
 
-    public final Pool<Goal> GoalPool = new Pool<Goal>() {
+    public final Pool<Goal> GoalPool = new Pool<Goal>(16, 32) {
         @Override
         protected Goal newObject() {
             System.out.println("!!!!!New Goal!!!!");
@@ -35,11 +35,10 @@ public class MovingGameObjectPool {
         }
     };
 
-    public final Pool<FireBall> FireBallPool = new Pool<FireBall>() {
+    public final Pool<FireBall> FireBallPool = new Pool<FireBall>(16, 32) {
         @Override
         protected FireBall newObject() {
             System.out.println("!!!!!New FireBall!!!!");
-
             TextureRegion[] textureRegions = new TextureRegion[Constants.FIREBALL_TOTAL_ANIMATION_FRAMES];
 
             imageProvider.setAnimations(textureRegions, ImageProvider.FIREBALL_ID);
@@ -54,6 +53,7 @@ public class MovingGameObjectPool {
     public final Pool<FireWall> FireWallPool = new Pool<FireWall>() {
         @Override
         protected FireWall newObject() {
+            System.out.println("!!!!!New FireWall!!!!");
             TextureRegion[] textureRegions = new TextureRegion[Constants.DYNAMIC_FIREWALL_TOTAL_ANIMATION_FRAMES];
 
             imageProvider.setAnimations(textureRegions, ImageProvider.FIREWALL_ID);
@@ -68,6 +68,7 @@ public class MovingGameObjectPool {
     public final Pool<Missile> MissilePool = new Pool<Missile>() {
         @Override
         protected Missile newObject() {
+            System.out.println("!!!!!New Missile!!!!");
             TextureRegion[] textureRegions = new TextureRegion[Constants.MISSLE_TOTAL_ANIMATION_FRAMES];
 
             imageProvider.setAnimations(textureRegions, ImageProvider.MISSILE_ID);
@@ -82,6 +83,7 @@ public class MovingGameObjectPool {
     public final Pool<RockWall> RockWallPool = new Pool<RockWall>() {
         @Override
         protected RockWall newObject() {
+            System.out.println("!!!!!New RockWall!!!!");
             TextureRegion[] textureRegions = new TextureRegion[1];
             textureRegions[0] = imageProvider.getRockWall();
 
@@ -95,6 +97,7 @@ public class MovingGameObjectPool {
     public final Pool<SlidingRockWall> SlidingRockWallPool = new Pool<SlidingRockWall>() {
         @Override
         protected SlidingRockWall newObject() {
+            System.out.println("!!!!!New SlidingRockWall!!!!");
             TextureRegion[] textureRegions = new TextureRegion[1];
             textureRegions[0] = imageProvider.getRockWall();
 

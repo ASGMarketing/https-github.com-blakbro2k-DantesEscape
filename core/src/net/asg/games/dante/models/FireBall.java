@@ -7,6 +7,7 @@ import net.asg.games.dante.states.MovingGameObjectState;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector3;
 
@@ -14,15 +15,29 @@ import com.badlogic.gdx.math.Vector3;
  * @author Blakbro2k
  */
 public class FireBall extends MovingGameObject {
-
     public FireBall(ImageProvider imageProvider,
                     TextureRegion[] textureRegions,
                     SoundProvider soundProvider,
                     MovingGameObjectState state,
                     int[] hitBoxConfig) {
         super(imageProvider, textureRegions, soundProvider, state, hitBoxConfig);
-        this.setMoveSpeed(Constants.FIREBALL_SPEED);
+    }
 
+    public void initialize(int[] hitBoxConfig){
+        this.offSetX = hitBoxConfig[GAME_OBJECT_X];
+        this.offSetY = hitBoxConfig[GAME_OBJECT_Y];
+
+        rect = new Rectangle();
+        hitboxBounds = new Rectangle();
+
+        int rectConfig[] = {0,0,textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight()};
+
+        setRectSize(rect, rectConfig);
+        setRectSize(hitboxBounds, hitBoxConfig);
+        setHitboxActive(true);
+        reset();
+        setStatefulPosition();
+        setMoveSpeed(Constants.FIREBALL_SPEED);
         imageProvider.setAnimations(textureRegions, ImageProvider.FIREBALL_ID);
     }
 

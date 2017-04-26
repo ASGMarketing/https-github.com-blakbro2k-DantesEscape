@@ -29,7 +29,7 @@ public class FireWall extends RockWall {
             lowerWall.y = 0 - height - position;
         } else {
             rect.y = imageProvider.getScreenHeight() / 2;
-            lowerWall.y = rect.y;
+            lowerWall.y = 0 - height - position;
         }
     }
 

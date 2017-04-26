@@ -255,8 +255,8 @@ public class GameScreen extends AbstractScreen {
             }
 
             if (fo.isLeftOfScreen()) {
-                fo.reset();
                 iter.remove();
+                movingGameObjectFactory.freeObject(fo);
             }
         }
     }

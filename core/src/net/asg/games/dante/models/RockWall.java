@@ -37,18 +37,27 @@ public class RockWall extends MovingGameObject {
                     MovingGameObjectState state,
                     int[] hitBoxConfig) {
         super(imageProvider, textureRegions, soundProvider, state, hitBoxConfig);
+    }
 
-        lowerWall = new Rectangle();
-        lowerHitboxBounds = new Rectangle();
+    public void initialize(int[] hitBoxConfig){
+        this.offSetX = hitBoxConfig[GAME_OBJECT_X];
+        this.offSetY = hitBoxConfig[GAME_OBJECT_Y];
+
+        this.rect = new Rectangle();
+        this.hitboxBounds = new Rectangle();
+        this.lowerWall = new Rectangle();
+        this.lowerHitboxBounds = new Rectangle();
 
         int rectConfig[] = {0,0,textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight()};
+        System.out.println("rectConfig: " + rectConfig);
 
         setRectSize(rect, rectConfig);
         setRectSize(lowerWall, rectConfig);
         setRectSize(hitboxBounds, hitBoxConfig);
         setRectSize(lowerHitboxBounds, hitBoxConfig);
         setHitboxBounds();
-        setObjectPosition(0,0);
+        reset();
+        setHitboxActive(true);
         this.setAnimationSpeed(0.1f);
     }
 
@@ -62,11 +71,15 @@ public class RockWall extends MovingGameObject {
         debugRenderer.setColor(Color.GREEN);
         debugRenderer.rect(rect.x, rect.y, rect.width, rect.height);
         debugRenderer.rect(lowerWall.x, lowerWall.y, lowerWall.width, lowerWall.height);
-        debugRenderer.set(ShapeType.Filled);
-        debugRenderer.setColor(Color.RED);
-        debugRenderer.rect(hitboxBounds.x, hitboxBounds.y, hitboxBounds.width, hitboxBounds.height);
-        debugRenderer.rect(lowerHitboxBounds.x, lowerHitboxBounds.y, lowerHitboxBounds.width, lowerHitboxBounds.height);
+
+        if(isHitboxActive) {
+            debugRenderer.set(ShapeType.Filled);
+            debugRenderer.setColor(Color.RED);
+            debugRenderer.rect(hitboxBounds.x, hitboxBounds.y, hitboxBounds.width, hitboxBounds.height);
+            debugRenderer.rect(lowerHitboxBounds.x, lowerHitboxBounds.y, lowerHitboxBounds.width, lowerHitboxBounds.height);
+        }
     }
+
 
     public void setHitboxBounds() {
         hitboxBounds.x = rect.x + offSetX;
@@ -96,6 +109,9 @@ public class RockWall extends MovingGameObject {
     }
 
     public void setObjectPosition(int x, int y){
+        //System.out.println("rect: " + rect);
+        //System.out.println("lowerWall: " + lowerWall);
+
         rect.x = lowerWall.x = x;
         rect.y = y;
         lowerWall.y = y - WALL_BASE_OFFSET - rect.height - holeSize - position;
@@ -109,6 +125,20 @@ public class RockWall extends MovingGameObject {
     public void setHoleSize(int holeSize){
         this.holeSize = holeSize;
     }
+
+    public void reset() {
+        time = 0;
+        isCollided = false;
+        isSoundTriggered = false;
+        isHitboxActive = true;
+        frame = 0;
+        position = WALL_POSITION_ONE;
+        holeSize = NORMAL_GAP_SIZE;
+        moveSpeed = Constants.WALL_OBJECT_MOVE_SPEED;
+        setHitboxActive(false);
+        setObjectPosition(imageProvider.getScreenWidth(), 0);
+    }
+
     public String toString() {
         return "RockWall: \n" +
                 "Upper Wall: " + rect + "\n" +
