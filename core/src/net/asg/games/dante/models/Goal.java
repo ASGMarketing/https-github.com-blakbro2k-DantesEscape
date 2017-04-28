@@ -73,10 +73,9 @@ public class Goal extends MovingGameObject {
         time = 0;
         isCollided = false;
         isSoundTriggered = false;
-        isHitboxActive = true;
         frame = 0;
         velocityX = Constants.GOAL_OBJECT_X_VELOCITY;
-        setHitboxActive(false);
+        setHitboxActive(true);
         setObjectPosition(imageProvider.getScreenWidth(), 0);
     }
 

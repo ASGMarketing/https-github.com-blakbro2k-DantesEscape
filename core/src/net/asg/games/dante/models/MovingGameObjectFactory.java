@@ -95,10 +95,10 @@ public class MovingGameObjectFactory {
     }
     public RockWall getRandomEasyRockWall(){
         RockWall obj = getRockWall();
-        System.out.println("!!!!!here now!!!!");
-
         obj.setHoleSize(RockWall.EASY_GAP_SIZE);
         obj.setHolePosition(getRandomWallPosition(2,4));
+        //obj.setHolePosition(RockWall.WALL_POSITION_ONE);
+        obj.setObjectPosition(imageProvider.getScreenWidth(),220);
         return obj;
     }
 

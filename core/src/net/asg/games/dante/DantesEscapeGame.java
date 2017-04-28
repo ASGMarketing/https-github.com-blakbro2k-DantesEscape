@@ -30,7 +30,7 @@ public class DantesEscapeGame extends Game {
 
     //private GameState gameState;
     //private TextResources textResources;
-    public boolean isDebugOn = false;
+    public boolean isDebugOn = true;
     private StateManager stateManager;
     private FPSLogger fpsLog;
 

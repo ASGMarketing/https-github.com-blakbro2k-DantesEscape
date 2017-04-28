@@ -22,7 +22,7 @@ public class RockWall extends MovingGameObject {
     public static final int WALL_POSITION_FOUR = 200;
     public static final int WALL_POSITION_FIVE = 250;
     public static final int WALL_POSITION_SIX = 300;
-    public static final int WALL_BASE_OFFSET = 450;
+    public static final int WALL_BASE_OFFSET = 0;
 
     protected Rectangle lowerWall;
     protected Rectangle lowerHitboxBounds;
@@ -49,8 +49,6 @@ public class RockWall extends MovingGameObject {
         this.lowerHitboxBounds = new Rectangle();
 
         int rectConfig[] = {0,0,textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight()};
-        System.out.println("rectConfig: " + rectConfig);
-
         setRectSize(rect, rectConfig);
         setRectSize(lowerWall, rectConfig);
         setRectSize(hitboxBounds, hitBoxConfig);
@@ -109,12 +107,10 @@ public class RockWall extends MovingGameObject {
     }
 
     public void setObjectPosition(int x, int y){
-        //System.out.println("rect: " + rect);
-        //System.out.println("lowerWall: " + lowerWall);
-
         rect.x = lowerWall.x = x;
-        rect.y = y;
-        lowerWall.y = y - WALL_BASE_OFFSET - rect.height - holeSize - position;
+        //lowerWall.x = lowerWall.x + 100;
+        rect.y = y - WALL_BASE_OFFSET - position;
+        lowerWall.y = y - rect.height - WALL_BASE_OFFSET - holeSize - position;
         setHitboxBounds();
     }
 
