@@ -102,7 +102,6 @@ public class Bob {
             bounds.x = screenWidth - width;
             hitBounds.x = bounds.x + offSetX;
         }
-
     }
 
     public void moveX(float pixels, float delta) {

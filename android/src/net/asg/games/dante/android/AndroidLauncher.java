@@ -53,7 +53,7 @@ public class AndroidLauncher extends AndroidApplication implements ActionResolve
 		startAdvertising(admobView);
 
 		interstitialAd = new InterstitialAd(this);
-		interstitialAd.setAdUnitId(AD_UNIT_ID_INTERSTITIAL);
+		interstitialAd.setAdUnitId(Integer.parseInt(R.string.intesteral_ad_unit_id));
 		interstitialAd.setAdListener(new AdListener() {
 			@Override
 			public void onAdLoaded() {

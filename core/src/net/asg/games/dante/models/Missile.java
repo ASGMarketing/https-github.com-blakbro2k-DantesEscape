@@ -2,6 +2,7 @@ package net.asg.games.dante.models;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
 
 import net.asg.games.dante.Constants;
 import net.asg.games.dante.providers.ImageProvider;
@@ -13,7 +14,7 @@ import net.asg.games.dante.states.MovingGameObjectState;
  */
 
 public class Missile extends MovingGameObject {
-    private final double targetX;
+    private float targetX;
     private boolean isDefunct;
     private boolean isFalling;
 
@@ -24,10 +25,28 @@ public class Missile extends MovingGameObject {
                    int[] hitBoxConfig) {
         super(imageProvider, textureRegions, soundProvider, state, hitBoxConfig);
 
+    }
+
+    public void initialize(int[] hitBoxConfig){
+        this.offSetX = hitBoxConfig[GAME_OBJECT_X];
+        this.offSetY = hitBoxConfig[GAME_OBJECT_Y];
+
         setLaunching();
         this.isDefunct = false;
-        targetX = MathUtils.random(0, imageProvider.getScreenWidth());
         flippedTextures(false);
+
+        rect = new Rectangle();
+        hitboxBounds = new Rectangle();
+
+        int rectConfig[] = {0,0,textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight()};
+
+        setRectSize(rect, rectConfig);
+        setRectSize(hitboxBounds, hitBoxConfig);
+        setHitboxActive(true);
+        reset();
+        setStatefulPosition();
+        setMoveSpeed(Constants.FIREBALL_SPEED);
+        imageProvider.setAnimations(textureRegions, ImageProvider.FIREBALL_ID);
     }
 
     public void setActive(){
@@ -42,6 +61,10 @@ public class Missile extends MovingGameObject {
         isFalling = true;
         flippedTextures(true);
         setTopOfScreen();
+    }
+
+    public void setTargetX(float x){
+        targetX = x;
     }
 
     public void setLaunching(){
@@ -111,5 +134,18 @@ public class Missile extends MovingGameObject {
             }
         }
         setStatefulPosition();
+    }
+
+    public void reset() {
+        time = 0;
+        isCollided = false;
+        isSoundTriggered = false;
+        frame = 0;
+        setHitboxActive(false);
+        setObjectPosition(imageProvider.getScreenWidth(), 0);
+    }
+
+    public void fireSound(){
+
     }
 }

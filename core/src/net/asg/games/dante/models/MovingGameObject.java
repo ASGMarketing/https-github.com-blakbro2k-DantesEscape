@@ -37,7 +37,7 @@ import com.badlogic.gdx.utils.Pool.Poolable;
  *         It requires an image provider to handle the textures. It returns an
  *         array of texture regions if the object has animations
  */
-public class MovingGameObject implements Poolable {
+public abstract class MovingGameObject implements Poolable {
     public static final int GAME_OBJECT_X = 0;
     public static final int GAME_OBJECT_Y = 1;
     public static final int GAME_OBJECT_WIDTH = 2;
@@ -75,25 +75,16 @@ public class MovingGameObject implements Poolable {
         initialize(hitBoxConfig);
     }
 
-    public void initialize(int[] hitBoxConfig){
-        this.offSetX = hitBoxConfig[GAME_OBJECT_X];
-        this.offSetY = hitBoxConfig[GAME_OBJECT_Y];
+    public abstract void initialize(int[] hitBoxConfig);
 
-        rect = new Rectangle();
-        hitboxBounds = new Rectangle();
-
-        int rectConfig[] = {0,0,textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight()};
-
-        setRectSize(rect, rectConfig);
-        setRectSize(hitboxBounds, hitBoxConfig);
-        setHitboxActive(true);
+    public void moveLeft(float delta, float speedBonus) {
+        this.rect.x -= moveSpeed * delta * speedBonus;
+        setHitboxBounds();
+        nextAnimationFrame(delta);
         setStatefulPosition();
     }
 
-    public void moveLeft(float delta, float speedBonus) {
-        rect.x -= moveSpeed * delta * speedBonus;
-        setHitboxBounds();
-
+    public void nextAnimationFrame(float delta){
         time += delta;
         if (time > animationPeriod) {
             time -= animationPeriod;
@@ -102,7 +93,6 @@ public class MovingGameObject implements Poolable {
                 frame = 0;
             }
         }
-        setStatefulPosition();
     }
 
     public void setStatefulPosition(){
@@ -135,12 +125,12 @@ public class MovingGameObject implements Poolable {
     }
 
     public void setHitboxBounds(){
-        hitboxBounds.x = rect.x + offSetX;
-        hitboxBounds.y = rect.y + offSetY;
+        this.hitboxBounds.x = rect.x + offSetX;
+        this.hitboxBounds.y = rect.y + offSetY;
     }
 
     public void setHitboxActive(boolean bool) {
-        isHitboxActive = bool;
+        this.isHitboxActive = bool;
         state.setHitboxActive(bool);
     }
 
@@ -202,21 +192,24 @@ public class MovingGameObject implements Poolable {
     }
 
     @Override
-    public void reset() {
-        time = 0;
-        isCollided = false;
-        isSoundTriggered = false;
-        frame = 0;
-        setHitboxActive(false);
-        setObjectPosition(imageProvider.getScreenWidth(), 0);
-    }
+    public abstract void reset();
 
-    public void fireSound(){
-    }
+    public abstract void fireSound();
 
     public void setObjectPosition(int x, int y){
-        rect.x = x;
-        rect.y = y;
+        this.rect.x = x;
+        this.rect.y = y;
+        keepOnScreen();
+    }
+
+    private void keepOnScreen() {
+        int screenHeight = imageProvider.getScreenHeight();
+
+        if (this.rect.y < 0) {
+            this.rect.y = 0;
+        } else if (this.rect.y + height > screenHeight) {
+            this.rect.y = screenHeight - height;
+        }
         setHitboxBounds();
     }
 }

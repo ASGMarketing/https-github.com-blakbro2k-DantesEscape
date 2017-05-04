@@ -51,6 +51,7 @@ public class RockWall extends MovingGameObject {
         int rectConfig[] = {0,0,textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight()};
         setRectSize(rect, rectConfig);
         setRectSize(lowerWall, rectConfig);
+        lowerWall.x = lowerWall.x + 10;
         setRectSize(hitboxBounds, hitBoxConfig);
         setRectSize(lowerHitboxBounds, hitBoxConfig);
         setHitboxBounds();
@@ -78,7 +79,6 @@ public class RockWall extends MovingGameObject {
         }
     }
 
-
     public void setHitboxBounds() {
         hitboxBounds.x = rect.x + offSetX;
         hitboxBounds.y = rect.y + offSetY;
@@ -90,15 +90,7 @@ public class RockWall extends MovingGameObject {
         rect.x -= moveSpeed * delta * speedBonus;
         lowerWall.x -= moveSpeed * delta * speedBonus;
         setHitboxBounds();
-
-        time += delta;
-        if (time > animationPeriod) {
-            time -= animationPeriod;
-            frame += 1;
-            if (frame >= textureRegions.length) {
-                frame = 0;
-            }
-        }
+        nextAnimationFrame(delta);
         setStatefulPosition();
     }
 
@@ -107,10 +99,21 @@ public class RockWall extends MovingGameObject {
     }
 
     public void setObjectPosition(int x, int y){
-        rect.x = lowerWall.x = x;
-        //lowerWall.x = lowerWall.x + 100;
-        rect.y = y - WALL_BASE_OFFSET - position;
-        lowerWall.y = y - rect.height - WALL_BASE_OFFSET - holeSize - position;
+        this.rect.x = lowerWall.x = x;
+        this.rect.y = y - WALL_BASE_OFFSET - position;
+        this.lowerWall.y = y - this.rect.height - WALL_BASE_OFFSET - holeSize - position;
+        keepOnScreen();
+    }
+
+    private void keepOnScreen() {
+        int screenHeight = imageProvider.getScreenHeight();
+
+        if (this.rect.y < 0) {
+            this.rect.x = lowerWall.x = 0;
+        } else if (this.rect.y + height > screenHeight) {
+            this.rect.y = screenHeight - height;
+            this.lowerWall.y = rect.y - rect.height - WALL_BASE_OFFSET - holeSize - position;
+        }
         setHitboxBounds();
     }
 
@@ -133,6 +136,10 @@ public class RockWall extends MovingGameObject {
         moveSpeed = Constants.WALL_OBJECT_MOVE_SPEED;
         setHitboxActive(false);
         setObjectPosition(imageProvider.getScreenWidth(), 0);
+    }
+
+    public void fireSound(){
+
     }
 
     public String toString() {

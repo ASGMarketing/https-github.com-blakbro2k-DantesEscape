@@ -41,6 +41,15 @@ public class FireBall extends MovingGameObject {
         imageProvider.setAnimations(textureRegions, ImageProvider.FIREBALL_ID);
     }
 
+    public void reset() {
+        time = 0;
+        isCollided = false;
+        isSoundTriggered = false;
+        frame = 0;
+        setHitboxActive(false);
+        setObjectPosition(imageProvider.getScreenWidth(), 0);
+    }
+
     public void fireSound(){
         soundProvider.playflameBurstSound();
     }

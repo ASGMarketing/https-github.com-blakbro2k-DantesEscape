@@ -17,9 +17,29 @@ public class FireWall extends RockWall {
                     MovingGameObjectState state,
                     int[] hitBoxConfig) {
         super(imageProvider, textureRegions, soundProvider, state, hitBoxConfig);
+    }
+
+    public void initialize(int[] hitBoxConfig){
+        this.offSetX = hitBoxConfig[GAME_OBJECT_X];
+        this.offSetY = hitBoxConfig[GAME_OBJECT_Y];
+
+        this.rect = new Rectangle();
+        this.hitboxBounds = new Rectangle();
+        this.lowerWall = new Rectangle();
+        this.lowerHitboxBounds = new Rectangle();
 
         setWallAsClosingType(isClosingType);
         this.setAnimationSpeed(0.11f);
+
+        int rectConfig[] = {0,0,textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight()};
+        setRectSize(rect, rectConfig);
+        setRectSize(lowerWall, rectConfig);
+        setRectSize(hitboxBounds, hitBoxConfig);
+        setRectSize(lowerHitboxBounds, hitBoxConfig);
+        setHitboxBounds();
+        reset();
+        setHitboxActive(true);
+        this.setAnimationSpeed(0.1f);
     }
 
     public void setWallAsClosingType(boolean wallType) {
@@ -73,6 +93,15 @@ public class FireWall extends RockWall {
             }
         }
         setStatefulPosition();
+    }
+
+    public void reset() {
+        time = 0;
+        isCollided = false;
+        isSoundTriggered = false;
+        frame = 0;
+        setHitboxActive(false);
+        setObjectPosition(imageProvider.getScreenWidth(), 0);
     }
 
     public void fireSound(){

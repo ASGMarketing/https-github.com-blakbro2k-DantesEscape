@@ -14,54 +14,50 @@ public class MovingGameObjectFactory {
         this.gameObjectPool = new MovingGameObjectPool(imageProvider, game.getSoundProvider());
     }
 
-    private FireBall getFireBall() {
+    private FireBall getFireBallObj() {
         return gameObjectPool.FireBallPool.obtain();
     }
 
-    private RockWall getRockWall() {
+    private RockWall getRockWallObj() {
         return gameObjectPool.RockWallPool.obtain();
     }
 
-    public FireWall getFireWall() {
+    public FireWall getFireWallObj() {
         return gameObjectPool.FireWallPool.obtain();
     }
 
-    private Missile getMissle() {
+    private Missile getMissleObj() {
         return gameObjectPool.MissilePool.obtain();
     }
 
-    public Goal getGoal() {
+    public Goal getGoalObj() {
         return gameObjectPool.GoalPool.obtain();
     }
 
-    private SlidingRockWall getSlidingRockWall() {
+    private SlidingRockWall getSlidingRockWallObj() {
         return gameObjectPool.SlidingRockWallPool.obtain();
     }
 
     public FireBall getRandomFireBall(){
-        FireBall obj = getFireBall();
+        return getFireBall(imageProvider.getScreenWidth(),
+                MathUtils.random(0, imageProvider.getScreenHeight()));
+    }
+
+    public FireBall getFireBall(int x, int y){
+        FireBall obj = getFireBallObj();
         obj.setHitboxActive(true);
-        obj.setObjectPosition(imageProvider.getScreenWidth(),
-                MathUtils.random(0, imageProvider.getScreenHeight() - ((int)obj.getPosition().height))
-        );
+        obj.setObjectPosition(x, y);
         return obj;
     }
 
-    /*public FireBall getFireBall(int x, int y){
-        FireBall obj = getFireBall();
-        obj.setHitboxActive(true);
-        obj.setObjectPosition(x,y);
-        return obj;
-    }*/
-
     public Missile getEasyLaunchMissle() {
-        Missile obj = getMissle();
+        Missile obj = getMissleObj();
         obj.setInactive();
         return obj;
     }
 
     public Missile getEasyActiveMissle() {
-        Missile obj = getMissle();
+        Missile obj = getMissleObj();
         obj.setActive();
         obj.setFalling();
         return obj;
@@ -80,35 +76,35 @@ public class MovingGameObjectFactory {
     }*/
 
     public SlidingRockWall getRandomEasyMediumSlidingWall(){
-        SlidingRockWall obj = getSlidingRockWall();
+        SlidingRockWall obj = getSlidingRockWallObj();
         return obj;
     }
 
     public SlidingRockWall getRandomEasyLongSlidingWall(){
-        SlidingRockWall obj = getSlidingRockWall();
+        SlidingRockWall obj = getSlidingRockWallObj();
         return obj;
     }
 
     public SlidingRockWall getRandomEasyShortSlidingWall(){
-        SlidingRockWall obj = getSlidingRockWall();
+        SlidingRockWall obj = getSlidingRockWallObj();
         return obj;
     }
     public RockWall getRandomEasyRockWall(){
-        RockWall obj = getRockWall();
+        RockWall obj = getRockWallObj();
         obj.setHoleSize(RockWall.EASY_GAP_SIZE);
         obj.setHolePosition(getRandomWallPosition(2,4));
-        //obj.setHolePosition(RockWall.WALL_POSITION_ONE);
+        //0obj.setHolePosition(RockWall.WALL_POSITION_ONE);
         obj.setObjectPosition(imageProvider.getScreenWidth(),220);
         return obj;
     }
 
     public RockWall getRandomNormalRockWall(){
-        SlidingRockWall obj = getSlidingRockWall();
+        SlidingRockWall obj = getSlidingRockWallObj();
         return obj;
     }
 
     public RockWall getRandomHardRockWall(){
-        SlidingRockWall obj = getSlidingRockWall();
+        SlidingRockWall obj = getSlidingRockWallObj();
         return obj;
     }
 

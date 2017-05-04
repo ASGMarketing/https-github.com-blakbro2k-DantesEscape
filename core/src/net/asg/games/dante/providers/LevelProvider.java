@@ -37,7 +37,7 @@ public class LevelProvider {
         switch (st.stageType) {
             case GOAL_LEVEL_VALUE:
                 st.lastGameObjTime = TimeUtils.millis();
-                mObj = movingGameObjectFactory.getGoal();
+                mObj = movingGameObjectFactory.getGoalObj();
                 clearFlags();
                 break;
             case FIREBALL_LEVEL_VALUE:
@@ -47,7 +47,7 @@ public class LevelProvider {
                 break;
             case LAVA_LEVEL_VALUE:
                 st.lastGameObjTime = TimeUtils.millis();
-                mObj = movingGameObjectFactory.getFireWall();
+                mObj = movingGameObjectFactory.getFireWallObj();
                 st.spawnTime = Constants.DYNAMIC_FIREWALL_SPAWN_TIME;
                 // mObj.setMoveSpeed(100);
                 break;
