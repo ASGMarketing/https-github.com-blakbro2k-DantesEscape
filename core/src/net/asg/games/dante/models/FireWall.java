@@ -28,9 +28,6 @@ public class FireWall extends RockWall {
         this.lowerWall = new Rectangle();
         this.lowerHitboxBounds = new Rectangle();
 
-        setWallAsClosingType(isClosingType);
-        this.setAnimationSpeed(0.11f);
-
         int rectConfig[] = {0,0,textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight()};
         setRectSize(rect, rectConfig);
         setRectSize(lowerWall, rectConfig);
@@ -39,7 +36,7 @@ public class FireWall extends RockWall {
         setHitboxBounds();
         reset();
         setHitboxActive(true);
-        this.setAnimationSpeed(0.1f);
+        setAnimationSpeed(0.8f);
     }
 
     public void setWallAsClosingType(boolean wallType) {
@@ -101,6 +98,7 @@ public class FireWall extends RockWall {
         isSoundTriggered = false;
         frame = 0;
         setHitboxActive(false);
+        setWallAsClosingType(isClosingType);
         setObjectPosition(imageProvider.getScreenWidth(), 0);
     }
 

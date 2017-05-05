@@ -5,7 +5,10 @@ import net.asg.games.dante.providers.ImageProvider;
 import net.asg.games.dante.providers.SoundProvider;
 import net.asg.games.dante.states.MovingGameObjectState;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector;
@@ -34,8 +37,8 @@ public class FireBall extends MovingGameObject {
 
         setRectSize(rect, rectConfig);
         setRectSize(hitboxBounds, hitBoxConfig);
-        setHitboxActive(true);
         reset();
+        setHitboxActive(true);
         setStatefulPosition();
         setMoveSpeed(Constants.FIREBALL_SPEED);
         imageProvider.setAnimations(textureRegions, ImageProvider.FIREBALL_ID);

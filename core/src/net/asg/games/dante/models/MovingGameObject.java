@@ -78,7 +78,7 @@ public abstract class MovingGameObject implements Poolable {
     public abstract void initialize(int[] hitBoxConfig);
 
     public void moveLeft(float delta, float speedBonus) {
-        this.rect.x -= moveSpeed * delta * speedBonus;
+        rect.x -= moveSpeed * delta * speedBonus;
         setHitboxBounds();
         nextAnimationFrame(delta);
         setStatefulPosition();
@@ -125,12 +125,12 @@ public abstract class MovingGameObject implements Poolable {
     }
 
     public void setHitboxBounds(){
-        this.hitboxBounds.x = rect.x + offSetX;
-        this.hitboxBounds.y = rect.y + offSetY;
+        hitboxBounds.x = rect.x + offSetX;
+        hitboxBounds.y = rect.y + offSetY;
     }
 
     public void setHitboxActive(boolean bool) {
-        this.isHitboxActive = bool;
+        isHitboxActive = bool;
         state.setHitboxActive(bool);
     }
 
@@ -166,13 +166,13 @@ public abstract class MovingGameObject implements Poolable {
         if(size[GAME_OBJECT_WIDTH] != -1){
             rect.width = size[GAME_OBJECT_WIDTH];
         } else {
-            rect.width = this.width;
+            rect.width = this.rect.width;
         }
 
         if(size[GAME_OBJECT_HEIGHT] != -1){
             rect.height = size[GAME_OBJECT_HEIGHT];
         } else {
-            rect.height = this.height;
+            rect.height = this.rect.height;
         }
     }
     public MovingGameObjectState getState() {
@@ -205,10 +205,12 @@ public abstract class MovingGameObject implements Poolable {
     private void keepOnScreen() {
         int screenHeight = imageProvider.getScreenHeight();
 
-        if (this.rect.y < 0) {
-            this.rect.y = 0;
-        } else if (this.rect.y + height > screenHeight) {
-            this.rect.y = screenHeight - height;
+        if (rect.y < 0) {
+            rect.y = 0;
+        }
+
+        if (rect.y + height > screenHeight) {
+            rect.y = screenHeight - height;
         }
         setHitboxBounds();
     }

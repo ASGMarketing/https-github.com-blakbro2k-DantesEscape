@@ -45,8 +45,8 @@ public class MovingGameObjectFactory {
 
     public FireBall getFireBall(int x, int y){
         FireBall obj = getFireBallObj();
-        obj.setHitboxActive(true);
         obj.setObjectPosition(x, y);
+        obj.setHitboxActive(true);
         return obj;
     }
 
@@ -92,14 +92,16 @@ public class MovingGameObjectFactory {
     public RockWall getRandomEasyRockWall(){
         RockWall obj = getRockWallObj();
         obj.setHoleSize(RockWall.EASY_GAP_SIZE);
-        obj.setHolePosition(getRandomWallPosition(2,4));
-        //0obj.setHolePosition(RockWall.WALL_POSITION_ONE);
-        obj.setObjectPosition(imageProvider.getScreenWidth(),220);
+        obj.setObjectPosition(imageProvider.getScreenWidth(),getRandomWallPosition(1,5));
+        obj.setHitboxActive(true);
         return obj;
     }
 
     public RockWall getRandomNormalRockWall(){
-        SlidingRockWall obj = getSlidingRockWallObj();
+        RockWall obj = getRockWallObj();
+        obj.setHoleSize(RockWall.NORMAL_GAP_SIZE);
+        obj.setObjectPosition(imageProvider.getScreenWidth(),getRandomWallPosition(1,5));
+        obj.setHitboxActive(true);
         return obj;
     }
 
@@ -126,9 +128,6 @@ public class MovingGameObjectFactory {
                 break;
             case 5:
                 wallPosition = RockWall.WALL_POSITION_FIVE;
-                break;
-            case 6:
-                wallPosition = RockWall.WALL_POSITION_SIX;
                 break;
             default:
                 throw new IllegalArgumentException("Bad wall position was entered");

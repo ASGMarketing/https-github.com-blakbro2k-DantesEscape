@@ -21,7 +21,7 @@ public class MovingGameObjectPool {
         this.soundProvider = soundProvider;
     }
 
-    public final Pool<Goal> GoalPool = new Pool<Goal>(16, 32) {
+    public final Pool<Goal> GoalPool = new Pool<Goal>(1, 2) {
         @Override
         protected Goal newObject() {
             System.out.println("!!!!!New Goal!!!!");
@@ -35,7 +35,7 @@ public class MovingGameObjectPool {
         }
     };
 
-    public final Pool<FireBall> FireBallPool = new Pool<FireBall>(16, 32) {
+    public final Pool<FireBall> FireBallPool = new Pool<FireBall>(16, 16) {
         @Override
         protected FireBall newObject() {
             System.out.println("!!!!!New FireBall!!!!");
@@ -50,7 +50,7 @@ public class MovingGameObjectPool {
         }
     };
 
-    public final Pool<FireWall> FireWallPool = new Pool<FireWall>() {
+    public final Pool<FireWall> FireWallPool = new Pool<FireWall>(16, 16) {
         @Override
         protected FireWall newObject() {
             System.out.println("!!!!!New FireWall!!!!");
@@ -65,7 +65,7 @@ public class MovingGameObjectPool {
         }
     };
 
-    public final Pool<Missile> MissilePool = new Pool<Missile>() {
+    public final Pool<Missile> MissilePool = new Pool<Missile>(16, 16) {
         @Override
         protected Missile newObject() {
             System.out.println("!!!!!New Missile!!!!");
@@ -80,7 +80,7 @@ public class MovingGameObjectPool {
         }
     };
 
-    public final Pool<RockWall> RockWallPool = new Pool<RockWall>() {
+    public final Pool<RockWall> RockWallPool = new Pool<RockWall>(16, 16) {
         @Override
         protected RockWall newObject() {
             System.out.println("!!!!!New RockWall!!!!");
@@ -94,7 +94,7 @@ public class MovingGameObjectPool {
         }
     };
 
-    public final Pool<SlidingRockWall> SlidingRockWallPool = new Pool<SlidingRockWall>() {
+    public final Pool<SlidingRockWall> SlidingRockWallPool = new Pool<SlidingRockWall>(16, 16) {
         @Override
         protected SlidingRockWall newObject() {
             System.out.println("!!!!!New SlidingRockWall!!!!");
@@ -110,12 +110,12 @@ public class MovingGameObjectPool {
 
     @Override
     public String toString(){
-        return "Goal free: " + GoalPool.peak + " max: " + GoalPool.getFree() + "\n"
-                + "FireBall free: " + FireBallPool.peak + " max: " + FireBallPool.getFree() + "\n"
-                + "RockWall free: " + RockWallPool.peak + " max: " + RockWallPool.getFree() + "\n"
-                + "FireWall free: " + FireWallPool.peak + " max: " + FireWallPool.getFree() + "\n"
-                + "Missile free: " + MissilePool.peak + " max: " + MissilePool.getFree() + "\n"
-                + "Sliding free: " + SlidingRockWallPool.peak + " max: " + SlidingRockWallPool.getFree() + "\n"
+        return "Goal free: " + ( GoalPool.peak) + " out of " + GoalPool.max + "\n"
+                + "FireBall free: " + ( FireBallPool.peak) + " out of " + FireBallPool.max + "\n"
+                + "RockWall free: " + ( RockWallPool.peak) + " out of " + RockWallPool.max + "\n"
+                + "FireWall free: " + ( FireWallPool.peak) + " out of " + FireWallPool.max + "\n"
+                + "Missile free: " +  ( MissilePool.peak) + " out of " + MissilePool.max + "\n"
+                + "Sliding free: " +  ( SlidingRockWallPool.peak) + " out of " + SlidingRockWallPool.max + "\n"
                 ;
     }
 }

@@ -13,16 +13,16 @@ import net.asg.games.dante.providers.SoundProvider;
 import net.asg.games.dante.states.MovingGameObjectState;
 
 public class RockWall extends MovingGameObject {
-    public static final int HARD_GAP_SIZE = 100;
-    public static final int NORMAL_GAP_SIZE = 150;
-    public static final int EASY_GAP_SIZE = 200;
-    public static final int WALL_POSITION_ONE = 0;
-    public static final int WALL_POSITION_TWO = 50;
-    public static final int WALL_POSITION_THREE = 150;
-    public static final int WALL_POSITION_FOUR = 200;
-    public static final int WALL_POSITION_FIVE = 250;
+    public static final int HARD_GAP_SIZE = 160;
+    public static final int NORMAL_GAP_SIZE = 180;
+    public static final int EASY_GAP_SIZE = 210;
+    public static final int WALL_POSITION_ONE = 80;
+    public static final int WALL_POSITION_TWO = 120;
+    public static final int WALL_POSITION_THREE = 200;
+    public static final int WALL_POSITION_FOUR = 280;
+    public static final int WALL_POSITION_FIVE = 360;
     public static final int WALL_POSITION_SIX = 300;
-    public static final int WALL_BASE_OFFSET = 0;
+    public static final int WALL_BASE_OFFSET = -250;
 
     protected Rectangle lowerWall;
     protected Rectangle lowerHitboxBounds;
@@ -51,13 +51,12 @@ public class RockWall extends MovingGameObject {
         int rectConfig[] = {0,0,textureRegions[0].getRegionWidth(), textureRegions[0].getRegionHeight()};
         setRectSize(rect, rectConfig);
         setRectSize(lowerWall, rectConfig);
-        lowerWall.x = lowerWall.x + 10;
         setRectSize(hitboxBounds, hitBoxConfig);
         setRectSize(lowerHitboxBounds, hitBoxConfig);
         setHitboxBounds();
         reset();
         setHitboxActive(true);
-        this.setAnimationSpeed(0.1f);
+        setAnimationSpeed(0.1f);
     }
 
     public void draw(SpriteBatch batch) {
@@ -99,27 +98,14 @@ public class RockWall extends MovingGameObject {
     }
 
     public void setObjectPosition(int x, int y){
-        this.rect.x = lowerWall.x = x;
-        this.rect.y = y - WALL_BASE_OFFSET - position;
-        this.lowerWall.y = y - this.rect.height - WALL_BASE_OFFSET - holeSize - position;
-        keepOnScreen();
+        rect.x = lowerWall.x = x;
+        rect.y = y + (holeSize / 2);
+        lowerWall.y = y - rect.height - (holeSize / 2);
     }
 
-    private void keepOnScreen() {
-        int screenHeight = imageProvider.getScreenHeight();
-
-        if (this.rect.y < 0) {
-            this.rect.x = lowerWall.x = 0;
-        } else if (this.rect.y + height > screenHeight) {
-            this.rect.y = screenHeight - height;
-            this.lowerWall.y = rect.y - rect.height - WALL_BASE_OFFSET - holeSize - position;
-        }
-        setHitboxBounds();
-    }
-
-    public void setHolePosition(int position){
+    /*public void setHolePosition(int position){
         this.position = position;
-    }
+    }*/
 
     public void setHoleSize(int holeSize){
         this.holeSize = holeSize;
@@ -129,9 +115,8 @@ public class RockWall extends MovingGameObject {
         time = 0;
         isCollided = false;
         isSoundTriggered = false;
-        isHitboxActive = true;
         frame = 0;
-        position = WALL_POSITION_ONE;
+        //position = WALL_POSITION_ONE;
         holeSize = NORMAL_GAP_SIZE;
         moveSpeed = Constants.WALL_OBJECT_MOVE_SPEED;
         setHitboxActive(false);
@@ -146,7 +131,7 @@ public class RockWall extends MovingGameObject {
         return "RockWall: \n" +
                 "Upper Wall: " + rect + "\n" +
                 "Lower Wall: " + lowerWall + "\n" +
-                "position: " + position + "\n" +
+                //"position: " + position + "\n" +
                 "holeSize: " + holeSize + "\n" +
                 "moveSpeed: " + moveSpeed + "\n";
     }

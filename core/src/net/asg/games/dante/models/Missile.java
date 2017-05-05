@@ -42,8 +42,8 @@ public class Missile extends MovingGameObject {
 
         setRectSize(rect, rectConfig);
         setRectSize(hitboxBounds, hitBoxConfig);
-        setHitboxActive(true);
         reset();
+        setHitboxActive(true);
         setStatefulPosition();
         setMoveSpeed(Constants.FIREBALL_SPEED);
         imageProvider.setAnimations(textureRegions, ImageProvider.FIREBALL_ID);
