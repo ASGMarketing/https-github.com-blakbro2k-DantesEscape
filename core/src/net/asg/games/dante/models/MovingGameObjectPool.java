@@ -110,12 +110,12 @@ public class MovingGameObjectPool {
 
     @Override
     public String toString(){
-        return "Goal free: " + ( GoalPool.peak) + " out of " + GoalPool.max + "\n"
-                + "FireBall free: " + ( FireBallPool.peak) + " out of " + FireBallPool.max + "\n"
-                + "RockWall free: " + ( RockWallPool.peak) + " out of " + RockWallPool.max + "\n"
-                + "FireWall free: " + ( FireWallPool.peak) + " out of " + FireWallPool.max + "\n"
-                + "Missile free: " +  ( MissilePool.peak) + " out of " + MissilePool.max + "\n"
-                + "Sliding free: " +  ( SlidingRockWallPool.peak) + " out of " + SlidingRockWallPool.max + "\n"
+        return "Goal free: " + ( GoalPool.peak) + " out of " + GoalPool.getFree() + "\n"
+                + "FireBall free: " + ( FireBallPool.peak) + " out of " + FireBallPool.getFree() + "\n"
+                + "RockWall free: " + ( RockWallPool.peak) + " out of " + RockWallPool.getFree() + "\n"
+                + "FireWall free: " + ( FireWallPool.peak) + " out of " + FireWallPool.getFree() + "\n"
+                + "Missile free: " +  ( MissilePool.peak) + " out of " + MissilePool.getFree() + "\n"
+                + "Sliding free: " +  ( SlidingRockWallPool.peak) + " out of " + SlidingRockWallPool.getFree() + "\n"
                 ;
     }
 }

@@ -15,7 +15,7 @@ public class Constants {
 
     public static final int[] BOB_HITBOX = {16, 12, 80, 58};
     public static final int[] FIREBALL_HITBOX = {0,8, 50, 45};
-    public static final int[] ROCKWALL_HITBOX = {0, 0, 26, -1};
+    public static final int[] ROCKWALL_HITBOX = {10, 0, 26, -1};
     public static final int[] DEFAULT_HITBOX = {0, 0, -1, -1};
     public static final int[] MISSLE_HITBOX = {12, 26, 32, 64};
     public static final int[] GOAL_HITBOX = {0, 0, 16, 800};
