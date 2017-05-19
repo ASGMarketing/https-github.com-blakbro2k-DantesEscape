@@ -93,8 +93,8 @@ public class MainMenuScreen extends AbstractScreen {
         //camera.update();
         //batch.setProjectionMatrix(camera.combined);
 
-        batch.begin();
+        //batch.begin();
         stage.draw();
-        batch.end();
+        //batch.end();
     }
 }

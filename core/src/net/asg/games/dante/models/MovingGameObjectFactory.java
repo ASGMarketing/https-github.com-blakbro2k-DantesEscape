@@ -77,6 +77,9 @@ public class MovingGameObjectFactory {
 
     public SlidingRockWall getRandomEasyMediumSlidingWall(){
         SlidingRockWall obj = getSlidingRockWallObj();
+        obj.setHoleSize(SlidingRockWall.NORMAL_GAP_SIZE);
+        obj.setObjectPosition(imageProvider.getScreenWidth(),getRandomWallPosition(3,4));
+        obj.setHitboxActive(true);
         return obj;
     }
 

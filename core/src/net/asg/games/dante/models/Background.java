@@ -65,5 +65,4 @@ public class Background extends Actor {
         textureRegionBounds1 = textureRegionBounds2;
         textureRegionBounds2 = new Rectangle(Constants.APP_WIDTH, 0, Constants.APP_WIDTH, Constants.APP_HEIGHT);
     }*/
-
 }
