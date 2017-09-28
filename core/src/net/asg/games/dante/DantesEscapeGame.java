@@ -141,9 +141,9 @@ public class DantesEscapeGame extends Game {
     }
 
     public void startGame(GameScreenState gameScreenState) {
-            gameScreenState.gameReset();
-            gameScreenState.isPaused = false;
-            soundProvider.resetSoundBoard();
+        gameScreenState.gameReset();
+        gameScreenState.isPaused = false;
+        soundProvider.resetSoundBoard();
     }
 
 

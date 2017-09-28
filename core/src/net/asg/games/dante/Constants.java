@@ -1,5 +1,7 @@
 package net.asg.games.dante;
 
+import com.badlogic.gdx.math.Vector2;
+
 public class Constants {
     public static final boolean DEBUG = false;
     public static final boolean NO_CLIP_MODE_OFF = true;
@@ -12,6 +14,8 @@ public class Constants {
 
     //view constants
     public static final int BOB_MOVE_SPEED = 510;
+
+    public static final Vector2 WORLD_GRAVITY = new Vector2(0, -10);
 
     public static final int[] BOB_HITBOX = {16, 12, 80, 58};
     public static final int[] FIREBALL_HITBOX = {0,8, 50, 45};
